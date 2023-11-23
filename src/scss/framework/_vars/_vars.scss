@@ -1,0 +1,120 @@
+/*
+    Foundations
+*/
+
+// /* Core Colors */
+$color-a: #0f0f0f;
+$color-b: #fefefe;
+$color-c: #f7f8f4;
+
+/* Accent Color */
+$color-d: #7ce55e;
+$color-e: #2d9f66;
+$color-f: #429ed6;
+$color-g: #fdb335;
+$color-h: #f76e4a;
+$color-i: #f58dd7;
+
+$color-options: (
+    a: $color-a,
+    b: $color-b,
+    c: $color-c,
+    d: $color-d,
+    e: $color-e,
+    f: $color-f,
+    g: $color-g,
+    h: $color-h,
+    i: $color-i,
+);
+
+$colorbg-options: (
+    a: $color-a,
+    b: $color-b,
+    c: $color-c,
+    d: $color-d,
+    e: $color-e,
+);
+
+$type-a: "Uncut Sans", sans-serif;
+
+$line-height: 1.5;
+/* Grid */
+//Container
+$g-container-width: 1300px;
+
+$all: 0;
+$desktop: 1700px;
+$laptop: 1570px;
+$tabletl: 1300px;
+$tabletm: 1024px;
+$tablets: 810px;
+$mobile: 580px;
+$viewport-type: max-width;
+$viewport-layouts: (
+    "all": (
+        $viewport-type: $all,
+    ),
+    "desktop": (
+        $viewport-type: $desktop,
+    ),
+    "laptop": (
+        $viewport-type: $laptop,
+    ),
+    "tabletl": (
+        $viewport-type: $tabletl,
+    ),
+    "tabletm": (
+        $viewport-type: $tabletm,
+    ),
+    "tablets": (
+        $viewport-type: $tablets,
+    ),
+    "mobile": (
+        $viewport-type: $mobile,
+    ),
+);
+$columns: 12;
+$gutter-width: 32px;
+$half-gutter-width: $gutter-width * 0.5;
+$gutter-compensation: -1 * $half-gutter-width;
+
+// Use for almost all Uitlities:
+// Display, Aspect Ratio, Flex, Float, Justify, Spacing, Text-align
+$breakpoints-grid: (
+    all: $all,
+    desktop: $desktop,
+    laptop: $laptop,
+    tabletl: $tabletl,
+    tabletm: $tabletm,
+    tablets: $tablets,
+    mobile: $mobile,
+) !default;
+
+/*
+    End Foundations
+*/
+
+// Measure
+$measure: 0.5rem; /* 0.5rem = 8px */
+
+// Time
+$time-a: 0.1s; // Micro-interactions such as button and toggle
+$time-b: 0.3s; // Expansion, system communication, toast
+$time-c: 0.6s; // Background dimming
+
+// Border-radius
+$border-radius-a: 20px;
+$border-radius-b: 8px;
+$border-radius-c: 10px;
+
+// Ease
+$ease-standard-a: cubic-bezier(0.2, 0, 0.38, 0.9); //productive
+$ease-standard-b: cubic-bezier(0, 0, 0.3, 1); //expresive
+$ease-entrance-a: cubic-bezier(0, 0, 0.38, 0.9); //productive
+$ease-entrance-b: cubic-bezier(0.4, 0.14, 0.3, 1); //expresive
+$ease-exit-a: cubic-bezier(0.2, 0, 1, 0.9); //productive
+$ease-exit-b: cubic-bezier(0.4, 0.14, 1, 1); //expresive
+
+// header
+$headerDesktop: 80px;
+$headerTablets: 72px;

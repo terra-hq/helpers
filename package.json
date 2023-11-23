@@ -1,0 +1,25 @@
+{
+  "name": "@terrahq/helpers",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "exports":{
+    "./hubspot":"./src/js/hubspot/index.js",
+    "./preload":"./src/js/preload/index.js",
+    "./recaptcha":"./src/js/recaptcha/index.js"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.5",
+    "sass": "^1.69.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "@andresclua/jsutil": "^3.0.16"
+  }
+}
