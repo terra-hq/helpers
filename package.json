@@ -3,10 +3,10 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "exports":{
-    "./hubspot":"./src/js/hubspot/index.js",
-    "./preload":"./src/js/preload/index.js",
-    "./recaptcha":"./src/js/recaptcha/index.js"
+  "exports": {
+    "./hubspot": "./src/js/hubspot/index.js",
+    "./preload": "./src/js/preload/index.js",
+    "./recaptcha": "./src/js/recaptcha/index.js"
   },
   "scripts": {
     "dev": "vite",
@@ -20,6 +20,9 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "@andresclua/jsutil": "^3.0.16"
+    "@andresclua/jsutil": "^3.0.16",
+    "imagesloaded": "^5.0.0",
+    "lottie-web": "^5.12.2",
+    "webfontloader": "^1.6.28"
   }
 }
