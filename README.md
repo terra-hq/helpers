@@ -41,8 +41,13 @@ preloadLotties();
 ```
 Se entiende que cada lottie se debe conformar de la siguiente manera
 ```html
-<div class="js--lottie-data">
-
-</div>
+<div class="js--lottie-data" data-src="filename.json" data-autoplay="true" data-name="myLottie"></div>
+```
+You can play/pause/etc via javascript, as all loties will live under window.windowLotties['data-name']
+```javascript
+// chequear con nera
+window.windowLotties['myLottie'].play()
+window.windowLotties['myLottie'].pause()
+window.windowLotties['myLottie'].stop()
 ```
 
