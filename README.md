@@ -10,7 +10,7 @@ npm i @terrahq/helpers
 #### Images
 Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **This is an async await operation** 
 ```javascript
-import {preloadImages} from @terrahq/helpers/preload;
+import {preloadImages} from "@terrahq/helpers/preload";
 ```
 ```javascript
 preloadImages("img")
@@ -21,7 +21,7 @@ preloadImages("img")
 
 Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/webfontloader) , **This is an async await operation** 
 ```javascript
-import {preloadFonts} from @terrahq/helpers/preload;
+import {preloadFonts} from "@terrahq/helpers/preload";
 ```
 ```javascript
 preloadFonts([
@@ -34,7 +34,7 @@ preloadFonts([
 #### Lottie 
 Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/lottie-web) , **This is an async await operation** 
 ```javascript
-import {preloadLotties} from @terrahq/helpers/preload;
+import {preloadLotties} from "@terrahq/helpers/preload";
 ```
 ```javascript
 preloadLotties();
