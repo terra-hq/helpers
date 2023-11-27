@@ -7,6 +7,7 @@ npm i @terrahq/helpers
 ```
 
 ## Preload
+---
 #### Images
 Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **This is an async await operation** 
 ```javascript
@@ -49,5 +50,28 @@ You can play/pause/etc via javascript, as all loties will live under window.wind
 window.windowLotties['myLottie'].play()
 window.windowLotties['myLottie'].pause()
 window.windowLotties['myLottie'].stop()
+```
+## Hubspot
+---
+Helper to submit directly to Hubspot.
+
+- This endpoint has a rate limit of 50 requests per 10 seconds.
+- When using this endpoint to integrate custom forms with HubSpot, keep in mind that the available endpoints do not log any API calls. Users will need to store their own logs. 
+- In addition to accepting server-side HTTP requests, this endpoint will accept cross-origin AJAX (CORS) requests, allowing you to submit form data directly to HubSpot client-side using JavaScript.
+- This endpoint does not support reCAPTCHA. If reCAPTCHA has been enabled on the form, submissions will not be accepted. 
+```javascript
+import {submitToHubspot} from "@terrahq/helpers/hubspot";
+```
+```javascript
+// option 1
+async function handleFormSubmit(formInputs) {
+    const { message,status } = await useHubSpot(portalId.value, formId.value, formInputs.concat(stepsResults.value));
+
+}
+// option 2
+const handleFormSubmit = async (formInputs) => {
+     const { message,status } = await useHubSpot(portalId.value, formId.value, formInputs.concat(stepsResults.value));
+
+};
 ```
 
