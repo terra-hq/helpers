@@ -9,7 +9,7 @@ const preloadImages =  (selector = "img") =>
 
 
 
-export const preloadFonts = (id) =>
+ const preloadFonts = (id) =>
   new Promise((resolve) => {
     WebFont.load({
       google: {
@@ -19,7 +19,7 @@ export const preloadFonts = (id) =>
     });
 });
 
-export const preloadLotties = (id) =>
+ const preloadLotties = (id) =>
   new Promise(async (resolve) => {
       window.windowLotties = []
       var allLotties = document.querySelectorAll(".js--lottie-data")
