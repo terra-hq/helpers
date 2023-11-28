@@ -42,4 +42,15 @@ const preloadImages =  (selector = "img") =>
   })
   
 
-export { preloadImages, preloadFonts, preloadLotties};
+  export const preloadVue = () =>
+    new Promise((resolve) => {
+      const intervalIdVue = setInterval(() => {
+          if (window["vueLoaded"]) {
+              clearInterval(intervalIdVue) // Stop the interval
+              resolve()
+          }
+      }, 100)
+  })
+
+
+export { preloadImages, preloadFonts, preloadLotties, preloadVue};
