@@ -83,7 +83,6 @@ It is customary for each page to include the tag js--resources-vue. This serves 
 
 
 ## Hubspot
----
 Helper to submit directly to Hubspot.
 
 - This endpoint has a rate limit of 50 requests per 10 seconds.
@@ -103,10 +102,19 @@ const handleFormSubmit = async (formInputs) => {
      const { message, success, statusCode } = await useHubSpot(portalId.value, formId.value, formInputs.concat(stepsResults.value));
 };
 ```
-
 message (String): Returns a message indicating the status of the submission. If successful, it will be "Thanks for submitting." If there is an error, the message will contain details about the API error.
 
 success (Boolean): Returns true if the submission is successful, and false if there is an error.
 
 statusCode (Integer): Returns the HTTP status code indicating the result of the API request. A status code of 200 indicates success, while other codes such as 400, 300, or 500 correspond to different API errors.
 
+## Recaptcha
+Helper to add v3 to our custom  forms. This resturns a token.
+```javascript
+import {recaptcha_v3} from "@terrahq/helpers/hubspot";
+```
+```javascript
+var GoogleAccesToken = await recaptcha_v3({
+    API_KEY : "XXXXXX",
+});
+```

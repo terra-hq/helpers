@@ -1,10 +1,8 @@
 import "./../scss/index.scss";
 
+import {getRecaptcha_v3} from './recaptcha/index.js';
+var GoogleAccesToken = await getRecaptcha_v3({
+    API_KEY : "6LdJjR8pAAAAAKqofmo08imm7lsnJ7XBYj1JbC8k",
+});
 
-import {submitToHubspot} from './hubspot/index.js';
-import { preloadVue } from './preload/index.js'
-
-// VUE
-await preloadVue({
-    element : document.querySelector(".js--vue")
-})
+console.log(GoogleAccesToken);
