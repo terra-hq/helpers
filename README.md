@@ -57,10 +57,11 @@ import {preloadVue} from "@terrahq/helpers/preload";
 ```
 ```javascript
 if(document.querySelecto("js--resources-vue")){
-    preloadVue();
+    await preloadVue();
 }
 ```
 In the context of Vue.js development, it is recommended to initialize the loading state within the mounted lifecycle hook of a Vue page by setting window['vueLoaded'] to false. As data is successfully loaded, often achieved through tools like Axios, the loading state is then gracefully transitioned to true by updating the value of window['vueLoaded']. This practice elegantly manages the loading dynamics of the Vue page in harmony with the asynchronous data retrieval process.
+##### MyVueApp.vue 
 ```javascript
 mounted() {
     window['vueLoaded'] = false
@@ -72,9 +73,10 @@ asyncData(){
 ```
 
 It is customary for each page to include the tag js--resources-vue. This serves as a visual cue, indicating that the enclosed Vue code should be scrutinized to ensure the proper loading and functioning of Vue components.
+##### Mypage.astro 
 ```html
 <div id="js--resources-vue">
- ...
+ <MyVueApp></MyVueApp>
 </div>
 ```
 
