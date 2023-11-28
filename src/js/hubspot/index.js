@@ -1,26 +1,22 @@
 import axios from "axios";
 const submitToHubspot = async (portalId, formId, formInputs) => {
     let success = false;
-    let errorMessage = "";
+    let statusCode = 200;
+    let responseMessage = "";
     const bodyData = {
         fields: formInputs,
     };
     try {
-        await axios.post(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`, bodyData)
-            .then(response => {
-                success = true;
-            })
-            .catch(error => {
-                console.error(error.message);
-                errorMessage = error.message;
-            });
+        var response = await axios.post(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`, bodyData);
+        success = true;
     } catch (error) {
-        console.error(error.message);
-        errorMessage = error.message;
+        statusCode = error.response.status;
+        responseMessage = error.response.data.errors[0].message;
     }
-    return {  
-        message: (success) ? response.data : errorMessage,
-        status: success, 
+    return {
+        message: success ? "Thank you for submitting!" : responseMessage,
+        success,
+        statusCode,
     };
 };
-export default submitToHubspot;
+export  {submitToHubspot};
