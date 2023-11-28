@@ -27,15 +27,15 @@ const preloadImages =  (selector = "img") =>
           for (let i = 0; i < allLotties.length; i++) {
               const element = allLotties[i]
               // Perform asynchronous operation here, e.g., API call, database query, etc.
-              window.windowLotties[`${element.getAttribute("data-name")}`] =
-                  await lottieweb.loadAnimation({
-                      container: element, // the dom element that will contain the animation
-                      renderer: "svg",
-                      loop: true,
-                      name: element.getAttribute("data-name"),
-                      autoplay: element.getAttribute("data-autoplay"),
-                      path: element.getAttribute("data-src"), // the path to the animation json
-                  })
+              await lottieweb.loadAnimation({
+                    container: element, // the dom element that will contain the animation
+                    renderer: "svg",
+                    loop: true,
+                    name: element.getAttribute("data-name"),
+                    autoplay: element.getAttribute("data-autoplay"),
+                    path: element.getAttribute("data-src"), // the path to the animation json
+                })
+              window.windowLotties[`${element.getAttribute("data-name")}`] = element
           }
       }
       resolve()
