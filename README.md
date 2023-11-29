@@ -111,7 +111,7 @@ statusCode (Integer): Returns the HTTP status code indicating the result of the 
 ## Recaptcha
 Helper to add v3 to our custom  forms. This resturns a token.
 ```javascript
-import {recaptcha_v3} from "@terrahq/helpers/hubspot";
+import {recaptcha_v3} from "@terrahq/helpers/recaptcha";
 ```
 ```javascript
 var GoogleAccesToken = await recaptcha_v3({
