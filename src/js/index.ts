@@ -10,5 +10,4 @@ import {forceScrollToTop} from './swup/index.js';
 // });
 
 // console.log(GoogleAccesToken);
-
-forceScrollToTop()
+await forceScrollToTop()
