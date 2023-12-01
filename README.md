@@ -14,7 +14,7 @@ Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **Thi
 import {preloadImages} from "@terrahq/helpers/preload";
 ```
 ```javascript
-preloadImages("img")
+await preloadImages("img")
 ```
 
 
@@ -25,7 +25,7 @@ Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/webfontloader
 import {preloadFonts} from "@terrahq/helpers/preload";
 ```
 ```javascript
-preloadFonts([
+await preloadFonts([
     'DMSans',
     'Domine',
 ]),
@@ -109,7 +109,7 @@ success (Boolean): Returns true if the submission is successful, and false if th
 statusCode (Integer): Returns the HTTP status code indicating the result of the API request. A status code of 200 indicates success, while other codes such as 400, 300, or 500 correspond to different API errors.
 
 ## Recaptcha
-Helper to add v3 to our custom  forms. This resturns a token.
+Helper to add recaptcha v3 to our custom forms. This resturns a token.
 ```javascript
 import {recaptcha_v3} from "@terrahq/helpers/recaptcha";
 ```
@@ -117,4 +117,13 @@ import {recaptcha_v3} from "@terrahq/helpers/recaptcha";
 var GoogleAccesToken = await recaptcha_v3({
     API_KEY : "XXXXXX",
 });
+```
+
+## Swup / Scroll to Top
+Helper to make pages scroll to top when page transition is fired.
+```javascript
+import {forceScrollToTop} from './swup/index.js';
+```
+```javascript
+await forceScrollToTop()
 ```
