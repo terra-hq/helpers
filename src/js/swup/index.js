@@ -1,6 +1,6 @@
 import JSUTIL from "@andresclua/jsutil"
 
-export const forceScrollToTop = ()=>{
+const forceScrollToTop = ()=>{
     var jsUtil = new JSUTIL()
     return new Promise((resolve) => {
         window.scrollTo(0, 0)
