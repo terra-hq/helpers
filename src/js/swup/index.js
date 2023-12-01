@@ -9,15 +9,15 @@ const forceScrollToTop = ()=>{
             window.scrollTo(0, 0)
             jsUtil.addStyle(document.querySelector("body"), 'height', 'auto')
             jsUtil.addStyle(document.querySelector("body"), 'overflow', 'initial')
+            setTimeout(() => {
+                disableScroll.off()
+                jsUtil.addStyle(document.querySelector("body"), 'height', 'auto')
+                jsUtil.addStyle(document.querySelector("body"), 'overflow', 'initial')
+            }, 300)
+            setTimeout(() => {
+                resolve()
+            }, 500)
         }, 10)
-        setTimeout(() => {
-            disableScroll.off()
-            jsUtil.addStyle(document.querySelector("body"), 'height', 'auto')
-            jsUtil.addStyle(document.querySelector("body"), 'overflow', 'initial')
-        }, 300)
-        setTimeout(() => {
-            resolve()
-        }, 1000)
     })
 }
 
