@@ -24,12 +24,22 @@ Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/webfontloader
 ```javascript
 import {preloadFonts} from "@terrahq/helpers/preload";
 ```
+For Google fonts
 ```javascript
-await preloadFonts([
-    'DMSans',
-    'Domine',
-]),
+await preloadFonts({
+  provider: 'google',
+  families: ['DMSans', 'Domine'] // Replace with your desired Google font families
+})
 ```
+For custom fonts
+```javascript
+await preloadFonts({
+  provider: 'custom',
+  families: ['MyCustomFont'], // Replace with your custom font family names
+  urls: ['https://example.com/path/to/mycustomfont.css'] // Replace with the URLs to your custom font CSS files
+})
+```
+
 
 #### Lottie 
 Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/lottie-web) , **This is an async await operation** 
