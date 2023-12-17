@@ -140,7 +140,7 @@ import {GET_RECAPTCHA_SCRIPT_FROM_GOOGLE} from "@terrahq/helpers/recaptcha";
         action:'submit'
     });
 ```
- Validates a Google reCAPTCHA token on the server-side using either PHP or Node.js.
+3rd Validates a Google reCAPTCHA token on the server-side using either PHP or Node.js.
  ```javascript
  import { VALIDATE_RECAPTCHA_SERVER} from "@terrahq/helpers/recaptcha";
 ```
