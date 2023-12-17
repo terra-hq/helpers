@@ -119,16 +119,41 @@ const handleFormSubmit = async (formInputs) => {
 - **StatusCode (Integer):** Returns the HTTP status code indicating the result of the API request. A status code of 200 indicates success, while other codes such as 400, 300, or 500 correspond to different API errors.
 
 ## Recaptcha
-Helper to add recaptcha v3 to our custom forms. This resturns a token.
+Helper to add recaptcha v3 to our custom forms. It has several functions.
+1 st Asynchronously loads the reCAPTCHA script from Google with the specified API key.
 ```javascript
-import {recaptcha_v3} from "@terrahq/helpers/recaptcha";
+import {GET_RECAPTCHA_SCRIPT_FROM_GOOGLE} from "@terrahq/helpers/recaptcha";
 ```
 ```javascript
-var GoogleAccesToken = await recaptcha_v3({
-    API_KEY : "XXXXXX",
-});
+    var publicKey = 'XXXXXXX';
+    var loadRecaptchaScript = await GET_RECAPTCHA_SCRIPT_FROM_GOOGLE({
+        API_KEY:publicKey,
+    });
 ```
-
+2nd Asynchronously retrieves a reCAPTCHA client token by executing the reCAPTCHA challenge.
+```javascript
+ import { GET_RECAPTCHA_CLIENT_TOKEN} from "@terrahq/helpers/recaptcha";
+```
+```javascript
+    var google_access_token = await GET_RECAPTCHA_CLIENT_TOKEN({
+        API_KEY:publicKey,
+        action:'submit'
+    });
+```
+ Validates a Google reCAPTCHA token on the server-side using either PHP or Node.js.
+ ```javascript
+ import { VALIDATE_RECAPTCHA_SERVER} from "@terrahq/helpers/recaptcha";
+```
+```javascript
+    var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
+        type:"node",
+        postUrl:'yoursite.com',
+        action: 'recaptcha_validate',
+        google_access_token : google_access_token,
+    })
+```
+###### Note : you could use these reference as a draft, note this is not production ready, for  [Node](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) or [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4)
+---
 ## Swup / Scroll to Top
 Helper to make pages scroll to top when page transition is fired.
 ```javascript
