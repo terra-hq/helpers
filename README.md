@@ -147,7 +147,7 @@ import {GET_RECAPTCHA_SCRIPT_FROM_GOOGLE} from "@terrahq/helpers/recaptcha";
 ```javascript
     var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
         type:"node",
-        postUrl:'yoursite.com',
+        postUrl:'yoursite.com/api/validate_recaptcha',
         action: 'recaptcha_validate',
         google_access_token : google_access_token,
     })
