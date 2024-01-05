@@ -209,7 +209,7 @@ await forceScrollToTop();
 
 Helper function designed to inspect a specified HTML element for mutations in its styles, classes, data attributes, or the structure of its children.
 
-The function returns true/false.
+The function returns a Promise resolving in true or rejecting with error message.
 
 ```javascript
 import { digElement } from "@terrahq/helpers/digElement";
@@ -227,22 +227,31 @@ search.type: (String) -> 'style'
 
 search.lookFor: (Array) -> Array of styles properties
 
+intervalFrequency: (Number) -> interval frequency in seconds
+
+timer: (Number) -> the interval will be finished once this number in seconds is reached
+
+callback: (Function) -> a callback function to execute once the promise is resolved
+
 ```javascript
-const intervalId = setInterval(() => {
-    (async () => {
-        const readyElement = await digElement({
+Promise.all(
+    elements.map(async (element) => {
+        await digElement({
             element: element,
             search: {
                 type: "style",
-                lookFor: ["max-height", "visibility"],
+                lookFor: ["max-height"],
             },
+            intervalFrequency: 1500,
+            timer: 5000,
+            callback: () => console.log("COMPLETED!"),
         });
-
-        if (readyElement) {
-            clearInterval(intervalId);
-        }
-    })();
-}, 1000);
+    })
+)
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
 
 ---
@@ -255,22 +264,31 @@ search.type: (String) -> 'class'
 
 search.lookFor: (Array) -> Array of classes
 
+intervalFrequency: (Number) -> interval frequency in seconds
+
+timer: (Number) -> the interval will be finished once this number in seconds is reached
+
+callback: (Function) -> a callback function to execute once the promise is resolved
+
 ```javascript
-const intervalId = setInterval(() => {
-    (async () => {
-        const readyElement = await digElement({
+Promise.all(
+    elements.map(async (element) => {
+        await digElement({
             element: element,
             search: {
                 type: "class",
-                lookFor: ["class-1", "class-2"],
+                lookFor: ["test-class"],
             },
+            intervalFrequency: 1500,
+            timer: 5000,
+            callback: () => console.log("COMPLETED!"),
         });
-
-        if (readyElement) {
-            clearInterval(intervalId);
-        }
-    })();
-}, 1000);
+    })
+)
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
 
 ---
@@ -285,23 +303,32 @@ search.attribute: (String) -> Data Attribute
 
 search.lookFor: (Array) -> Array of possible values
 
+intervalFrequency: (Number) -> interval frequency in seconds
+
+timer: (Number) -> the interval will be finished once this number in seconds is reached
+
+callback: (Function) -> a callback function to execute once the promise is resolved
+
 ```javascript
-const intervalId = setInterval(() => {
-    (async () => {
-        const readyElement = await digElement({
+Promise.all(
+    elements.map(async (element) => {
+        await digElement({
             element: element,
             search: {
                 type: "class",
-                attribute: "data-attr",
-                lookFor: ["one", "two"],
+                attribute: "data-test",
+                lookFor: ["value"],
             },
+            intervalFrequency: 1500,
+            timer: 5000,
+            callback: () => console.log("COMPLETED!"),
         });
-
-        if (readyElement) {
-            clearInterval(intervalId);
-        }
-    })();
-}, 1000);
+    })
+)
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
 
 ---
@@ -312,19 +339,28 @@ element: (HTMLElement) -> the element to check
 
 search.type: (String) -> 'hasChildren'
 
+intervalFrequency: (Number) -> interval frequency in seconds
+
+timer: (Number) -> the interval will be finished once this number in seconds is reached
+
+callback: (Function) -> a callback function to execute once the promise is resolved
+
 ```javascript
-const intervalId = setInterval(() => {
-    (async () => {
-        const readyElement = await digElement({
+Promise.all(
+    elements.map(async (element) => {
+        await digElement({
             element: element,
             search: {
                 type: "hasChildren",
             },
+            intervalFrequency: 1500,
+            timer: 5000,
+            callback: () => console.log("COMPLETED!"),
         });
-
-        if (readyElement) {
-            clearInterval(intervalId);
-        }
-    })();
-}, 1000);
+    })
+)
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```

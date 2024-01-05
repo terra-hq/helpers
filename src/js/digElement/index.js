@@ -8,38 +8,65 @@ import JSUTIL from "@andresclua/jsutil";
  * @param {String} payload.search.type - Define if you are looking for style, class or children elements.
  * @param {Array} payload.search.lookFor - Array of style properties/classes/data-attribute values.
  * @param {String} payload.search.attribute - The data attribute you are looking for.
+ * @param {Number} payload.intervalFrequency - The frequency set to the interval.
+ * @param {Number} payload.timer - The interval will be finished once this number in seconds is reached.
+ * @param {Function} payload.callback - A callback function to execute once the promise is resolved.
  * @returns {Promise<boolean>} A Promise that resolves to `true` when the requested values are matched.
  *
  * @example
  * // Example usage:
- * const intervalId = setInterval(() => {
-    (async () => {
-        const readyElement = await digElement({
+Promise.all(
+    elements.map(async (element) => {
+        await digElement({
             element: element,
             search: {
                 type: "style",
-                lookFor: ["max-height", "visibility"],
+                lookFor: ["max-height"],
             },
+            intervalFrequency: 1500,
+            timer: 5000,
+            callback: () => console.log("COMPLETED!"),
         });
-
-        if (readyElement) {
-            clearInterval(intervalId);
-        }
-    })();
-}, 1000);
+    })
+)
+.then(() => {
+    console.log("READY");
+})
+.catch((error) => console.log(error.message));
  */
 
 const digElement = async (payload) => {
-    if (!payload.element) return Promise.resolve(false);
-
-    return new Promise((resolve) => {
-        if (payload.search?.type == "style") {
-            resolve(payload.search.lookFor.some((property) => payload.element.style[property]));
-        } else if (payload.search?.type == "class") {
-            resolve(new JSUTIL().matches(payload.element, payload.search.lookFor, payload.search.attribute || payload.search.type));
-        } else if (payload.search?.type == "hasChildren") {
-            resolve(payload.element.children.length > 0);
+    return new Promise((resolve, reject) => {
+        if (!payload.element) {
+            return reject(new Error("An element is required."));
         }
+
+        const intervalId = setInterval(() => {
+            if (payload.search?.type == "style") {
+                if (payload.search.lookFor.some((property) => payload.element.style[property])) {
+                    if (payload.callback) payload.callback();
+                    resolve(true);
+                    clearInterval(intervalId);
+                }
+            } else if (payload.search?.type == "class") {
+                if (new JSUTIL().matches(payload.element, payload.search.lookFor, payload.search.attribute || payload.search.type)) {
+                    if (payload.callback) payload.callback();
+                    resolve(true);
+                    clearInterval(intervalId);
+                }
+            } else if (payload.search?.type == "hasChildren") {
+                if (payload.element.children.length > 0) {
+                    if (payload.callback) payload.callback();
+                    resolve(true);
+                    clearInterval(intervalId);
+                }
+            }
+        }, payload.intervalFrequency || 1000);
+
+        setTimeout(() => {
+            reject(new Error("Time is out."));
+            clearInterval(intervalId);
+        }, payload.timer || 5000);
     });
 };
 
