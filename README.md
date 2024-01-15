@@ -19,7 +19,10 @@ import { preloadImages } from "@terrahq/helpers/preload";
 ```
 
 ```javascript
-await preloadImages("img");
+ await preLoadVideos({
+    selector: document.querySelectorAll('.js--video'),
+    maxTime: 300
+})
 ```
 
 #### Videos
