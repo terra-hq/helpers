@@ -27,7 +27,7 @@ await preloadImages("img");
 Under the hood it uses canplaythrough, **This is an async await operation**
 
 ```javascript
-import { preloadImages } from "@terrahq/helpers/preload";
+import { preLoadVideos } from "@terrahq/helpers/preload";
 ```
 
 ```javascript
