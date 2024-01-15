@@ -24,7 +24,7 @@ await preloadImages("img");
 
 #### Videos
 
-Under the hood it uses  [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event) canplaythrough, **This is an async await operation**
+Under the hood it uses  [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
 
 ```javascript
 import { preLoadVideos } from "@terrahq/helpers/preload";
