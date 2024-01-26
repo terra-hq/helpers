@@ -22,6 +22,21 @@ import { preloadImages } from "@terrahq/helpers/preload";
 await preloadImages("img");
 ```
 
+#### Videos
+
+Under the hood it uses  [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
+
+```javascript
+import { preLoadVideos } from "@terrahq/helpers/preload";
+```
+
+```javascript
+ await preLoadVideos({
+    selector: document.querySelectorAll('.js--video'),
+    maxTime: 300
+})
+```
+
 #### Fonts
 
 Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/webfontloader) , **This is an async await operation**
@@ -205,19 +220,16 @@ import { digElement } from "@terrahq/helpers/digElement";
 
 ---
 
-1- Check if the element has new styles properties.
 
-element: (HTMLElement) -> the element to check
 
-search.type: (String) -> 'style'
-
-search.lookFor: (Array) -> Array of styles properties
-
-intervalFrequency: (Number) -> interval frequency in seconds
-
-timer: (Number) -> the interval will be finished once this number in seconds is reached
-
-callback: (Function) -> a callback function to execute once the promise is resolved
+| # | Parameter         | Type       | Description                                                               |
+|---|-------------------|------------|---------------------------------------------------------------------------|
+| 1 | element           | HTMLElement| The element to check                                                      |
+| 2 | search.type       | String     | The type of search, in this case 'style'                                  |
+| 3 | search.lookFor    | Array      | Array of styles properties to look for                                    |
+| 4 | intervalFrequency | Number     | Interval frequency in seconds                                             |
+| 5 | timer             | Number     | The duration in seconds after which the interval will be finished        |
+| 6 | callback          | Function   | A callback function to execute once the promise is resolved               |
 
 ```javascript
 Promise.all(
@@ -242,19 +254,15 @@ Promise.all(
 
 ---
 
-2- Check if the element has new classes.
 
-element: (HTMLElement) -> the element to check
-
-search.type: (String) -> 'class'
-
-search.lookFor: (Array) -> Array of classes
-
-intervalFrequency: (Number) -> interval frequency in seconds
-
-timer: (Number) -> the interval will be finished once this number in seconds is reached
-
-callback: (Function) -> a callback function to execute once the promise is resolved
+| # | Parameter         | Type       | Description                                                               |
+|---|-------------------|------------|---------------------------------------------------------------------------|
+| 1 | element           | HTMLElement| The element to check                                                      |
+| 2 | search.type       | String     | The type of search, in this case 'class'                                  |
+| 3 | search.lookFor    | Array      | Array of classes to look for                                              |
+| 4 | intervalFrequency | Number     | Interval frequency in seconds                                             |
+| 5 | timer             | Number     | The duration in seconds after which the interval will be finished        |
+| 6 | callback          | Function   | A callback function to execute once the promise is resolved               |
 
 ```javascript
 Promise.all(
@@ -279,21 +287,17 @@ Promise.all(
 
 ---
 
-3- Check if the element has a data-attribute set as a desired value.
+Here's the information you provided in table format:
 
-element: (HTMLElement) -> the element to check
-
-search.type: (String) -> 'class'
-
-search.attribute: (String) -> Data Attribute
-
-search.lookFor: (Array) -> Array of possible values
-
-intervalFrequency: (Number) -> interval frequency in seconds
-
-timer: (Number) -> the interval will be finished once this number in seconds is reached
-
-callback: (Function) -> a callback function to execute once the promise is resolved
+| # | Parameter           | Type       | Description                                                                |
+|---|---------------------|------------|----------------------------------------------------------------------------|
+| 1 | element             | HTMLElement| The element to check                                                       |
+| 2 | search.type         | String     | The type of search, in this case 'class'                                   |
+| 3 | search.attribute    | String     | The data attribute to check                                                |
+| 4 | search.lookFor      | Array      | Array of possible values for the data attribute                            |
+| 5 | intervalFrequency   | Number     | Interval frequency in seconds                                              |
+| 6 | timer               | Number     | The duration in seconds after which the interval will be finished         |
+| 7 | callback            | Function   | A callback function to execute once the promise is resolved                |
 
 ```javascript
 Promise.all(
@@ -319,17 +323,15 @@ Promise.all(
 
 ---
 
-4- Check if the element has children.
+Here's the information in table format:
 
-element: (HTMLElement) -> the element to check
-
-search.type: (String) -> 'hasChildren'
-
-intervalFrequency: (Number) -> interval frequency in seconds
-
-timer: (Number) -> the interval will be finished once this number in seconds is reached
-
-callback: (Function) -> a callback function to execute once the promise is resolved
+| # | Parameter         | Type       | Description                                                               |
+|---|-------------------|------------|---------------------------------------------------------------------------|
+| 1 | element           | HTMLElement| The element to check                                                      |
+| 2 | search.type       | String     | The type of search, in this case 'hasChildren'                            |
+| 3 | intervalFrequency | Number     | Interval frequency in seconds                                             |
+| 4 | timer             | Number     | The duration in seconds after which the interval will be finished        |
+| 5 | callback          | Function   | A callback function to execute once the promise is resolved               |
 
 ```javascript
 Promise.all(
