@@ -364,8 +364,8 @@ import { manipulateScroll } from "@terrahq/helpers/manipulateScroll";
 ```
 
 ```javascript
-ManipulateScroll("block");
-ManipulateScroll("scroll");
+manipulateScroll("block");
+manipulateScroll("scroll");
 ```
 
 ---
