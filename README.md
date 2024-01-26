@@ -191,20 +191,6 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ---
 
-## Swup / Scroll to Top
-
-Helper to make pages scroll to top when page transition is fired.
-
-```javascript
-import { forceScrollToTop } from "./swup/index.js";
-```
-
-```javascript
-await forceScrollToTop();
-```
-
----
-
 ## Dig Element
 
 Helper function designed to inspect a specified HTML element for mutations in its styles, classes, data attributes, or the structure of its children.
@@ -364,3 +350,20 @@ Promise.all(
     })
     .catch((error) => console.log(error.message));
 ```
+
+---
+
+## Manipulate Scroll
+
+Helper function designed to enable/disable scrolling in your website.
+
+```javascript
+import { manipulateScroll } from "@terrahq/helpers/manipulateScroll";
+```
+
+```javascript
+ManipulateScroll("block");
+ManipulateScroll("scroll");
+```
+
+---

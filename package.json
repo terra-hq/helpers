@@ -8,7 +8,8 @@
         "./preload": "./src/js/preload/index.js",
         "./recaptcha": "./src/js/recaptcha/index.js",
         "./swup": "./src/js/swup/index.js",
-        "./digElement": "./src/js/digElement/index.js"
+        "./digElement": "./src/js/digElement/index.js",
+        "./manipulateScroll": "./src/js/manipulateScroll/index.js"
     },
     "scripts": {
         "dev": "vite",
