@@ -66,7 +66,7 @@ await preloadFonts({
 
 #### Lottie
 
-Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/lottie-web) , **This is an async await operation**
+Under the hood it uses [lottie-web](https://www.npmjs.com/package/lottie-web) , **This is an async await operation**
 
 ```javascript
 import { preloadLotties } from "@terrahq/helpers/preload";
