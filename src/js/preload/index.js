@@ -197,27 +197,30 @@ const preloadFonts = (payload) => {
  *   });
  */
 
-const preloadLotties = (id) =>
-  new Promise(async (resolve) => {
-    window.windowLotties = [];
-    var allLotties = document.querySelectorAll(".js--lottie-data");
-    if (allLotties) {
-      for (let i = 0; i < allLotties.length; i++) {
-        const element = allLotties[i];
-        // Perform asynchronous operation here, e.g., API call, database query, etc.
-        await lottieweb.loadAnimation({
-          container: element, // the dom element that will contain the animation
-          renderer: "svg",
-          loop: true,
-          name: element.getAttribute("data-name"),
-          autoplay: element.getAttribute("data-autoplay"),
-          path: element.getAttribute("data-src"), // the path to the animation json
-        });
-        window.windowLotties[`${element.getAttribute("data-name")}`] = element;
-      }
+const preloadLotties = async () => {
+  window.windowLotties = [];
+  var allLotties = document.querySelectorAll(".js--lottie-data");
+  if (allLotties.length) {
+    for (let i = 0; i < allLotties.length; i++) {
+      const element = allLotties[i];
+      const loopAttr = element.getAttribute("data-loop");
+      const autoplayAttr = element.getAttribute("data-autoplay");
+
+      const loop = loopAttr === 'true';
+      const autoplay = autoplayAttr === 'true';
+
+      const animation = await lottieweb.loadAnimation({
+        container: element,
+        renderer: "svg",
+        loop: loop,
+        autoplay: autoplay,
+        path: element.getAttribute("data-src"),
+      });
+
+      window.windowLotties[element.getAttribute("data-name")] = animation;
     }
-    resolve();
-  });
+  }
+};
 
 /**
  * Preloads Vue.js asynchronously and resolves the Promise when Vue.js is loaded.
