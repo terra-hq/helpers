@@ -152,7 +152,7 @@ const preloadImages = (selector = "img") =>
 
 
 const preloadFonts = (payload) => {
-  console.log("preload " + payload.provider);
+  //console.log("preload " + payload.provider);
 
   return new Promise((resolve, reject) => {
     if (payload.provider === 'google') {
