@@ -1,5 +1,3 @@
-import lottieweb from "lottie-web";
-
 /**
  * Preloads Lottie animations asynchronously and resolves the Promise when all animations are loaded.
  *
@@ -19,28 +17,30 @@ import lottieweb from "lottie-web";
  *   });
  */
 
-const preloadLotties = async () => {
+const preloadLotties = () => {
     window.windowLotties = [];
     var allLotties = document.querySelectorAll(".js--lottie-data");
     if (allLotties.length) {
-        for (let i = 0; i < allLotties.length; i++) {
-            const element = allLotties[i];
-            const loopAttr = element.getAttribute("data-loop");
-            const autoplayAttr = element.getAttribute("data-autoplay");
+        import("lottie-web").then(async (x) => {
+            for (let i = 0; i < allLotties.length; i++) {
+                const element = allLotties[i];
+                const loopAttr = element.getAttribute("data-loop");
+                const autoplayAttr = element.getAttribute("data-autoplay");
 
-            const loop = loopAttr === "true";
-            const autoplay = autoplayAttr === "true";
+                const loop = loopAttr === "true";
+                const autoplay = autoplayAttr === "true";
 
-            const animation = await lottieweb.loadAnimation({
-                container: element,
-                renderer: "svg",
-                loop: loop,
-                autoplay: autoplay,
-                path: element.getAttribute("data-src"),
-            });
+                const animation = await x.loadAnimation({
+                    container: element,
+                    renderer: "svg",
+                    loop: loop,
+                    autoplay: autoplay,
+                    path: element.getAttribute("data-src"),
+                });
 
-            window.windowLotties[element.getAttribute("data-name")] = animation;
-        }
+                window.windowLotties[element.getAttribute("data-name")] = animation;
+            }
+        });
     }
 };
 
