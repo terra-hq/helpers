@@ -1,11 +1,14 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.35",
+    "version": "0.0.36",
     "type": "module",
     "exports": {
         "./hubspot": "./src/js/hubspot/index.js",
-        "./preload": "./src/js/preload/index.js",
+        "./preloadFonts": "./src/js/preloadFonts/index.js",
+        "./preloadImages": "./src/js/preloadImages/index.js",
+        "./preloadLotties": "./src/js/preloadLotties/index.js",
+        "./preloadVue": "./src/js/preloadVue/index.js",
         "./recaptcha": "./src/js/recaptcha/index.js",
         "./swup": "./src/js/swup/index.js",
         "./digElement": "./src/js/digElement/index.js",

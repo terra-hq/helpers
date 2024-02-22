@@ -23,24 +23,25 @@ const preloadLotties = async () => {
     window.windowLotties = [];
     var allLotties = document.querySelectorAll(".js--lottie-data");
     if (allLotties.length) {
-      for (let i = 0; i < allLotties.length; i++) {
-        const element = allLotties[i];
-        const loopAttr = element.getAttribute("data-loop");
-        const autoplayAttr = element.getAttribute("data-autoplay");
-  
-        const loop = loopAttr === 'true';
-        const autoplay = autoplayAttr === 'true';
-  
-        const animation = await lottieweb.loadAnimation({
-          container: element,
-          renderer: "svg",
-          loop: loop,
-          autoplay: autoplay,
-          path: element.getAttribute("data-src"),
-        });
-  
-        window.windowLotties[element.getAttribute("data-name")] = animation;
-      }
+        for (let i = 0; i < allLotties.length; i++) {
+            const element = allLotties[i];
+            const loopAttr = element.getAttribute("data-loop");
+            const autoplayAttr = element.getAttribute("data-autoplay");
+
+            const loop = loopAttr === "true";
+            const autoplay = autoplayAttr === "true";
+
+            const animation = await lottieweb.loadAnimation({
+                container: element,
+                renderer: "svg",
+                loop: loop,
+                autoplay: autoplay,
+                path: element.getAttribute("data-src"),
+            });
+
+            window.windowLotties[element.getAttribute("data-name")] = animation;
+        }
     }
-  };
-  export { preloadLotties };
+};
+
+export { preloadLotties };
