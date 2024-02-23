@@ -15,7 +15,7 @@ npm i @terrahq/helpers
 Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **This is an async await operation**
 
 ```javascript
-import { preloadImages } from "@terrahq/helpers/preload";
+import { preloadImages } from "@terrahq/helpers/preloadImages";
 ```
 
 ```javascript
@@ -24,17 +24,17 @@ await preloadImages("img");
 
 #### Videos
 
-Under the hood it uses  [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
+Under the hood it uses [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
 
 ```javascript
-import { preLoadVideos } from "@terrahq/helpers/preload";
+import { preLoadVideos } from "@terrahq/helpers/preloadVideos";
 ```
 
 ```javascript
- await preLoadVideos({
-    selector: document.querySelectorAll('.js--video'),
-    maxTime: 300
-})
+await preLoadVideos({
+    selector: document.querySelectorAll(".js--video"),
+    maxTime: 300,
+});
 ```
 
 #### Fonts
@@ -42,7 +42,7 @@ import { preLoadVideos } from "@terrahq/helpers/preload";
 Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/webfontloader) , **This is an async await operation**
 
 ```javascript
-import { preloadFonts } from "@terrahq/helpers/preload";
+import { preloadFonts } from "@terrahq/helpers/preloadFonts";
 ```
 
 For Google fonts
@@ -69,11 +69,19 @@ await preloadFonts({
 Under the hood it uses [lottie-web](https://www.npmjs.com/package/lottie-web) , **This is an async await operation**
 
 ```javascript
-import { preloadLotties } from "@terrahq/helpers/preload";
+import { preloadLotties } from "@terrahq/helpers/preloadLotties";
 ```
+
+---
+
+| #   | Parameter        | Type   | Description                                                                  |
+| --- | ---------------- | ------ | ---------------------------------------------------------------------------- |
+| 1   | payload.onScroll | Boolen | It defines if the 'lottie-web' should be import on init or on window scroll. |
 
 ```javascript
 preloadLotties();
+
+preloadLotties({ onScroll: true });
 ```
 
 It is understood that each lottie must be formed in the following way
@@ -95,7 +103,7 @@ window.windowLotties["myLottie"].stop();
 **This is an async await operation**
 
 ```javascript
-import { preloadVue } from "@terrahq/helpers/preload";
+import { preloadVue } from "@terrahq/helpers/preloadVue";
 ```
 
 ```javascript
@@ -220,16 +228,14 @@ import { digElement } from "@terrahq/helpers/digElement";
 
 ---
 
-
-
-| # | Parameter         | Type       | Description                                                               |
-|---|-------------------|------------|---------------------------------------------------------------------------|
-| 1 | element           | HTMLElement| The element to check                                                      |
-| 2 | search.type       | String     | The type of search, in this case 'style'                                  |
-| 3 | search.lookFor    | Array      | Array of styles properties to look for                                    |
-| 4 | intervalFrequency | Number     | Interval frequency in seconds                                             |
-| 5 | timer             | Number     | The duration in seconds after which the interval will be finished        |
-| 6 | callback          | Function   | A callback function to execute once the promise is resolved               |
+| #   | Parameter         | Type        | Description                                                       |
+| --- | ----------------- | ----------- | ----------------------------------------------------------------- |
+| 1   | element           | HTMLElement | The element to check                                              |
+| 2   | search.type       | String      | The type of search, in this case 'style'                          |
+| 3   | search.lookFor    | Array       | Array of styles properties to look for                            |
+| 4   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
 ```javascript
 Promise.all(
@@ -254,15 +260,14 @@ Promise.all(
 
 ---
 
-
-| # | Parameter         | Type       | Description                                                               |
-|---|-------------------|------------|---------------------------------------------------------------------------|
-| 1 | element           | HTMLElement| The element to check                                                      |
-| 2 | search.type       | String     | The type of search, in this case 'class'                                  |
-| 3 | search.lookFor    | Array      | Array of classes to look for                                              |
-| 4 | intervalFrequency | Number     | Interval frequency in seconds                                             |
-| 5 | timer             | Number     | The duration in seconds after which the interval will be finished        |
-| 6 | callback          | Function   | A callback function to execute once the promise is resolved               |
+| #   | Parameter         | Type        | Description                                                       |
+| --- | ----------------- | ----------- | ----------------------------------------------------------------- |
+| 1   | element           | HTMLElement | The element to check                                              |
+| 2   | search.type       | String      | The type of search, in this case 'class'                          |
+| 3   | search.lookFor    | Array       | Array of classes to look for                                      |
+| 4   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
 ```javascript
 Promise.all(
@@ -289,15 +294,15 @@ Promise.all(
 
 Here's the information you provided in table format:
 
-| # | Parameter           | Type       | Description                                                                |
-|---|---------------------|------------|----------------------------------------------------------------------------|
-| 1 | element             | HTMLElement| The element to check                                                       |
-| 2 | search.type         | String     | The type of search, in this case 'class'                                   |
-| 3 | search.attribute    | String     | The data attribute to check                                                |
-| 4 | search.lookFor      | Array      | Array of possible values for the data attribute                            |
-| 5 | intervalFrequency   | Number     | Interval frequency in seconds                                              |
-| 6 | timer               | Number     | The duration in seconds after which the interval will be finished         |
-| 7 | callback            | Function   | A callback function to execute once the promise is resolved                |
+| #   | Parameter         | Type        | Description                                                       |
+| --- | ----------------- | ----------- | ----------------------------------------------------------------- |
+| 1   | element           | HTMLElement | The element to check                                              |
+| 2   | search.type       | String      | The type of search, in this case 'class'                          |
+| 3   | search.attribute  | String      | The data attribute to check                                       |
+| 4   | search.lookFor    | Array       | Array of possible values for the data attribute                   |
+| 5   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 6   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 7   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
 ```javascript
 Promise.all(
@@ -325,13 +330,13 @@ Promise.all(
 
 Here's the information in table format:
 
-| # | Parameter         | Type       | Description                                                               |
-|---|-------------------|------------|---------------------------------------------------------------------------|
-| 1 | element           | HTMLElement| The element to check                                                      |
-| 2 | search.type       | String     | The type of search, in this case 'hasChildren'                            |
-| 3 | intervalFrequency | Number     | Interval frequency in seconds                                             |
-| 4 | timer             | Number     | The duration in seconds after which the interval will be finished        |
-| 5 | callback          | Function   | A callback function to execute once the promise is resolved               |
+| #   | Parameter         | Type        | Description                                                       |
+| --- | ----------------- | ----------- | ----------------------------------------------------------------- |
+| 1   | element           | HTMLElement | The element to check                                              |
+| 2   | search.type       | String      | The type of search, in this case 'hasChildren'                    |
+| 3   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 4   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 5   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
 ```javascript
 Promise.all(

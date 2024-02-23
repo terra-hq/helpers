@@ -1,12 +1,13 @@
 /**
  * Preloads Lottie animations asynchronously and resolves the Promise when all animations are loaded.
  *
- * @param {string} id - The identifier for the Lottie animations to preload.
+ * @param {Object} payload - The payload containing different arguments.
+ * @param {Boolean} payload.onScroll - It defines if the 'lottie-web' should be import on init or on window scroll.
  * @returns {Promise} - A Promise that resolves when all Lottie animations are successfully loaded.
  *
  * @example
  * // Preload Lottie animations with a specific identifier
- * preloadLotties('my-animations')
+ * preloadLotties()
  *   .then(() => {
  *     console.log('Lottie animations preloaded successfully');
  *     // Your code to handle when the animations are preloaded
