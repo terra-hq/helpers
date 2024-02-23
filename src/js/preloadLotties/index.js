@@ -17,30 +17,38 @@
  *   });
  */
 
-const preloadLotties = () => {
+const executeDynamicImport = () => {
+    import("lottie-web").then(async (x) => {
+        for (let i = 0; i < document.querySelectorAll(".js--lottie-data").length; i++) {
+            const element = document.querySelectorAll(".js--lottie-data")[i];
+            const loopAttr = element.getAttribute("data-loop");
+            const autoplayAttr = element.getAttribute("data-autoplay");
+
+            const loop = loopAttr === "true";
+            const autoplay = autoplayAttr === "true";
+
+            const animation = await x.loadAnimation({
+                container: element,
+                renderer: "svg",
+                loop: loop,
+                autoplay: autoplay,
+                path: element.getAttribute("data-src"),
+            });
+
+            window.windowLotties[element.getAttribute("data-name")] = animation;
+        }
+    });
+    window.removeEventListener("scroll", executeDynamicImport);
+};
+
+const preloadLotties = (payload) => {
     window.windowLotties = [];
-    var allLotties = document.querySelectorAll(".js--lottie-data");
-    if (allLotties.length) {
-        import("lottie-web").then(async (x) => {
-            for (let i = 0; i < allLotties.length; i++) {
-                const element = allLotties[i];
-                const loopAttr = element.getAttribute("data-loop");
-                const autoplayAttr = element.getAttribute("data-autoplay");
-
-                const loop = loopAttr === "true";
-                const autoplay = autoplayAttr === "true";
-
-                const animation = await x.loadAnimation({
-                    container: element,
-                    renderer: "svg",
-                    loop: loop,
-                    autoplay: autoplay,
-                    path: element.getAttribute("data-src"),
-                });
-
-                window.windowLotties[element.getAttribute("data-name")] = animation;
-            }
-        });
+    if (document.querySelectorAll(".js--lottie-data").length) {
+        if (payload?.onScroll) {
+            window.addEventListener("scroll", executeDynamicImport);
+        } else {
+            executeDynamicImport();
+        }
     }
 };
 
