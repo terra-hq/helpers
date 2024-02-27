@@ -374,3 +374,34 @@ manipulateScroll("scroll");
 ```
 
 ---
+
+## Google Scripts Detection
+
+This utility function, `hasGoogleScripts`, is designed to asynchronously check for the presence of Google Analytics and Google Tag Manager scripts on a webpage. It returns a promise that resolves with a boolean value indicating whether the specified Google scripts are detected within a given timeframe.
+
+### Function Signature
+
+`async hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTime: 5000 })`
+
+- `options`: Optional configuration object.
+  - `detect`: Array specifying which Google scripts to detect. Default is `['analytics', 'gtm']`.
+  - `maxTime`: Maximum time in milliseconds to wait for script detection. Default is `5000`.
+
+### Usage
+
+The function can be used with `await` inside an async function, or with `.then()` for promise handling. Here's an example using `.then()` for handling the detection result:
+
+```javascript
+await hasGoogleScripts().then((detected) => {
+  if (detected) {
+    // Code to execute if the specified Google scripts are detected, e.g., load GTM
+    this.loadGTM();
+  } else {
+    // Code to execute if the scripts are not detected within the specified time
+    console.log("Google Scripts not detected");
+  }
+});
+```
+
+
+
