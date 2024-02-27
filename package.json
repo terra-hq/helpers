@@ -12,7 +12,8 @@
         "./recaptcha": "./src/js/recaptcha/index.js",
         "./swup": "./src/js/swup/index.js",
         "./digElement": "./src/js/digElement/index.js",
-        "./manipulateScroll": "./src/js/manipulateScroll/index.js"
+        "./manipulateScroll": "./src/js/manipulateScroll/index.js",
+        "./hasGoogleScripts": "./src/js/hasGoogleScripts/index.js"
     },
     "scripts": {
         "dev": "vite",
