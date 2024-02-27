@@ -379,6 +379,10 @@ manipulateScroll("scroll");
 
 This utility function, `hasGoogleScripts`, is designed to asynchronously check for the presence of Google Analytics and Google Tag Manager scripts on a webpage. It returns a promise that resolves with a boolean value indicating whether the specified Google scripts are detected within a given timeframe.
 
+```javascript
+import { hasGoogleScripts } from '@terrahq/helpers/hasGoogleScripts';
+```
+
 ### Function Signature
 
 `async hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTime: 5000 })`
