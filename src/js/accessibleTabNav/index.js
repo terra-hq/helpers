@@ -20,8 +20,8 @@ const accesibleTabNav = (payload) => {
                     if (event.key === "Enter") {
                         event.preventDefault();
                         const targetElement = document.getElementById(trigger.dataset.focusTarget);
-                        const nextFocusableElement =
-                            targetElement.querySelector(payload.focusableElements.join(", ")) || targetElement?.nextElementSibling.querySelector(payload.focusableElements.join(", "));
+                        const focusableElements = payload.focusableElements || ["a", "button:not([type='hidden'])", "input:not([type='hidden'])"];
+                        const nextFocusableElement = targetElement.querySelector(focusableElements.join(", ")) || targetElement?.nextElementSibling.querySelector(focusableElements.join(", "));
                         if (nextFocusableElement) {
                             nextFocusableElement.focus();
                         }
