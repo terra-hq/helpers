@@ -380,16 +380,16 @@ manipulateScroll("scroll");
 This utility function, `hasGoogleScripts`, is designed to asynchronously check for the presence of Google Analytics and Google Tag Manager scripts on a webpage. It returns a promise that resolves with a boolean value indicating whether the specified Google scripts are detected within a given timeframe.
 
 ```javascript
-import { hasGoogleScripts } from '@terrahq/helpers/hasGoogleScripts';
+import { hasGoogleScripts } from "@terrahq/helpers/hasGoogleScripts";
 ```
 
 ### Function Signature
 
 `async hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTime: 5000 })`
 
-- `options`: Optional configuration object.
-  - `detect`: Array specifying which Google scripts to detect. Default is `['analytics', 'gtm']`.
-  - `maxTime`: Maximum time in milliseconds to wait for script detection. Default is `5000`.
+-   `options`: Optional configuration object.
+    -   `detect`: Array specifying which Google scripts to detect. Default is `['analytics', 'gtm']`.
+    -   `maxTime`: Maximum time in milliseconds to wait for script detection. Default is `5000`.
 
 ### Usage
 
@@ -397,15 +397,85 @@ The function can be used with `await` inside an async function, or with `.then()
 
 ```javascript
 await hasGoogleScripts().then((detected) => {
-  if (detected) {
-    // Code to execute if the specified Google scripts are detected, e.g., load GTM
-    this.loadGTM();
-  } else {
-    // Code to execute if the scripts are not detected within the specified time
-    console.log("Google Scripts not detected");
-  }
+    if (detected) {
+        // Code to execute if the specified Google scripts are detected, e.g., load GTM
+        this.loadGTM();
+    } else {
+        // Code to execute if the scripts are not detected within the specified time
+        console.log("Google Scripts not detected");
+    }
 });
 ```
 
+---
 
+## Accessible Tab Nav
 
+It handles focus on 'skip to main content' and/or anchor to section enter keydown.
+
+```javascript
+import { accesibleTabNav } from "@terrahq/helpers/accesibleTabNav";
+```
+
+| #   | Parameter         | Type          | Description                                                                                 |
+| --- | ----------------- | ------------- | ------------------------------------------------------------------------------------------- |
+| 1   | focusableElements | Array<String> | It specifies which types of elements will be included as focusables within the focus target |
+
+---
+
+Trigger elements must include:
+
+-   class: 'js--trigger-focus'
+
+-   data-focus-target='${focusTargetID}'
+
+---
+
+Target elements must include:
+
+-   id: '${focusTargetID}'
+
+---
+
+HTML - Example 1:
+
+```html
+//header.php
+
+<main id="swup">
+    <button class="js--trigger-focus" data-focus-target="main-content" tabindex="1">Skip to Main Content</button>
+    <div id="main-content">...</div>
+    ...
+</main>
+```
+
+HTML - Example 2:
+
+```html
+//card-a.php
+
+<a href="test" class="c--card-a js--trigger-focus" data-focus-target="3">
+    <div class="c--card-a__ft-items">
+        <h2 class="c--card-a__ft-items__title">Title</h2>
+        <p class="c--card-a__ft-items__subtitle">Subtitle</p>
+        <div class="c--card-a__ft-items__btn">Link</div>
+    </div>
+</a>
+
+//random-module.php
+
+<span id="3" class="js--invisible-span" style="position: relative; display:block;"></span>
+<section class="">
+    <div class="f--container">Content</div>
+</section>
+```
+
+JavaScript:
+
+```javascript
+accesibleTabNav();
+
+accesibleTabNav(["a", "button"]);
+```
+
+---
