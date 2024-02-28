@@ -5,12 +5,12 @@
  *
  * @example
  * // Example usage:
-accesibleTabNav();
+accessibleTabNav();
 
-accesibleTabNav(["a", "button"]);
+accessibleTabNav(["a", "button"]);
  */
 
-const accesibleTabNav = (payload) => {
+const accessibleTabNav = (payload) => {
     if (document.querySelectorAll(".js--trigger-focus").length) {
         document.querySelectorAll(".js--trigger-focus").forEach((trigger) => {
             if (trigger.dataset.focusTarget) {
@@ -34,4 +34,4 @@ const accesibleTabNav = (payload) => {
     }
 };
 
-export { accesibleTabNav };
+export { accessibleTabNav };

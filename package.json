@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.43",
+    "version": "0.0.44",
     "type": "module",
     "exports": {
         "./hubspot": "./src/js/hubspot/index.js",
@@ -14,7 +14,7 @@
         "./digElement": "./src/js/digElement/index.js",
         "./manipulateScroll": "./src/js/manipulateScroll/index.js",
         "./hasGoogleScripts": "./src/js/hasGoogleScripts/index.js",
-        "./accesibleTabNav": "./src/js/accesibleTabNav/index.js"
+        "./accessibleTabNav": "./src/js/accessibleTabNav/index.js"
     },
     "scripts": {
         "dev": "vite",

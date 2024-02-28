@@ -414,7 +414,7 @@ await hasGoogleScripts().then((detected) => {
 It handles focus on 'skip to main content' and/or anchor to section enter keydown.
 
 ```javascript
-import { accesibleTabNav } from "@terrahq/helpers/accesibleTabNav";
+import { accessibleTabNav } from "@terrahq/helpers/accessibleTabNav";
 ```
 
 | #   | Parameter         | Type          | Description                                                                                 |
@@ -473,9 +473,9 @@ HTML - Example 2:
 JavaScript:
 
 ```javascript
-accesibleTabNav();
+accessibleTabNav();
 
-accesibleTabNav(["a", "button"]);
+accessibleTabNav(["a", "button"]);
 ```
 
 ---
