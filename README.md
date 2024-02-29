@@ -27,11 +27,11 @@ await preloadImages("img");
 Under the hood it uses [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
 
 ```javascript
-import { preLoadVideos } from "@terrahq/helpers/preloadVideos";
+import { preloadVideos } from "@terrahq/helpers/preloadVideos";
 ```
 
 ```javascript
-await preLoadVideos({
+await preloadVideos({
     selector: document.querySelectorAll(".js--video"),
     maxTime: 300,
 });
