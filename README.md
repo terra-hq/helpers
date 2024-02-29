@@ -475,7 +475,9 @@ JavaScript:
 ```javascript
 accessibleTabNav();
 
-accessibleTabNav(["a", "button"]);
+accessibleTabNav({
+    focusableElements: ["a", "button"],
+});
 ```
 
 ---

@@ -7,7 +7,7 @@
  * // Example usage:
 accessibleTabNav();
 
-accessibleTabNav(["a", "button"]);
+accessibleTabNav({ focusableElements: ["a", "button"] });
  */
 
 const accessibleTabNav = (payload) => {
@@ -20,7 +20,7 @@ const accessibleTabNav = (payload) => {
                     if (event.key === "Enter") {
                         event.preventDefault();
                         const targetElement = document.getElementById(trigger.dataset.focusTarget);
-                        const focusableElements = payload.focusableElements || ["a", "button:not([type='hidden'])", "input:not([type='hidden'])"];
+                        const focusableElements = payload?.focusableElements || ["a", "button:not([type='hidden'])", "input:not([type='hidden'])"];
                         const nextFocusableElement = targetElement.querySelector(focusableElements.join(", ")) || targetElement?.nextElementSibling.querySelector(focusableElements.join(", "));
                         if (nextFocusableElement) {
                             nextFocusableElement.focus();
