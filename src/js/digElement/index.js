@@ -1,4 +1,4 @@
-import JSUTIL from "@andresclua/jsutil";
+import { u_matches } from "@andresclua/jsutil";
 
 /**
  * Inspect a specified HTML element for mutations in its styles, classes, data attributes, or the structure of its children.
@@ -49,7 +49,7 @@ const digElement = async (payload) => {
                     clearInterval(intervalId);
                 }
             } else if (payload.search?.type == "class") {
-                if (new JSUTIL().matches(payload.element, payload.search.lookFor, payload.search.attribute || payload.search.type)) {
+                if (u_matches(payload.element, payload.search.lookFor, payload.search.attribute || payload.search.type)) {
                     if (payload.callback) payload.callback();
                     resolve(true);
                     clearInterval(intervalId);

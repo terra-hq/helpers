@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.46",
+    "version": "0.0.47",
     "type": "module",
     "exports": {
         "./hubspot": "./src/js/hubspot/index.js",
@@ -29,7 +29,7 @@
         "vite": "^4.4.5"
     },
     "dependencies": {
-        "@andresclua/jsutil": "^3.0.16",
+        "@andresclua/jsutil": "^4.0.2",
         "axios": "^1.6.2",
         "imagesloaded": "^5.0.0",
         "lottie-web": "^5.12.2",
