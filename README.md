@@ -481,3 +481,32 @@ accessibleTabNav({
 ```
 
 ---
+
+## scrollYis
+
+This function checks if the current vertical scroll position (window.scrollY) of the window is equal to a specified distance. It is typically used in scenarios where you need to verify if the window has been scrolled to a particular vertical position.
+
+```javascript
+import { scrollYis } from "@terrahq/helpers/scrollYis";
+
+if (scrollYis({ distance: 150 })) {
+    console.log("The scroll position is exactly 150 pixels from the top.");
+} else {
+    console.log("The scroll position is not 150 pixels from the top.");
+}
+```
+---
+## hasQueryParameter
+
+This function checks if a specific query parameter is present in the URL of the current window location and retrieves its value if it exists. It is particularly useful for accessing and manipulating URL parameters dynamically in client-side applications.
+
+```javascript
+import { hasQueryParameter } from "@terrahq/helpers/hasQueryParameter";
+
+let result = hasQueryParameter({ name: 'user' });
+if (result) {
+    console.log(`Query parameter 'user' has the value: ${result}`);
+} else {
+    console.log("Query parameter 'user' is not present in the URL.");
+}
+```

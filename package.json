@@ -15,7 +15,8 @@
         "./digElement": "./src/js/digElement/index.js",
         "./manipulateScroll": "./src/js/manipulateScroll/index.js",
         "./hasGoogleScripts": "./src/js/hasGoogleScripts/index.js",
-        "./accessibleTabNav": "./src/js/accessibleTabNav/index.js"
+        "./accessibleTabNav": "./src/js/accessibleTabNav/index.js",
+        "./hasQueryParameter": "./src/js/hasQueryParameter/index.js"
     },
     "scripts": {
         "dev": "vite",
