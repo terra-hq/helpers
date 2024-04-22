@@ -489,10 +489,10 @@ This function checks if the current vertical scroll position (window.scrollY) of
 ```javascript
 import { scrollYis } from "@terrahq/helpers/scrollYis";
 
-if (scrollYis({ distance: 0 })) {
-    console.log("The scroll position is exactly 0 pixels from the top.");
+if (scrollYis({ distance: 30 })) {
+    console.log("The scroll position is exactly 30 pixels or more from the top.");
 } else {
-    console.log("The scroll position is not 0 pixels from the top.");
+    console.log("The scroll position is below 30 pixels.");
 }
 ```
 ---
