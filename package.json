@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.48",
+    "version": "0.0.49",
     "type": "module",
     "exports": {
         "./hubspot": "./src/js/hubspot/index.js",
