@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.47",
+    "version": "0.0.48",
     "type": "module",
     "exports": {
         "./hubspot": "./src/js/hubspot/index.js",
@@ -16,7 +16,8 @@
         "./manipulateScroll": "./src/js/manipulateScroll/index.js",
         "./hasGoogleScripts": "./src/js/hasGoogleScripts/index.js",
         "./accessibleTabNav": "./src/js/accessibleTabNav/index.js",
-        "./hasQueryParameter": "./src/js/hasQueryParameter/index.js"
+        "./hasQueryParameter": "./src/js/hasQueryParameter/index.js",
+        "./scrollYis": "./src/js/scrollYis/index.js"
     },
     "scripts": {
         "dev": "vite",
