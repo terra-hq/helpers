@@ -2,6 +2,8 @@ export function hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTi
     return new Promise((resolve, reject) => {
         const startTime = Date.now();
         const detectOptions = options.detect || ['analytics', 'gtm'];
+        const enableLogging = options.enableLogging !== undefined ? options.enableLogging : true;
+
 
         function checkForUniversalAnalytics() {
             const hasGACookies = document.cookie.split(';').some(cookie => cookie.trim().startsWith('_ga'));
@@ -18,13 +20,21 @@ export function hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTi
             const isGTMDetected = detectOptions.includes('gtm') ? isGTMInstalled() : true;
 
             if (isAnalyticsDetected && isGTMDetected) {
-                console.log('Specified Google scripts are detected.');
+                if (enableLogging) {
+                    console.log('Specified Google scripts are detected.');
+                }
                 resolve(true);
             } else if (currentTime - startTime > options.maxTime) {
-                console.log('Maximum time exceeded. Resolving promise.');
+
+                if (enableLogging) {
+                    console.log('Maximum time exceeded. Resolving promise.');
+                }
                 resolve(false);
             } else {
-                console.log('Checking for specified Google scripts...');
+
+                if (enableLogging) {
+                    console.log('Checking for specified Google scripts...');
+                }
                 setTimeout(checkScripts, 1000);
             }
         }

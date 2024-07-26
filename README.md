@@ -385,11 +385,12 @@ import { hasGoogleScripts } from "@terrahq/helpers/hasGoogleScripts";
 
 ### Function Signature
 
-`async hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTime: 5000 })`
+`async hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTime: 5000, enableLogging: true })`
 
 -   `options`: Optional configuration object.
     -   `detect`: Array specifying which Google scripts to detect. Default is `['analytics', 'gtm']`.
     -   `maxTime`: Maximum time in milliseconds to wait for script detection. Default is `5000`.
+    -   `enableLogging`: Default true, you can hide the console logs with `enableLogging: false`.
 
 ### Usage
 
