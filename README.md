@@ -8,7 +8,7 @@ npm i @terrahq/helpers
 
 ## Preload
 
----
+
 
 ### Images
 
@@ -86,6 +86,7 @@ window.WL["myLottie"].stop();   // Stop the Lottie animation
 ```
 
 
+## Marketing
 
 ### Hubspot
 
@@ -131,7 +132,7 @@ try {
 ```
 
 
-## Recaptcha
+### Recaptcha
 
 Helper to add recaptcha v3 to forms. It has several functions.
 1st Asynchronously loads the reCAPTCHA script from Google with the specified API key.
@@ -173,7 +174,7 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ---
 
-## Dig Element
+### Dig Element
 
 Helper function designed to inspect a specified HTML element for mutations in its styles, classes, data attributes, or the structure of its children.
 
