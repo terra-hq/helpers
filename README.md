@@ -204,10 +204,10 @@ Promise.all(
         });
     })
 )
-    .then(() => {
-        console.log("READY");
-    })
-    .catch((error) => console.log(error.message));
+.then(() => {
+    console.log("READY");
+})
+.catch((error) => console.log(error.message));
 ```
 
 | #   | Parameter         | Type        | Description                                                       |
@@ -219,7 +219,7 @@ Promise.all(
 | 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
 | 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
-<br/><br/><br/><br/><br/>
+<br/><br/>
 
 ### Class Search
 
@@ -238,10 +238,10 @@ Promise.all(
         });
     })
 )
-    .then(() => {
-        console.log("READY");
-    })
-    .catch((error) => console.log(error.message));
+.then(() => {
+    console.log("READY");
+})
+.catch((error) => console.log(error.message));
 ```
 
 | #   | Parameter         | Type        | Description                                                       |
@@ -253,6 +253,7 @@ Promise.all(
 | 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
 | 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
+<br><br>
 
 
 ### Attribute Search for value
@@ -290,9 +291,9 @@ Here's the information you provided in table format:
 | 6   | timer             | Number      | The duration in seconds after which the interval will be finished |
 | 7   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
+<br><br>
 
-
-Search for children inside element
+### Search for children inside element
 
 ```javascript
 Promise.all(
