@@ -256,7 +256,7 @@ Promise.all(
 <br><br>
 
 
-### Attribute Search for value
+### Attribute Search and look for a specific value
 
 ```javascript
 Promise.all(
@@ -274,10 +274,10 @@ Promise.all(
         });
     })
 )
-    .then(() => {
-        console.log("READY");
-    })
-    .catch((error) => console.log(error.message));
+.then(() => {
+    console.log("READY");
+})
+.catch((error) => console.log(error.message));
 ```
 Here's the information you provided in table format:
 
@@ -309,10 +309,10 @@ Promise.all(
         });
     })
 )
-    .then(() => {
-        console.log("READY");
-    })
-    .catch((error) => console.log(error.message));
+.then(() => {
+    console.log("READY");
+})
+.catch((error) => console.log(error.message));
 ```
 
 Here's the information in table format:
@@ -327,7 +327,6 @@ Here's the information in table format:
 
 
 
----
 
 ## Manipulate Scroll
 
