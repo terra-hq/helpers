@@ -187,16 +187,7 @@ import { digElement } from "@terrahq/helpers/digElement";
 
 ### 4 different ways of implementing it:
 
----
-
-| #   | Parameter         | Type        | Description                                                       |
-| --- | ----------------- | ----------- | ----------------------------------------------------------------- |
-| 1   | element           | HTMLElement | The element to check                                              |
-| 2   | search.type       | String      | The type of search, in this case 'style'                          |
-| 3   | search.lookFor    | Array       | Array of styles properties to look for                            |
-| 4   | intervalFrequency | Number      | Interval frequency in seconds                                     |
-| 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
-| 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
+### Style Search
 
 ```javascript
 Promise.all(
@@ -219,16 +210,17 @@ Promise.all(
     .catch((error) => console.log(error.message));
 ```
 
----
-
 | #   | Parameter         | Type        | Description                                                       |
 | --- | ----------------- | ----------- | ----------------------------------------------------------------- |
 | 1   | element           | HTMLElement | The element to check                                              |
-| 2   | search.type       | String      | The type of search, in this case 'class'                          |
-| 3   | search.lookFor    | Array       | Array of classes to look for                                      |
+| 2   | search.type       | String      | The type of search, in this case 'style'                          |
+| 3   | search.lookFor    | Array       | Array of styles properties to look for                            |
 | 4   | intervalFrequency | Number      | Interval frequency in seconds                                     |
 | 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
 | 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
+
+
+### Class Search
 
 ```javascript
 Promise.all(
@@ -251,19 +243,18 @@ Promise.all(
     .catch((error) => console.log(error.message));
 ```
 
----
-
-Here's the information you provided in table format:
-
 | #   | Parameter         | Type        | Description                                                       |
 | --- | ----------------- | ----------- | ----------------------------------------------------------------- |
 | 1   | element           | HTMLElement | The element to check                                              |
 | 2   | search.type       | String      | The type of search, in this case 'class'                          |
-| 3   | search.attribute  | String      | The data attribute to check                                       |
-| 4   | search.lookFor    | Array       | Array of possible values for the data attribute                   |
-| 5   | intervalFrequency | Number      | Interval frequency in seconds                                     |
-| 6   | timer             | Number      | The duration in seconds after which the interval will be finished |
-| 7   | callback          | Function    | A callback function to execute once the promise is resolved       |
+| 3   | search.lookFor    | Array       | Array of classes to look for                                      |
+| 4   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
+
+
+
+### Attribute Search for value
 
 ```javascript
 Promise.all(
@@ -286,18 +277,21 @@ Promise.all(
     })
     .catch((error) => console.log(error.message));
 ```
-
----
-
-Here's the information in table format:
+Here's the information you provided in table format:
 
 | #   | Parameter         | Type        | Description                                                       |
 | --- | ----------------- | ----------- | ----------------------------------------------------------------- |
 | 1   | element           | HTMLElement | The element to check                                              |
-| 2   | search.type       | String      | The type of search, in this case 'hasChildren'                    |
-| 3   | intervalFrequency | Number      | Interval frequency in seconds                                     |
-| 4   | timer             | Number      | The duration in seconds after which the interval will be finished |
-| 5   | callback          | Function    | A callback function to execute once the promise is resolved       |
+| 2   | search.type       | String      | The type of search, in this case 'class'                          |
+| 3   | search.attribute  | String      | The data attribute to check                                       |
+| 4   | search.lookFor    | Array       | Array of possible values for the data attribute                   |
+| 5   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 6   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 7   | callback          | Function    | A callback function to execute once the promise is resolved       |
+
+
+
+Search for children inside element
 
 ```javascript
 Promise.all(
@@ -318,6 +312,18 @@ Promise.all(
     })
     .catch((error) => console.log(error.message));
 ```
+
+Here's the information in table format:
+
+| #   | Parameter         | Type        | Description                                                       |
+| --- | ----------------- | ----------- | ----------------------------------------------------------------- |
+| 1   | element           | HTMLElement | The element to check                                              |
+| 2   | search.type       | String      | The type of search, in this case 'hasChildren'                    |
+| 3   | intervalFrequency | Number      | Interval frequency in seconds                                     |
+| 4   | timer             | Number      | The duration in seconds after which the interval will be finished |
+| 5   | callback          | Function    | A callback function to execute once the promise is resolved       |
+
+
 
 ---
 
