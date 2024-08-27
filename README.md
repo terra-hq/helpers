@@ -131,6 +131,7 @@ try {
 }
 ```
 
+## Forms
 
 ### Recaptcha
 
@@ -172,7 +173,7 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ###### Note : you could use these reference as a draft, this is not production ready, samples for [Node](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) or [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4)
 
----
+## Miscellaneous
 
 ### Dig Element
 
