@@ -187,7 +187,7 @@ import { digElement } from "@terrahq/helpers/digElement";
 
 ### 4 different ways of implementing it:
 
-### Style Search
+###  1 - Style Search
 
 ```javascript
 Promise.all(
@@ -219,6 +219,7 @@ Promise.all(
 | 5   | timer             | Number      | The duration in seconds after which the interval will be finished |
 | 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
+<br/><br/><br/><br/><br/>
 
 ### Class Search
 
