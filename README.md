@@ -14,131 +14,83 @@ npm i @terrahq/helpers
 
 Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **This is an async await operation**
 
-```javascript
-import { preloadImages } from "@terrahq/helpers/preloadImages";
-```
+Preloads images asynchronously and resolves the Promise when all images are loaded.
+Optionally, a callback function can be provided, which will be called after the images have preloaded.
+A debug option can be enabled to log information about the images that match the selector.
 
 ```javascript
-await preloadImages("img");
+import { preloadImages } from "@terrahq/helpers/preloadImages";
+
+await preloadImages({
+    selector: 'img', 
+    callback: () => {
+        console.log('All images loaded');
+    },
+    debug: false
+});
 ```
 
 #### Videos
 
 Under the hood it uses [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
 
+Preloads video elements asynchronously and resolves the Promise when either all videos can play through, or the maximum time limit is reached.
+Optionally, a callback function can be provided, which will be called after the videos have preloaded or the time limit is reached.
+A debug option can be enabled to log information about the video elements that match the selector.
+
 ```javascript
 import { preloadVideos } from "@terrahq/helpers/preloadVideos";
-```
-
-```javascript
 await preloadVideos({
     selector: document.querySelectorAll(".js--video"),
-    maxTime: 300,
+    maxTime: 1300,
+    callback:(payload) => {
+        console.log('aca',payload)
+        console.log('All videos loaded [a[a!]]');
+    },
+    debug:true,
 });
 ```
 
-#### Fonts
 
-Under the hood it uses [WebFontLoad](https://www.npmjs.com/package/webfontloader) , **This is an async await operation**
-
-```javascript
-import { preloadFonts } from "@terrahq/helpers/preloadFonts";
-```
-
-For Google fonts
-
-```javascript
-await preloadFonts({
-    provider: "google",
-    families: ["DMSans", "Domine"], // Replace with your desired Google font families
-});
-```
-
-For custom fonts
-
-```javascript
-await preloadFonts({
-    provider: "custom",
-    families: ["MyCustomFont"], // Replace with your custom font family names
-    urls: ["https://example.com/path/to/mycustomfont.css"], // Replace with the URLs to your custom font CSS files
-});
-```
 
 #### Lottie
 
 Under the hood it uses [lottie-web](https://www.npmjs.com/package/lottie-web) , **This is an async await operation**
 
+Preloads Lottie animations asynchronously and resolves the Promise when all animations are loaded. Optionally, a callback function can be provided, which will be called after all Lottie animations are loaded. A debug option can be enabled to log information about the Lottie elements being processed.
+
 ```javascript
 import { preloadLotties } from "@terrahq/helpers/preloadLotties";
-```
 
----
-
-| #   | Parameter        | Type   | Description                                                                  |
-| --- | ---------------- | ------ | ---------------------------------------------------------------------------- |
-| 1   | payload.onScroll | Boolen | It defines if the 'lottie-web' should be import on init or on window scroll. |
-
-```javascript
-preloadLotties();
-
-preloadLotties({ onScroll: true });
-```
-
-It is understood that each lottie must be formed in the following way
-
-```html
-<div class="js--lottie-data" data-src="filename.json" data-autoplay="true" data-name="myLottie"></div>
-```
-
-You can play/pause/etc via javascript, as all loties will live under window.windowLotties['data-name']
-
-```javascript
-window.windowLotties["myLottie"].play();
-window.windowLotties["myLottie"].pause();
-window.windowLotties["myLottie"].stop();
-```
-
-#### Vue
-
-**This is an async await operation**
-
-```javascript
-import { preloadVue } from "@terrahq/helpers/preloadVue";
-```
-
-```javascript
-await preloadVue({
-    element: document.querySelector(".js--vue"),
+await preloadLotties({
+    debug: true,
+    selector: document.querySelectorAll('.js--lottie-element'),
+    callback: (payload) => {
+        console.log('All lotties loaded', payload);
+    }
 });
 ```
 
-In the context of Vue.js development, it is recommended to initialize the loading state within the mounted lifecycle hook of a Vue page by setting window['vueLoaded'] to false. As data is successfully loaded, often achieved through tools like Axios, the loading state is then gracefully transitioned to true by updating the value of window['vueLoaded']. This practice elegantly manages the loading dynamics of the Vue page in harmony with the asynchronous data retrieval process.
-
-##### MyVueApp.vue
-
-```javascript
-mounted() {
-    window['vueLoaded'] = false
-},
-asyncData(){
-    await axios.get("XXXX")
-    window['vueLoaded'] = true
-}
-```
-
-It is customary for each page to include the tag js--resources-vue. This serves as a visual cue, indicating that the enclosed Vue code should be scrutinized to ensure the proper loading and functioning of Vue components.
-
-##### Mypage.astro
+Expected HTML structure for each Lottie element
 
 ```html
-<div class="js--vue">
-    <MyVueApp></MyVueApp>
-</div>
+<div class="js--lottie-element" data-path="filename.json" data-animType="svg" data-loop="true" data-autoplay="false" data-name="myLottie"></div>
 ```
+
+Controlling Lottie animations via JavaScript
+
+```javascript
+window.WL["myLottie"].play();   // Play the Lottie animation
+window.WL["myLottie"].pause();  // Pause the Lottie animation
+window.WL["myLottie"].stop();   // Stop the Lottie animation
+```
+
+
 
 ## Hubspot
 
-Helper to submit directly to Hubspot.
+Helper to submit directly to Hubspot. Using axios.
+Submits form data to the HubSpot API using the specified portal ID and form ID. Optionally, a debug option can be enabled to log detailed information during the submission process, and a callback function can be provided to handle the response after the submission is completed.
 
 -   This endpoint has a rate limit of 50 requests per 10 seconds.
 -   When using this endpoint to integrate custom forms with HubSpot, keep in mind that the available endpoints do not log any API calls. Users will need to store their own logs.
@@ -147,35 +99,46 @@ Helper to submit directly to Hubspot.
 
 ```javascript
 import { submitToHubspot } from "@terrahq/helpers/hubspot";
-```
 
-```javascript
+
 // option 1
-async function handleFormSubmit(formInputs) {
-    const { message, success, statusCode } = await useHubSpot(portalId.value, formId.value, formInputs.concat(stepsResults.value));
-}
-// option 2
-const handleFormSubmit = async (formInputs) => {
-    const { message, success, statusCode } = await useHubSpot(portalId.value, formId.value, formInputs.concat(stepsResults.value));
+const payload = {
+  portalId: 'YOUR_PORTAL_ID',
+  formId: 'YOUR_FORM_ID',
+  formInputs: {
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+  },
+  callback: (result) => {
+    console.log('Callback result:', result);
+    if (result.success) {
+      // Handle successful submission
+    } else {
+      // Handle submission error
+    }
+  },
+  debug: true // Enable debug mode
 };
+
+try {
+  const submissionResult = await submitToHubspot(payload);
+  console.log(submissionResult.message);
+} catch (error) {
+  // Handle unexpected errors during submission
+  console.error('Submission error:', error.message);
+}
 ```
 
--   **Message (String):** Returns a message indicating the status of the submission. If successful, it will be "Thanks for submitting." If there is an error, the message will contain details about the API error.
-
--   **Success (Boolean):** Returns true if the submission is successful, and false if there is an error.
-
--   **StatusCode (Integer):** Returns the HTTP status code indicating the result of the API request. A status code of 200 indicates success, while other codes such as 400, 300, or 500 correspond to different API errors.
 
 ## Recaptcha
 
-Helper to add recaptcha v3 to our custom forms. It has several functions.
-1 st Asynchronously loads the reCAPTCHA script from Google with the specified API key.
+Helper to add recaptcha v3 to forms. It has several functions.
+1st Asynchronously loads the reCAPTCHA script from Google with the specified API key.
 
 ```javascript
 import { GET_RECAPTCHA_SCRIPT_FROM_GOOGLE } from "@terrahq/helpers/recaptcha";
-```
 
-```javascript
 var publicKey = "XXXXXXX";
 var loadRecaptchaScript = await GET_RECAPTCHA_SCRIPT_FROM_GOOGLE({
     API_KEY: publicKey,
@@ -186,9 +149,7 @@ var loadRecaptchaScript = await GET_RECAPTCHA_SCRIPT_FROM_GOOGLE({
 
 ```javascript
 import { GET_RECAPTCHA_CLIENT_TOKEN } from "@terrahq/helpers/recaptcha";
-```
 
-```javascript
 var google_access_token = await GET_RECAPTCHA_CLIENT_TOKEN({
     API_KEY: publicKey,
     action: "submit",
@@ -199,9 +160,7 @@ var google_access_token = await GET_RECAPTCHA_CLIENT_TOKEN({
 
 ```javascript
 import { VALIDATE_RECAPTCHA_SERVER } from "@terrahq/helpers/recaptcha";
-```
 
-```javascript
 var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
     type: "node",
     postUrl: "yoursite.com/api/validate_recaptcha",

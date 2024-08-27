@@ -35,7 +35,6 @@
         "axios": "^1.6.2",
         "imagesloaded": "^5.0.0",
         "lottie-web": "^5.12.2",
-        "qs": "^6.11.2",
-        "webfontloader": "^1.6.28"
+        "qs": "^6.11.2"
     }
 }
