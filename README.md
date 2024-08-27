@@ -10,7 +10,7 @@ npm i @terrahq/helpers
 
 ---
 
-#### Images
+### Images
 
 Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **This is an async await operation**
 
@@ -30,7 +30,7 @@ await preloadImages({
 });
 ```
 
-#### Videos
+### Videos
 
 Under the hood it uses [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event), **This is an async await operation**
 
@@ -53,7 +53,7 @@ await preloadVideos({
 
 
 
-#### Lottie
+### Lottie
 
 Under the hood it uses [lottie-web](https://www.npmjs.com/package/lottie-web) , **This is an async await operation**
 
@@ -87,7 +87,7 @@ window.WL["myLottie"].stop();   // Stop the Lottie animation
 
 
 
-## Hubspot
+### Hubspot
 
 Helper to submit directly to Hubspot. Using axios.
 Submits form data to the HubSpot API using the specified portal ID and form ID. Optionally, a debug option can be enabled to log detailed information during the submission process, and a callback function can be provided to handle the response after the submission is completed.
