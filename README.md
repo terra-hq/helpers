@@ -5,7 +5,7 @@ These functions play a crucial role in project development, establishing identit
 ```javascript
 npm i @terrahq/helpers
 ```
-<br><br><br><br>
+<br><br>
 
 
 ## Preload
@@ -87,7 +87,7 @@ window.WL["myLottie"].pause();  // Pause the Lottie animation
 window.WL["myLottie"].stop();   // Stop the Lottie animation
 ```
 
-<br><br><br><br>
+<br><br>
 
 ## Marketing
 
