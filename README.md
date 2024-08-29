@@ -31,6 +31,7 @@ await preloadImages({
     debug: false
 });
 ```
+<br>
 
 ### Videos
 
@@ -52,8 +53,7 @@ await preloadVideos({
     debug:true,
 });
 ```
-
-
+<br>
 
 ### Lottie
 
