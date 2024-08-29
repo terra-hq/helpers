@@ -104,8 +104,6 @@ Submits form data to the HubSpot API using the specified portal ID and form ID. 
 ```javascript
 import { submitToHubspot } from "@terrahq/helpers/hubspot";
 
-
-// option 1
 const payload = {
   portalId: 'YOUR_PORTAL_ID',
   formId: 'YOUR_FORM_ID',
