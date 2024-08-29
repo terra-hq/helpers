@@ -19,6 +19,7 @@ Under the hood it uses [ImagesLoaded](https://imagesloaded.desandro.com/), **Thi
 Preloads images asynchronously and resolves the Promise when all images are loaded.
 Optionally, a callback function can be provided, which will be called after the images have preloaded.
 A debug option can be enabled to log information about the images that match the selector.
+The selector can be a class or selector: 'img' for all images. If no selector is provided, preloadImages will look for img tags by default.
 
 ```javascript
 import { preloadImages } from "@terrahq/helpers/preloadImages";
@@ -28,7 +29,19 @@ await preloadImages({
     callback: () => {
         console.log('All images loaded');
     },
-    debug: false
+    debug: false,
+});
+```
+
+```javascript
+import { preloadImages } from "@terrahq/helpers/preloadImages";
+
+await preloadImages({
+    selector: document.querySelectorAll('.js--image'),  
+    callback: () => {
+        console.log('All images loaded');
+    },
+    debug: true,
 });
 ```
 <br>
@@ -47,10 +60,9 @@ await preloadVideos({
     selector: document.querySelectorAll(".js--video"),
     maxTime: 1300,
     callback:(payload) => {
-        console.log('aca',payload)
-        console.log('All videos loaded [a[a!]]');
+       console.log('All videos are loaded');
     },
-    debug:true,
+    debug: true,
 });
 ```
 <br>

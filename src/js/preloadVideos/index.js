@@ -56,13 +56,23 @@ const preloadVideos = (payload) => {
         debug = false 
     } = payload;
 
+    // If selector is not provided, log a debug message
+    if (!selector) {
+        if (debug) {
+            console.log("Debug: selector missing");
+        }
+    }
+
     let isResolved = false; // Flag to check if the promise has already been resolved
 
-    // Convert selector to NodeList if it's a string
     const elements = selector instanceof NodeList ? Array.from(selector) : document.querySelectorAll(selector);
 
+    const selectorName = selector instanceof NodeList ? 
+        (selector.length > 0 && selector[0].classList.contains('js--video') ? '.js--video' : 'NodeList') : 
+        selector;
+
     if (debug) {
-        console.log(`Debug: Found ${elements.length} video element(s) matching selector "${selector instanceof NodeList ? 'NodeList' : selector}".`);
+        console.log(`Debug: Found ${elements.length} video element(s) matching selector "${selectorName}".`);
     }
 
     return Promise.race([

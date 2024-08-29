@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="f--container">
-            <img src="https://www.w3schools.com/html/pic_trulli.jpg" alt="">
+            <img class="js--image" src="https://www.w3schools.com/html/pic_trulli.jpg" alt="">
         </div>
         
   
@@ -44,11 +44,11 @@
             (async () => {
                 try {
                     await preloadImages({
-                        selector: 'img', 
+                        selector: document.querySelectorAll('.js--image'), 
                         callback: () => {
                             console.log('All images loaded');
                         },
-                        debug: false
+                        debug: true
                     });
                 } catch (error) {
                     console.error('Error:', error);

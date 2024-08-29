@@ -66,16 +66,28 @@ import imagesLoaded from "imagesloaded";
 const preloadImages = (payload = {}) => {
     // Destructure properties from payload with default values
     const { 
-        selector = "img", 
+        selector = "img", // Default to 'img' if no selector is provided
         callback, 
         debug = false 
     } = payload;
 
     return new Promise((resolve) => {
-        const images = document.querySelectorAll(selector);
-        
+        let images;
+        let selectorName = "";
+
+        // Check if the selector is a string or a NodeList
+        if (typeof selector === 'string') {
+            images = document.querySelectorAll(selector);
+            selectorName = selector;
+        } else if (selector instanceof NodeList) {
+            images = selector;
+            selectorName = selector[0]?.className || 'NodeList'; // Get class name or fallback to 'NodeList'
+        } else {
+            throw new Error("Invalid selector provided. Must be a string or NodeList.");
+        }
+
         if (debug) {
-            console.log(`Debug: Found ${images.length} image(s) matching selector "${selector}".`);
+            console.log(`Debug: Found ${images.length} image(s) matching selector "${selectorName}".`);
         }
         
         imagesLoaded(images, { background: true }, () => {
