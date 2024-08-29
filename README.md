@@ -85,6 +85,7 @@ window.WL["myLottie"].pause();  // Pause the Lottie animation
 window.WL["myLottie"].stop();   // Stop the Lottie animation
 ```
 
+<br><br><br><br>
 
 ## Marketing
 
