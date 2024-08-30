@@ -1,3 +1,4 @@
+import lottie from 'lottie-web';
 /**
  * Preloads Lottie animations asynchronously and resolves the Promise when all animations are loaded.
  * Optionally, a callback function can be provided, which will be called after all Lottie animations are loaded.
@@ -63,7 +64,7 @@ export const preloadLotties = async (payload = {}) => {
     }
   
     // Import the lottie-web module
-    const response = await import('lottie-web');
+    
     const animations = []; // To store all Lottie animation instances
   
     for (let i = 0; i < elements.length; i++) {
@@ -75,7 +76,7 @@ export const preloadLotties = async (payload = {}) => {
         'https://labs.nearpod.com/bodymovin/demo/markus/isometric/markus2.json';
       let autoplay = elements[i].getAttribute('data-autoplay') !== 'false';
   
-      let animItem = response.loadAnimation({
+      let animItem = lottie.loadAnimation({
         container: elements[i],
         renderer: animType,
         loop: loop,
@@ -103,4 +104,3 @@ export const preloadLotties = async (payload = {}) => {
   
     return Promise.resolve('All Lottie animations are successfully loaded.');
   };
-  
