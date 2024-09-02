@@ -188,7 +188,7 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ## Miscellaneous
 
-## Breakpoints
+### Breakpoints
 
 Helper function that returns all breakpoints for Terra
 ```javascript
@@ -197,7 +197,7 @@ Helper function that returns all breakpoints for Terra
 console.log(bk.mobile)
 ```
 
-## TerraDebugger
+### TerraDebugger
 
 Helper function to develop better testing for Developers + UX/ui, it returns breakpoint name and clickup space.
 
