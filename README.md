@@ -188,6 +188,34 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ## Miscellaneous
 
+## Breakpoints
+
+Helper function that returns all breakpoints for Terra
+```javascript
+ import {breakpoints} from "@terrahq/helpers/breakpoints";
+ let bk = breakpoints.reduce((target, inner) => Object.assign(target, inner), {})
+console.log(bk.mobile)
+```
+
+## TerraDebugger
+
+Helper function to develop better testing for Developers + UX/ui, it returns breakpoint name and clickup space.
+
+```javascript
+ import {terraDebugger} from "@terrahq/helpers/terraDebugger";
+
+ function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.has(param); // returns true if the parameter is present, otherwise false
+}
+
+var terraDebug = getQueryParam('debug');
+
+if (terraDebug) {
+    terraDebugger({ submitQA: 'your_QA_app' });
+}
+```
+
 ### Dig Element
 
 Helper function designed to inspect a specified HTML element for mutations in its styles, classes, data attributes, or the structure of its children.

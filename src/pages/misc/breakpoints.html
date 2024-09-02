@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TerraHQ.com</title>
+    </head>
+    <body>
+        <div class="f--container">
+            <div class="f--row">
+                <div class="f--col-12">
+                    <h2 class="f--font-a f--sp-a f--mt-3">
+                        Helpers <span class="f--font-c">By Terra</span>
+                    </h2>
+  
+                </div>
+            </div> 
+            <div class="f--row">
+                <div class="f--col-12">
+                    <hr/>
+                </div>
+            </div>  
+            <div class="f--row">
+                <div class="f--col-6">
+                    <h3 class="f--font-d f--sp-a f--mt-3">
+                        Breakpoints
+                    </h3>
+                </div>
+                <div class="f--col-6" style="text-align: right;">
+                   <a href="/">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="f--container">
+           <div class="f--row">
+                <div class="f--col-12">
+                    <p>Check console</p>
+                </div>
+           </div>
+        </div>
+        
+  
+        <script type="module">
+            import "@scss/index.scss";
+            import {breakpoints} from "@js/breakpoints/index.js";
+
+            console.log(breakpoints)
+
+            let bk = breakpoints.reduce((target, inner) => Object.assign(target, inner), {})
+            console.log(bk.mobile)
+
+        </script>
+    </body>
+</html>
