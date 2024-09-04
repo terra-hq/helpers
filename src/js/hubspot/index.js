@@ -90,7 +90,6 @@ const submitToHubspot = async (payload = {}) => {
     statusCode,
   };
 
-  // Invoke the callback with the result object
   callback(result);
 
   return result;

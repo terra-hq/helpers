@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TerraHQ.com</title>
+    </head>
+    <body>
+        <div class="f--container">
+            <div class="f--row">
+                <div class="f--col-12">
+                    <h2 class="f--font-a f--sp-a f--mt-3">
+                        Helpers <span class="f--font-c">By Terra</span>
+                    </h2>
+                </div>
+            </div> 
+            <div class="f--row">
+                <div class="f--col-12">
+                    <hr/>
+                </div>
+            </div>  
+            <div class="f--row">
+                <div class="f--col-6">
+                    <h3 class="f--font-d f--sp-a f--mt-3">
+                        HubSpot Example
+                    </h3>
+                </div>
+                <div class="f--col-6" style="text-align: right;">
+                   <a href="/">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="f--container">
+            <form id="hubspot-form">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <br>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br><br>
+                <button type="submit" style="background-color: black;color:white;padding:10px 25px">Submit</button>
+            </form>
+        </div>
+        
+        <script type="module">
+            import "@scss/index.scss";
+            import {submitToHubspot} from "@js/hubspot/index.js";
+
+            document.getElementById('hubspot-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const formInputs = {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    comment: 'helper test'
+                };
+
+                const payload = {
+                    portalId: '6968388', 
+                    formId: '1b2e0c0b-f255-496f-8024-cb1a060debb3',
+                    formInputs,
+                    callback: (result) => {
+                        if (result.success) {
+                            alert('Submission successful!');
+                        } else {
+                            alert('Submission failed: ' + result.message);
+                        }
+                    },
+                    debug: true,
+                };
+
+                try {
+                    const submissionResult = await submitToHubspot(payload);
+                    console.log('Submission result:', submissionResult.message);
+                } catch (error) {
+                    console.error('Unexpected error during submission:', error.message);
+                }
+            });
+
+        </script>
+    </body>
+</html>
