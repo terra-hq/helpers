@@ -45,9 +45,9 @@ export function hasGoogleScripts(options = { detect: ['analytics', 'gtm'], maxTi
         }
 
         function isGoogleAdsInstalled() {
-            return window.google_tag_manager && window.google_tag_manager['AW'];
+            return !!document.querySelector('script[src*="googleads.g.doubleclick.net"]');
         }
-
+        
         function checkScripts() {
             const currentTime = Date.now();
             const isAnalyticsDetected = detectOptions.includes('analytics') ? checkForUniversalAnalytics() : true;
