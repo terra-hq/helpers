@@ -144,48 +144,6 @@ try {
 }
 ```
 
-## Forms
-
-### Recaptcha
-
-Helper to add recaptcha v3 to forms. It has several functions.
-1st Asynchronously loads the reCAPTCHA script from Google with the specified API key.
-
-```javascript
-import { GET_RECAPTCHA_SCRIPT_FROM_GOOGLE } from "@terrahq/helpers/recaptcha";
-
-var publicKey = "XXXXXXX";
-var loadRecaptchaScript = await GET_RECAPTCHA_SCRIPT_FROM_GOOGLE({
-    API_KEY: publicKey,
-});
-```
-
-2nd Asynchronously retrieves a reCAPTCHA client token by executing the reCAPTCHA challenge.
-
-```javascript
-import { GET_RECAPTCHA_CLIENT_TOKEN } from "@terrahq/helpers/recaptcha";
-
-var google_access_token = await GET_RECAPTCHA_CLIENT_TOKEN({
-    API_KEY: publicKey,
-    action: "submit",
-});
-```
-
-3rd Validates a Google reCAPTCHA token on the server-side using either PHP or Node.js.
-
-```javascript
-import { VALIDATE_RECAPTCHA_SERVER } from "@terrahq/helpers/recaptcha";
-
-var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
-    type: "node",
-    postUrl: "yoursite.com/api/validate_recaptcha",
-    action: "recaptcha_validate",
-    google_access_token: google_access_token,
-});
-```
-
-###### Note : you could use these reference as a draft, this is not production ready, samples for [Node](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) or [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4)
-
 ## Miscellaneous
 
 ### Breakpoints
@@ -453,6 +411,48 @@ await hasGoogleScripts().then((detected) => {
     }
 });
 ```
+
+---
+
+### Recaptcha
+
+Helper to add recaptcha v3 to forms. It has several functions.
+1st Asynchronously loads the reCAPTCHA script from Google with the specified API key.
+
+```javascript
+import { GET_RECAPTCHA_SCRIPT_FROM_GOOGLE } from "@terrahq/helpers/recaptcha";
+
+var publicKey = "XXXXXXX";
+var loadRecaptchaScript = await GET_RECAPTCHA_SCRIPT_FROM_GOOGLE({
+    API_KEY: publicKey,
+});
+```
+
+2nd Asynchronously retrieves a reCAPTCHA client token by executing the reCAPTCHA challenge.
+
+```javascript
+import { GET_RECAPTCHA_CLIENT_TOKEN } from "@terrahq/helpers/recaptcha";
+
+var google_access_token = await GET_RECAPTCHA_CLIENT_TOKEN({
+    API_KEY: publicKey,
+    action: "submit",
+});
+```
+
+3rd Validates a Google reCAPTCHA token on the server-side using either PHP or Node.js.
+
+```javascript
+import { VALIDATE_RECAPTCHA_SERVER } from "@terrahq/helpers/recaptcha";
+
+var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
+    type: "node",
+    postUrl: "yoursite.com/api/validate_recaptcha",
+    action: "recaptcha_validate",
+    google_access_token: google_access_token,
+});
+```
+
+###### Note : you could use these reference as a draft, this is not production ready, samples for [Node](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) or [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4)
 
 ---
 
