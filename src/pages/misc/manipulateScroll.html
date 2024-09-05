@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TerraHQ.com</title>
+</head>
+<body>
+    <div class="f--container">
+        <div class="f--row">
+            <div class="f--col-12">
+                <h2 class="f--font-a f--sp-a f--mt-3">
+                    Helpers <span class="f--font-c">By Terra</span>
+                </h2>
+            </div>
+        </div> 
+        <div class="f--row">
+            <div class="f--col-12">
+                <hr/>
+            </div>
+        </div>  
+        <div class="f--row">
+            <div class="f--col-8 f--sp-c">
+                <h3 class="f--font-d f--mt-3">
+                   Manipulate Scroll
+                </h3>
+                <p class="f--font-e f--mt-2">(Dummy text included after the buttons for scrolling purposes.)</p>
+            </div>
+            <div class="f--col-4" style="text-align: right;">
+               <a href="/">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="f--container f--sp-c">
+      <button style="background-color:#f76e4b;color:white;padding:10px 25px" id="disableScroll">Disable Scroll</button>
+      <button style="background-color: #7ce55e;color:white;padding:10px 25px" id="enableScroll">Enable Scroll</button>
+    </div>
+    <div class="f--container">
+      <p class="f--font-e f--sp-c">(Dummy text starts here.)</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+    </div>
+    
+    <script type="module">
+        import "@scss/index.scss";
+        import { manipulateScroll } from "@js/manipulateScroll/index.js";
+
+        document.getElementById('disableScroll').addEventListener('click', () => {
+            manipulateScroll('block');
+        });
+
+        document.getElementById('enableScroll').addEventListener('click', () => {
+            manipulateScroll('scroll');
+        });
+       
+    </script>
+</body>
+</html>
