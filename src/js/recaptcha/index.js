@@ -19,24 +19,24 @@ import qs from 'qs';
  */
 
 export const GET_RECAPTCHA_SCRIPT_FROM_GOOGLE = async (payload) => {
-    return new Promise((resolve, reject) => {      
+    return new Promise((resolve, reject) => {
         const s = document.createElement('script');
         let r = false;
         s.type = 'text/javascript';
         s.src = `https://www.google.com/recaptcha/api.js?render=${payload.API_KEY}`;
-        s.onerror = (err) =>{
-            reject(err, s);
+        s.onerror = (err) => {
+            console.log(`Debug: Failed to load reCAPTCHA script. Error: ${err.message}`);
         };
         s.onload = s.onreadystatechange = function() {
             if (!r && (!this.readyState || this.readyState == 'complete')) {
-              r = true;
-              resolve(true);
+                r = true;
+                resolve(true);
             }
         };
         const t = document.getElementsByTagName('script')[0];
         t.parentElement.insertBefore(s, t);
-    })
-}
+    });
+};
 
 /**
  * Asynchronously retrieves a reCAPTCHA client token by executing the reCAPTCHA challenge.
@@ -83,24 +83,27 @@ export const GET_RECAPTCHA_CLIENT_TOKEN= async (payload) => {
  */
 
 export const VALIDATE_RECAPTCHA_SERVER = async (payload) => {
-    if(payload.type === 'php'){
-        let dataToSubmit  = null;
-        var settings = payload;
-        try{
+    if (payload.type === 'php') {
+        let dataToSubmit = null;
+        const settings = payload;
+        try {
             dataToSubmit = await axios.post(payload.postUrl, qs.stringify(settings));
-        }catch(error){
-            console.log(error);
+        } catch (error) {
+            console.log('Debug: Error in PHP validation:', error);
         }
         return dataToSubmit;
     }
-    if(payload.type === 'node'){
+
+    if (payload.type === 'node') {
         const postData = {
             google_access_token: payload.google_access_token,
-            action:payload.action
+            action: payload.action
         };
-        return axios.post(payload.postUrl, postData).then(response =>{
+        return axios.post(payload.postUrl, postData).then(response => {
             return response.data;
-        })
+        }).catch(error => {
+            console.log('Debug: Error in Node.js validation:', error);
+        });
     }
 }
 
