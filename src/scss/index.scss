@@ -1,1 +1,7 @@
 body{background:rgb(238, 229, 229);}
+a{
+  color: black;
+  &:hover{
+    color: #439ed7;
+  }
+}
