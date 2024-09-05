@@ -241,6 +241,7 @@ Promise.all(
             },
             intervalFrequency: 1500,
             timer: 5000,
+            debug: true,
             callback: () => console.log("COMPLETED!"),
         });
     })
@@ -275,6 +276,7 @@ Promise.all(
             },
             intervalFrequency: 1500,
             timer: 5000,
+            debug: true,
             callback: () => console.log("COMPLETED!"),
         });
     })
@@ -311,6 +313,7 @@ Promise.all(
             },
             intervalFrequency: 1500,
             timer: 5000,
+            debug: true,
             callback: () => console.log("COMPLETED!"),
         });
     })
@@ -346,6 +349,7 @@ Promise.all(
             },
             intervalFrequency: 1500,
             timer: 5000,
+            debug: true,
             callback: () => console.log("COMPLETED!"),
         });
     })

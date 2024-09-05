@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TerraHQ.com</title>
+</head>
+<body>
+    <div class="f--container">
+        <div class="f--row">
+            <div class="f--col-12">
+                <h2 class="f--font-a f--sp-a f--mt-3">
+                    Helpers <span class="f--font-c">By Terra</span>
+                </h2>
+            </div>
+        </div> 
+        <div class="f--row">
+            <div class="f--col-12">
+                <hr/>
+            </div>
+        </div>  
+        <div class="f--row">
+            <div class="f--col-6">
+                <h3 class="f--font-d f--sp-a f--mt-3">
+                    Dig elements
+                </h3>
+            </div>
+            <div class="f--col-6" style="text-align: right;">
+               <a href="/">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="f--container">
+        <h2 class="f--font-d f--mt-3" id="element-to-watch" style="background-color:#ffb41d; width: 20%; text-align: center;">
+            Dig me?
+        </h2>
+    </div>
+    
+    <script type="module">
+        import "@scss/index.scss";
+        import { digElement } from "@js/digElement/index.js";
+
+        digElement({
+            element: document.getElementById('element-to-watch'),
+            search: {
+                type: "style",
+                lookFor: ["max-height"],
+            },
+            intervalFrequency: 500,
+            timer: 10000,
+            debug: true,
+            callback: () => {
+                console.log("Element style mutation detected!");
+                console.log("Element style changed!");
+            },
+        })
+        .then(() => console.log("READY"))
+        .catch((error) => console.error(error.message));
+
+        setTimeout(() => {
+            document.getElementById('element-to-watch').style.maxHeight = '100px';
+        }, 3000);
+    </script>
+</body>
+</html>
