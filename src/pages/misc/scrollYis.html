@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TerraHQ.com</title>
+</head>
+<body>
+    <div class="f--container">
+        <div class="f--row">
+            <div class="f--col-12">
+                <h2 class="f--font-a f--sp-a f--mt-3">
+                    Helpers <span class="f--font-c">By Terra</span>
+                </h2>
+            </div>
+        </div> 
+        <div class="f--row">
+            <div class="f--col-12">
+                <hr/>
+            </div>
+        </div>  
+        <div class="f--row">
+            <div class="f--col-8 f--sp-c">
+                <h3 class="f--font-d f--mt-3">
+                  Scroll Y Check
+                </h3>
+                <h4 class="f--font-e f--mt-2">Scroll down to see the message</h4>
+                <p class="f--font-f f--mt-2">(Dummy text included after the buttons for scrolling purposes.)</p>
+            </div>
+            <div class="f--col-4" style="text-align: right;">
+               <a href="/">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="f--container">
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor, vel minima. Vero explicabo possimus molestiae temporibus. Aut deleniti totam doloribus magnam veniam blanditiis dolores fugit. Voluptas culpa quos ab mollitia?</p>
+    </div>
+    
+    <script type="module">
+        import "@scss/index.scss";
+        import { scrollYis } from "@js/scrollYis/index.js";
+        document.addEventListener('scroll', () => {
+            const distance = 100; 
+            const messageElement = document.getElementById('scroll-message');
+            if (scrollYis({ distance })) {
+              console.log(`The scroll position is exactly ${distance} pixels or more from the top.`);
+            } else {
+              console.log(`The scroll position is below ${distance} pixels.`);
+            }
+        });
+    </script>
+</body>
+</html>
+
