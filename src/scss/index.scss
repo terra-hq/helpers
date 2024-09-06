@@ -5,3 +5,31 @@ a{
     color: #439ed7;
   }
 }
+
+header{
+  padding: 2rem;
+  position: relative;
+  background-color: #439ed7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & img{
+    display: block;
+    max-width: 100px;
+  }
+  > button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    color: #ffb41d;
+    &:focus-visible{
+      opacity: 1;
+    }
+  }
+}
+
+nav{
+  display: flex;
+  gap: 2rem;
+}

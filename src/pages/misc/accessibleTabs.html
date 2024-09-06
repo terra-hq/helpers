@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TerraHQ.com</title>
+</head>
+<body>
+    <div class="f--container">
+        <div class="f--row">
+            <div class="f--col-12">
+                <h2 class="f--font-a f--sp-a f--mt-3">
+                    Helpers <span class="f--font-c">By Terra</span>
+                </h2>
+            </div>
+        </div> 
+        <div class="f--row">
+            <div class="f--col-12">
+                <hr/>
+            </div>
+        </div>  
+        <div class="f--row">
+            <div class="f--col-6">
+                <h3 class="f--font-d f--sp-a f--mt-3">
+                    Accessible Tabs
+                </h3>
+            </div>
+            <div class="f--col-6" style="text-align: right;">
+               <a href="/">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="f--container">
+        <header class="f--sp-c">
+            <button class="js--trigger-focus" data-focus-target="main-content">Skip to main Content</button>
+            <img src="https://www.w3schools.com/html/pic_trulli.jpg" alt="">
+            <nav>
+                <a href="#">Link item 1</a>
+                <a href="#">Link item 2</a>
+                <a href="#">Link item 3</a>
+                <a href="#">Link item 4</a>
+            </nav>
+        </header>
+        <div id="main-content">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+            <p>Lorem ipsum <a href="#">test link</a> dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur beatae dolorem perferendis qui nemo. Adipisci ipsa nostrum excepturi ullam recusandae enim assumenda? Sit culpa dicta deleniti sint ex eius aspernatur.</p>
+        </div>
+    </div>
+    
+    <script type="module">
+        import "@scss/index.scss";
+        import { accessibleTabNav } from "@js/accessibleTabNav/index.js";
+        accessibleTabNav();
+    </script>
+</body>
+</html>
