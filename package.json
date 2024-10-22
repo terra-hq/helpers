@@ -1,16 +1,14 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.54",
+    "version": "0.0.55",
     "type": "module",
     "exports": {
         "./preloadFonts": "./src/js/preloadFonts/index.js",
         "./preloadImages": "./src/js/preloadImages/index.js",
         "./preloadLotties": "./src/js/preloadLotties/index.js",
-
         "./breakpoints": "./src/js/breakpoints/index.js",
         "./terraDebugger": "./src/js/terraDebugger/index.js",
-
         "./hubspot": "./src/js/hubspot/index.js",
         "./preloadVideos": "./src/js/preloadVideos/index.js",
         "./preloadVue": "./src/js/preloadVue/index.js",
@@ -21,7 +19,9 @@
         "./hasGoogleScripts": "./src/js/hasGoogleScripts/index.js",
         "./accessibleTabNav": "./src/js/accessibleTabNav/index.js",
         "./hasQueryParameter": "./src/js/hasQueryParameter/index.js",
-        "./scrollYis": "./src/js/scrollYis/index.js"
+        "./scrollYis": "./src/js/scrollYis/index.js",
+        "./getIDbySlug": "./src/js/wp/getIDbySlug/index.js",
+        "./getIDbyTitle": "./src/js/wp/getIDbyTitle/index.js"
     },
     "scripts": {
         "dev": "vite",
