@@ -25,7 +25,7 @@
  *   if (postID) {
  *     console.log(`Found post with ID: ${postID}`);
  *   } else {
- *     console.log('No post found with the specified title.');
+ *     console.log('No post found with the specified slug.');
  *   }
  */
 
