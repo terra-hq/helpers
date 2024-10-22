@@ -36,7 +36,7 @@ const getIDbyTitle = async ({ title, type = ["pages"], callback, debug = false }
         // Itera sobre el array de tipos de post (pages, posts, etc.)
         for (let postType of type) {
             // Hacemos la petición para cada tipo de post
-            const response = await fetch(`/wp-json/wp/v2/${postType}?search=${encodeURIComponent(title)}`);
+            const response = await fetch(`${base_wp_api.root_url}/wp-json/wp/v2/${postType}?search=${encodeURIComponent(title)}`);
             const data = await response.json();
 
             // Si encontramos posts, filtramos aquellos cuyo título coincida exactamente

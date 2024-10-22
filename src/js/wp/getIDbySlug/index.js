@@ -35,7 +35,7 @@ const getIDbySlug = async ({ slug, type = ["pages"], callback, debug = false }) 
         // Itera sobre el array de tipos de post (pages, posts, etc.)
         for (let postType of type) {
             // Hacemos la petición para cada tipo de post
-            const response = await fetch(`/wp-json/wp/v2/${postType}?slug=${encodeURIComponent(slug)}`);
+            const response = await fetch(`${base_wp_api.root_url}/wp-json/wp/v2/${postType}?slug=${encodeURIComponent(slug)}`);
             const data = await response.json();
 
             // Si encontramos posts con el slug, agregamos sus IDs al array
