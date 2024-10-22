@@ -5,12 +5,10 @@ These functions play a crucial role in project development, establishing identit
 ```javascript
 npm i @terrahq/helpers
 ```
+
 <br><br>
 
-
 ## Preload
-
-
 
 ### Images
 
@@ -25,9 +23,9 @@ The selector can be a class or selector: 'img' for all images. If no selector is
 import { preloadImages } from "@terrahq/helpers/preloadImages";
 
 await preloadImages({
-    selector: 'img', 
+    selector: "img",
     callback: () => {
-        console.log('All images loaded');
+        console.log("All images loaded");
     },
     debug: false,
 });
@@ -37,13 +35,14 @@ await preloadImages({
 import { preloadImages } from "@terrahq/helpers/preloadImages";
 
 await preloadImages({
-    selector: document.querySelectorAll('.js--image'),  
+    selector: document.querySelectorAll(".js--image"),
     callback: () => {
-        console.log('All images loaded');
+        console.log("All images loaded");
     },
     debug: true,
 });
 ```
+
 <br>
 
 ### Videos
@@ -59,12 +58,13 @@ import { preloadVideos } from "@terrahq/helpers/preloadVideos";
 await preloadVideos({
     selector: document.querySelectorAll(".js--video"),
     maxTime: 1300,
-    callback:(payload) => {
-       console.log('All videos are loaded');
+    callback: (payload) => {
+        console.log("All videos are loaded");
     },
     debug: true,
 });
 ```
+
 <br>
 
 ### Lottie
@@ -78,10 +78,10 @@ import { preloadLotties } from "@terrahq/helpers/preloadLotties";
 
 await preloadLotties({
     debug: true,
-    selector: document.querySelectorAll('.js--lottie-element'),
+    selector: document.querySelectorAll(".js--lottie-element"),
     callback: (payload) => {
-        console.log('All lotties loaded', payload);
-    }
+        console.log("All lotties loaded", payload);
+    },
 });
 ```
 
@@ -94,9 +94,9 @@ Expected HTML structure for each Lottie element
 Controlling Lottie animations via JavaScript
 
 ```javascript
-window.WL["myLottie"].play();   // Play the Lottie animation
-window.WL["myLottie"].pause();  // Pause the Lottie animation
-window.WL["myLottie"].stop();   // Stop the Lottie animation
+window.WL["myLottie"].play(); // Play the Lottie animation
+window.WL["myLottie"].pause(); // Pause the Lottie animation
+window.WL["myLottie"].stop(); // Stop the Lottie animation
 ```
 
 <br><br>
@@ -117,30 +117,30 @@ Submits form data to the HubSpot API using the specified portal ID and form ID. 
 import { submitToHubspot } from "@terrahq/helpers/hubspot";
 
 const payload = {
-  portalId: 'YOUR_PORTAL_ID',
-  formId: 'YOUR_FORM_ID',
-  formInputs: {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-  },
-  callback: (result) => {
-    console.log('Callback result:', result);
-    if (result.success) {
-      // Handle successful submission
-    } else {
-      // Handle submission error
-    }
-  },
-  debug: true // Enable debug mode
+    portalId: "YOUR_PORTAL_ID",
+    formId: "YOUR_FORM_ID",
+    formInputs: {
+        firstName: "John",
+        lastName: "Doe",
+        email: "john.doe@example.com",
+    },
+    callback: (result) => {
+        console.log("Callback result:", result);
+        if (result.success) {
+            // Handle successful submission
+        } else {
+            // Handle submission error
+        }
+    },
+    debug: true, // Enable debug mode
 };
 
 try {
-  const submissionResult = await submitToHubspot(payload);
-  console.log(submissionResult.message);
+    const submissionResult = await submitToHubspot(payload);
+    console.log(submissionResult.message);
 } catch (error) {
-  // Handle unexpected errors during submission
-  console.error('Submission error:', error.message);
+    // Handle unexpected errors during submission
+    console.error("Submission error:", error.message);
 }
 ```
 
@@ -149,10 +149,11 @@ try {
 ### Breakpoints
 
 Helper function that returns all breakpoints for Terra
+
 ```javascript
- import {breakpoints} from "@terrahq/helpers/breakpoints";
- let bk = breakpoints.reduce((target, inner) => Object.assign(target, inner), {})
-console.log(bk.mobile)
+import { breakpoints } from "@terrahq/helpers/breakpoints";
+let bk = breakpoints.reduce((target, inner) => Object.assign(target, inner), {});
+console.log(bk.mobile);
 ```
 
 ### TerraDebugger
@@ -160,17 +161,17 @@ console.log(bk.mobile)
 Helper function to develop better testing for Developers + UX/ui, it returns breakpoint name and clickup space.
 
 ```javascript
- import {terraDebugger} from "@terrahq/helpers/terraDebugger";
+import { terraDebugger } from "@terrahq/helpers/terraDebugger";
 
- function getQueryParam(param) {
+function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.has(param); // returns true if the parameter is present, otherwise false
 }
 
-var terraDebug = getQueryParam('debug');
+var terraDebug = getQueryParam("debug");
 
 if (terraDebug) {
-    terraDebugger({ submitQA: 'your_QA_app' });
+    terraDebugger({ submitQA: "your_QA_app" });
 }
 ```
 
@@ -186,7 +187,7 @@ import { digElement } from "@terrahq/helpers/digElement";
 
 ### 4 different ways of implementing it:
 
-###  1 - Style Search
+### 1 - Style Search
 
 ```javascript
 Promise.all(
@@ -204,10 +205,10 @@ Promise.all(
         });
     })
 )
-.then(() => {
-    console.log("READY");
-})
-.catch((error) => console.log(error.message));
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
 
 | #   | Parameter         | Type        | Description                                                       |
@@ -239,10 +240,10 @@ Promise.all(
         });
     })
 )
-.then(() => {
-    console.log("READY");
-})
-.catch((error) => console.log(error.message));
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
 
 | #   | Parameter         | Type        | Description                                                       |
@@ -255,7 +256,6 @@ Promise.all(
 | 6   | callback          | Function    | A callback function to execute once the promise is resolved       |
 
 <br><br>
-
 
 ### Attribute Search and look for a specific value
 
@@ -276,11 +276,12 @@ Promise.all(
         });
     })
 )
-.then(() => {
-    console.log("READY");
-})
-.catch((error) => console.log(error.message));
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
+
 Here's the information you provided in table format:
 
 | #   | Parameter         | Type        | Description                                                       |
@@ -312,10 +313,10 @@ Promise.all(
         });
     })
 )
-.then(() => {
-    console.log("READY");
-})
-.catch((error) => console.log(error.message));
+    .then(() => {
+        console.log("READY");
+    })
+    .catch((error) => console.log(error.message));
 ```
 
 Here's the information in table format:
@@ -327,7 +328,6 @@ Here's the information in table format:
 | 3   | intervalFrequency | Number      | Interval frequency in seconds                                     |
 | 4   | timer             | Number      | The duration in seconds after which the interval will be finished |
 | 5   | callback          | Function    | A callback function to execute once the promise is resolved       |
-
 
 ---
 
@@ -346,6 +346,62 @@ manipulateScroll("scroll");
 
 ---
 
+### Get ID by Slug
+
+Helper function designed to get the ID/s of the specified pages/post types looking by slug (it works only for WordPress projects).
+
+```javascript
+import { getIDbySlug } from "@terrahq/helpers/getIDbySlug";
+```
+
+```javascript
+const payload = {
+    slug: "my-page-slug",
+    type: ["pages", "posts"],
+    callback: () => {
+        console.log("This is a callback!");
+    },
+    debug: true,
+};
+
+const postID = await getIDbySlug(payload);
+if (postID) {
+    console.log(`Found post with ID: ${postID}`);
+} else {
+    console.log("No post found with the specified title.");
+}
+```
+
+---
+
+### Get ID by Title
+
+Helper function designed to get the ID/s of the specified pages/post types looking by title (it works only for WordPress projects).
+
+```javascript
+import { getIDbyTitle } from "@terrahq/helpers/getIDbyTitle";
+```
+
+```javascript
+const payload = {
+    title: "my-page-title",
+    type: ["pages", "posts"],
+    callback: () => {
+        console.log("This is a callback!");
+    },
+    debug: true,
+};
+
+const postID = await getIDbyTitle(payload);
+if (postID) {
+    console.log(`Found post with ID: ${postID}`);
+} else {
+    console.log("No post found with the specified title.");
+}
+```
+
+---
+
 ### hasQueryParameter
 
 This function checks if a specific query parameter is present in the URL of the current window location and retrieves its value if it exists. It is particularly useful for accessing and manipulating URL parameters dynamically in client-side applications.
@@ -353,7 +409,7 @@ This function checks if a specific query parameter is present in the URL of the 
 ```javascript
 import { hasQueryParameter } from "@terrahq/helpers/hasQueryParameter";
 
-let result = hasQueryParameter({ name: 'user' });
+let result = hasQueryParameter({ name: "user" });
 if (result) {
     console.log(`Query parameter 'user' has the value: ${result}`);
 } else {
@@ -376,8 +432,8 @@ if (scrollYis({ distance: 30 })) {
     console.log("The scroll position is below 30 pixels.");
 }
 ```
----
 
+---
 
 ## Google Scripts Detection
 
@@ -526,4 +582,3 @@ accessibleTabNav({
     focusableElements: ["a", "button"],
 });
 ```
-
