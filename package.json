@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.59",
+    "version": "0.0.61",
     "type": "module",
     "exports": {
         "./preloadFonts": "./src/js/preloadFonts/index.js",
@@ -21,7 +21,8 @@
         "./hasQueryParameter": "./src/js/hasQueryParameter/index.js",
         "./scrollYis": "./src/js/scrollYis/index.js",
         "./getIDbySlug": "./src/js/wp/getIDbySlug/index.js",
-        "./getIDbyTitle": "./src/js/wp/getIDbyTitle/index.js"
+        "./getIDbyTitle": "./src/js/wp/getIDbyTitle/index.js",
+        "./wpcf7DelayRecaptcha": "./wpcf7DelayRecaptcha/index.js"
     },
     "scripts": {
         "dev": "vite",
