@@ -17,7 +17,7 @@
  * this.boostify.scroll({
  *   distance: 300,
  *   callback: async () => {
- *     wpcf7DelayRecaptcha({
+ *     await wpcf7DelayRecaptcha({
  *       payload: {
  *         siteKey: 'your-recaptcha-site-key',
  *         recaptchaScript: 'google-recaptcha-js',

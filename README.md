@@ -512,6 +512,29 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ---
 
+### WPCF7 Delay Recaptcha
+
+Dynamically injects Google reCAPTCHA and required scripts into the document head, optimizing load times for Contact Form 7 forms with reCAPTCHA. Includes optional debug logging and supports a callback function post-injection.
+
+```javascript
+import { wpcf7DelayRecaptcha } from "@terrahq/helpers/wpcf7DelayRecaptcha";
+
+wpcf7DelayRecaptcha({
+    payload: {
+      siteKey: 'XXXXXXX',
+      recaptchaScript: 'google-recaptcha-js',
+      polyfill: 'wp-polyfill-js',
+      recaptchaExtraScriptId: 'wpcf7-recaptcha-js-extra',
+      wpcf7RecaptchaScriptId: 'wpcf7-recaptcha-js'
+    },
+    debug: true,
+    callback: () => {
+      console.log("reCAPTCHA scripts have been successfully injected!");
+    }
+  });
+
+---
+
 ## Accessible Tab Nav
 
 It handles focus on 'skip to main content' and/or anchor to section enter keydown.
