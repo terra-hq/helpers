@@ -43,7 +43,7 @@ export function wpcf7DelayRecaptcha({ payload, debug = false, callback }) {
   const init = () => {
       logDebug("Initializing reCAPTCHA scripts injection...");
 
-      const baseUrl = window.location.origin;
+      const baseUrl = base_wp_api.root_url;
 
       if (!document.querySelector(`#${payload.recaptchaScript}`)) {
           const recaptchaScript = document.createElement('script');

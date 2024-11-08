@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.61",
+    "version": "0.0.64",
     "type": "module",
     "exports": {
         "./preloadFonts": "./src/js/preloadFonts/index.js",
@@ -22,7 +22,7 @@
         "./scrollYis": "./src/js/scrollYis/index.js",
         "./getIDbySlug": "./src/js/wp/getIDbySlug/index.js",
         "./getIDbyTitle": "./src/js/wp/getIDbyTitle/index.js",
-        "./wpcf7DelayRecaptcha": "./wpcf7DelayRecaptcha/index.js"
+        "./wpcf7DelayRecaptcha": "./src/js/wpcf7DelayRecaptcha/index.js"
     },
     "scripts": {
         "dev": "vite",
@@ -37,6 +37,7 @@
     },
     "dependencies": {
         "@andresclua/jsutil": "^4.0.2",
+        "@terrahq/helpers": "^0.0.62",
         "axios": "^1.6.2",
         "imagesloaded": "^5.0.0",
         "lottie-web": "^5.12.2",
