@@ -48,6 +48,7 @@ const submitToHubspot = async (payload = {}) => {
     portalId,
     formId,
     formInputs,
+    context,
     callback = () => {},
     debug = false,
   } = payload;
@@ -59,6 +60,10 @@ const submitToHubspot = async (payload = {}) => {
   const bodyData = {
     fields: Object.entries(formInputs).map(([name, value]) => ({ name, value })),
   };
+  // mostly used to submit the cookie hubspotutk
+  if(context){
+    bodyData.context = context;
+  }
 
   if (debug) {
     console.log("Debug: Submitting to HubSpot with the following data:", bodyData);
