@@ -520,13 +520,13 @@ Dynamically injects Google reCAPTCHA and required scripts into the document head
 import { wpcf7DelayRecaptcha } from "@terrahq/helpers/wpcf7DelayRecaptcha";
 
 wpcf7DelayRecaptcha({
-    payload: {
-      siteKey: 'XXXXXXX',
+    scripts: {
       recaptchaScript: 'google-recaptcha-js',
       polyfill: 'wp-polyfill-js',
       recaptchaExtraScriptId: 'wpcf7-recaptcha-js-extra',
       wpcf7RecaptchaScriptId: 'wpcf7-recaptcha-js'
     },
+    siteKey: 'XXXXXXX',
     debug: true,
     callback: () => {
       console.log("reCAPTCHA scripts have been successfully injected!");
