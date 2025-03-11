@@ -43,8 +43,9 @@
         digElement({
             element: document.getElementById('element-to-watch'),
             search: {
-                type: "style",
-                lookFor: ["max-height"],
+                type: "class",
+                attribute: "data-eli",
+                lookFor: ["1"],
             },
             intervalFrequency: 500,
             timer: 10000,
@@ -58,7 +59,8 @@
         .catch((error) => console.error(error.message));
 
         setTimeout(() => {
-            document.getElementById('element-to-watch').style.maxHeight = '100px';
+            // document.getElementById('element-to-watch').style.maxHeight = '100px';
+            document.getElementById('element-to-watch').setAttribute('data-eli', 1);
         }, 3000);
     </script>
 </body>
