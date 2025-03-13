@@ -80,6 +80,36 @@ const digElement = async (payload) => {
                     resolve(true);
                     clearInterval(intervalId);
                 }
+            } else if (payload.search?.type === 'attribute') {
+                const attribute = payload.search?.attribute
+                const lookFor = payload.search.lookFor || [];
+
+                if (payload.element.hasAttribute(attribute)) {
+                    const attrValue = payload.element.getAttribute(attribute);
+            
+                    const matched = lookFor.length === 0 || lookFor.some((entry) => {
+                        if (typeof entry === 'function') {
+                            try {
+                                return entry(attrValue, payload.element); 
+                            } catch (err) {
+                                if (payload.debug) {
+                                    console.warn("Debug: Error in callback matcher", err);
+                                }
+                                return false;
+                            }
+                        }
+                        return entry === attrValue;
+                    });
+            
+                    if (matched) {
+                        if (payload.debug) {
+                            console.log(`Debug: Attribute "${attribute}" matched with value "${attrValue}".`);
+                        }
+                        if (payload.callback) payload.callback();
+                        resolve(true);
+                        clearInterval(intervalId);
+                    }
+                }
             }
         }, payload.intervalFrequency || 1000);
 
@@ -92,5 +122,7 @@ const digElement = async (payload) => {
         }, payload.timer || 5000);
     });
 };
+
+
 
 export { digElement };
