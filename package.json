@@ -36,7 +36,7 @@
         "vite": "^4.4.5"
     },
     "dependencies": {
-        "@andresclua/jsutil": "^4.0.2",
+        "@andresclua/jsutil": "^4.0.5",
         "@terrahq/helpers": "^0.0.62",
         "axios": "^1.6.2",
         "imagesloaded": "^5.0.0",

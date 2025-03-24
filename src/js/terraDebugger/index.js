@@ -1,9 +1,13 @@
-import {breakpoints} from '../breakpoints/index.js';
+import { breakpoints } from '../breakpoints/index.js';
+import { u_get_browser } from '@andresclua/jsutil';
+
+console.log('Terra Debugger Loaded');
+console.log('Browser:', u_get_browser());
 
 export const terraDebugger = (payload) => {
   // Destructuring the payload to get clickupDashboard
   const { submitQA } = payload;
-  
+
   // Create the div element for the breakpoint indicator
   const indicator = document.createElement('div');
   indicator.id = 'breakpoint-indicator';
@@ -49,8 +53,11 @@ export const terraDebugger = (payload) => {
       breakpointName = 'desktop';
     }
 
+    // Get the browser information
+    const browser = u_get_browser();
+
     // Update the text of the indicator
-    let indicatorContent = `BKPT : ${breakpointName} | Current Size ${width}px`;
+    let indicatorContent = `BKPT : ${breakpointName} | Current Size ${width}px | Browser: ${browser}`;
 
     // Only add the link if clickupDashboard is defined
     if (submitQA) {
