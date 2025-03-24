@@ -1,8 +1,6 @@
 import { breakpoints } from '../breakpoints/index.js';
 import { u_get_browser } from '@andresclua/jsutil';
 
-console.log('Terra Debugger Loaded');
-console.log('Browser:', u_get_browser());
 
 export const terraDebugger = (payload) => {
   // Destructuring the payload to get clickupDashboard
