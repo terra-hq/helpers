@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TerraHQ.com</title>
+    </head>
+    <body>
+        <div class="f--container">
+            <div class="f--row">
+                <div class="f--col-12">
+                    <h2 class="f--font-a f--sp-a f--mt-3">
+                        Helpers <span class="f--font-c">By Terra</span>
+                    </h2>
+  
+                </div>
+            </div> 
+            <div class="f--row">
+                <div class="f--col-12">
+                    <hr/>
+                </div>
+            </div>  
+            <div class="f--row">
+                <div class="f--col-6">
+                    <h3 class="f--font-d f--sp-a f--mt-3">
+                        Modify Tag
+                    </h3>
+                </div>
+                <script type="text/javascript" id="toto">console.log('va');</script>
+                <div class="f--col-6" style="text-align: right;">
+                   <a href="/">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="f--container">
+           <div class="f--row">
+                <div class="f--col-12">
+                    <p>Add <code style="background-color:#f58dd9;">?debug</code> parameter to URL</p>
+                </div>
+           </div>
+        </div>
+        
+  
+        <script type="module">
+            import "@scss/index.scss";
+            import {modifyTag} from "@js/modifyTag/index.js";
+            import { u_take_your_time } from '@andresclua/jsutil';
+
+            (async () => {
+                console.log('Wait starts');
+                await u_take_your_time(1200);
+
+                // Make sure the element exists before modifying it
+                const scriptElement = document.getElementById('toto');
+                if (scriptElement) {
+                    await modifyTag({
+                        element: scriptElement,  
+                        attributes: {
+                            'data-swup-ignore-script': '',
+                        }
+                    });
+                } else {
+                    console.log('Script element not found!');
+                }
+
+                console.log('Wait ends');
+            })();
+
+          
+
+        </script>
+    </body>
+</html>
