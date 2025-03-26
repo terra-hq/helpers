@@ -24,14 +24,14 @@
             <div class="f--row">
                 <div class="f--col-6">
                     <h3 class="f--font-d f--sp-a f--mt-3">
-                        Modify Tag
+                        isElementInViewport
                     </h3>
                 </div>
-                <script type="text/javascript" id="toto">console.log('modify!');</script>
                 <div class="f--col-6" style="text-align: right;">
-                   <a href="/">Back</a>
+                   <div id="redbox" style="background:red; width:30px; height:30px; margin-bottom: 120vh;"></div>
                 </div>
             </div>
+            <div class="f--row"></div>
         </div>
         <div class="f--container">
            <div class="f--row">
@@ -44,38 +44,14 @@
   
         <script type="module">
             import "@scss/index.scss";
-            import {modifyTag} from "@js/modifyTag/index.js";
-            import { u_take_your_time } from '@andresclua/jsutil';
+            import {isElementInViewport} from "@js/isElementInViewport/index.js";
 
-            (async () => {
-                console.log('Wait starts');
-                await u_take_your_time(1200);
-                const scriptElement = document.getElementById('toto');
-                if (scriptElement) {
-                    await modifyTag({
-                        element: scriptElement,  
-                        attributes: {
-                            'data-swup-ignore-script': '',
-                        },
-                        debug:false,
-                    });
-
-                    await modifyTag({
-                        element: scriptElement,  
-                        attributes: {
-                            'test': 'true',
-                        },
-                        debug:false,
-                    });
-                } else {
-                    console.log('Script element not found!');
-                }
-
-                console.log('Wait ends');
-            })();
-
-          
-
+            const isInViewportDebug = isElementInViewport({
+             el: document.querySelector('#redbox'),
+             debug: true,
+            });
+    
+           
         </script>
     </body>
 </html>
