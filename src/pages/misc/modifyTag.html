@@ -27,7 +27,7 @@
                         Modify Tag
                     </h3>
                 </div>
-                <script type="text/javascript" id="toto">console.log('va');</script>
+                <script type="text/javascript" id="toto">console.log('modify!');</script>
                 <div class="f--col-6" style="text-align: right;">
                    <a href="/">Back</a>
                 </div>
@@ -50,14 +50,19 @@
             (async () => {
                 console.log('Wait starts');
                 await u_take_your_time(1200);
-
-                // Make sure the element exists before modifying it
                 const scriptElement = document.getElementById('toto');
                 if (scriptElement) {
                     await modifyTag({
                         element: scriptElement,  
                         attributes: {
                             'data-swup-ignore-script': '',
+                        }
+                    });
+
+                    await modifyTag({
+                        element: scriptElement,  
+                        attributes: {
+                            'test': 'true',
                         }
                     });
                 } else {

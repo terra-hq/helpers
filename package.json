@@ -22,7 +22,8 @@
         "./scrollYis": "./src/js/scrollYis/index.js",
         "./getIDbySlug": "./src/js/wp/getIDbySlug/index.js",
         "./getIDbyTitle": "./src/js/wp/getIDbyTitle/index.js",
-        "./wpcf7DelayRecaptcha": "./src/js/wpcf7DelayRecaptcha/index.js"
+        "./wpcf7DelayRecaptcha": "./src/js/wpcf7DelayRecaptcha/index.js",
+        "./modifyTag": "./src/js/modifyTag/index.js"
     },
     "scripts": {
         "dev": "vite",
