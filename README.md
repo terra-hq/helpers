@@ -605,3 +605,59 @@ accessibleTabNav({
     focusableElements: ["a", "button"],
 });
 ```
+
+
+## isElementInViewport
+
+This function checks if a DOM element is in the viewport. Optionally, it can log debug information about the element's position, viewport dimensions, and whether the element is currently visible within the viewport. It is useful for scenarios where you want to determine if an element is in view as the user scrolls through a page.
+
+### Usage
+
+```javascript
+import { isElementInViewport } from "@terrahq/helpers/isElementInViewport";
+
+// Example 1: Check if an element is in the viewport without debug logging
+const isInViewport = isElementInViewport({ el: document.querySelector('#myElement') });
+if (isInViewport) {
+    console.log('The element is in the viewport.');
+} else {
+    console.log('The element is not in the viewport.');
+}
+
+// Example 2: Check if an element is in the viewport with debug logging
+const isInViewportDebug = isElementInViewport({
+    el: document.querySelector('#myElement'),
+    debug: true,
+});
+```
+
+
+## modifyTag
+
+This function modifies the attributes of a DOM element with an optional debug flag. It allows you to update an element’s attributes dynamically and includes an option to log detailed information for debugging.
+
+### Usage
+
+```javascript
+import { modifyTag } from "@terrahq/helpers/modifyTag";
+
+// Example 1: Modify an element's attributes without debug logging
+modifyTag({
+    selector: '#myElement',
+    attributes: { 'data-swup-ignore-script': '' }
+}).then((element) => {
+    console.log('Element modified:', element);
+}).catch((error) => {
+    console.error(error);
+});
+
+// Example 2: Modify an element's attributes with debug logging
+modifyTag({
+    selector: '#myElement',
+    attributes: { 'data-swup-ignore-script': '' },
+    debug: true
+}).then((element) => {
+    console.log('Element modified:', element);
+}).catch((error) => {
+    console.error(error);
+});
