@@ -185,6 +185,14 @@ The function returns a Promise resolving in true or rejecting with error message
 import { digElement } from "@terrahq/helpers/digElement";
 ```
 
+### Ordered List Start
+
+This helper function is designed to change the `start` attribute on `<ol>` lists and convert it to inline styles, avoiding overwritten styling issues with the WordPress WYSIWYG editor.
+
+```javascript
+import { orderedListStart } from "@terrahq/helpers/orderedListStart";
+```
+
 ### 4 different ways of implementing it:
 
 ### 1 - Style Search

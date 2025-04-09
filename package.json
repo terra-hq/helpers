@@ -1,7 +1,7 @@
 {
     "name": "@terrahq/helpers",
     "private": false,
-    "version": "0.0.70",
+    "version": "0.0.80",
     "type": "module",
     "exports": {
         "./preloadFonts": "./src/js/preloadFonts/index.js",

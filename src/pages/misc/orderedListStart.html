@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TerraHQ.com</title>
+</head>
+<body>
+    <div class="f--container">
+        <div class="f--row">
+            <div class="f--col-12">
+                <h2 class="f--font-a f--sp-a f--mt-3">
+                    Helpers <span class="f--font-c">By Terra</span>
+                </h2>
+            </div>
+        </div> 
+        <div class="f--row">
+            <div class="f--col-12">
+                <hr/>
+            </div>
+        </div>  
+        <div class="f--row">
+            <div class="f--col-6">
+                <h3 class="f--font-d f--sp-a f--mt-3">
+                    Ordered List Start
+                </h3>
+            </div>
+            <div class="f--col-6" style="text-align: right;">
+               <a href="/">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="f--container">
+        <ol id="my-list" start="4">
+            <li>Item 4</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+        </ol>
+        <p class="f--font-e" id="element-to-watch" style="margin-top: 32px; background-color:#ffb41d; width: fit-content; text-align: center; padding: 15px 20px;">
+            Change start Attribute for counter-reset: list-item
+        </p>
+    </div>
+    
+    <script type="module">
+        import "@scss/index.scss";
+        import { orderedListStart } from "@js/orderedListStart/index.js";
+
+        const exampleList = document.getElementById('my-list');
+        const triggerButton = document.getElementById('element-to-watch');
+
+        triggerButton.addEventListener('click', () => {
+            orderedListStart(exampleList);
+        });
+    </script>
+</body>
+</html>

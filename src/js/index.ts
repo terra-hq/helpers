@@ -1,6 +1,6 @@
 import "./../scss/index.scss";
 
-import {preloadVideos} from "./preloadVideos";
+import {preloadVideos} from "./preloadVideos/index.js";
 
 
 
