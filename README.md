@@ -528,52 +528,28 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ###### Note : you could use these reference as a draft, this is not production ready, samples for [Node](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) or [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4)
 
----
 
-### WPCF7 Delay Recaptcha
-
-Dynamically injects Google reCAPTCHA and required scripts into the document head, optimizing load times for Contact Form 7 forms with reCAPTCHA. Includes optional debug logging and supports a callback function post-injection.
-
-````javascript
-import { wpcf7DelayRecaptcha } from "@terrahq/helpers/wpcf7DelayRecaptcha";
-
-wpcf7DelayRecaptcha({
-    scripts: {
-      recaptchaScript: 'google-recaptcha-js',
-      polyfill: 'wp-polyfill-js',
-      recaptchaExtraScriptId: 'wpcf7-recaptcha-js-extra',
-      wpcf7RecaptchaScriptId: 'wpcf7-recaptcha-js'
-    },
-    siteKey: 'XXXXXXX',
-    debug: true,
-    callback: () => {
-      console.log("reCAPTCHA scripts have been successfully injected!");
-    }
-  });
-
----
-
+```
 ## Accessible Tab Nav
 
 It handles focus on 'skip to main content' and/or anchor to section enter keydown.
 
-```javascript
-import { accessibleTabNav } from "@terrahq/helpers/accessibleTabNav";
-````
+
 
 | #   | Parameter         | Type          | Description                                                                                 |
 | --- | ----------------- | ------------- | ------------------------------------------------------------------------------------------- |
 | 1   | focusableElements | Array<String> | It specifies which types of elements will be included as focusables within the focus target |
 
----
+```javascript
+import { accessibleTabNav } from "@terrahq/helpers/accessibleTabNav";
+````
 
 Trigger elements must include:
 
 - class: 'js--trigger-focus'
-
 - data-focus-target='${focusTargetID}'
 
----
+
 
 Target elements must include:
 
