@@ -528,7 +528,7 @@ var response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 ###### Note : you could use these reference as a draft, this is not production ready, samples for [Node](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) or [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4)
 
-
+---
 
 ## Accessible Tab Nav
 
@@ -554,8 +554,6 @@ Trigger elements must include:
 Target elements must include:
 
 - id: '${focusTargetID}'
-
----
 
 HTML - Example 1:
 
@@ -610,6 +608,8 @@ accessibleTabNav({
 });
 ```
 
+---
+
 ## isElementInViewport
 
 This function checks if a DOM element is in the viewport. Optionally, it can log debug information about the element's position, viewport dimensions, and whether the element is currently visible within the viewport. It is useful for scenarios where you want to determine if an element is in view as the user scrolls through a page.
@@ -635,6 +635,7 @@ const isInViewportDebug = isElementInViewport({
   debug: true,
 });
 ```
+---
 
 ## modifyTag
 
