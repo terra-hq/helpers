@@ -45,17 +45,16 @@
             import "@scss/index.scss";
             import {terraDebugger} from "@js/terraDebugger/index.js";
 
-            function getQueryParam(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.has(param); // returns true if the parameter is present, otherwise false
+            const has = (name) => new URLSearchParams(location.search).has(name);
+
+            if (has("debug")) {
+                terraDebugger({
+                submitQA: "https://app.clickup.com/2197638/v/l/6-901701608554-1",
+                custom: async (ctx, ui) => {
+                   console.log("Custom Debugger Action", ctx, ui);
+                },
+                });
             }
-
-            var terraDebug = getQueryParam('debug');
-
-            if (terraDebug) {
-                terraDebugger({ submitQA: 'https://app.clickup.com/2197638/v/l/6-901701608554-1' });
-            }
-
         </script>
     </body>
 </html>

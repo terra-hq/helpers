@@ -681,3 +681,10 @@ When contributing to this library, please ensure:
 ## License
 
 This project is licensed under the MIT License.
+
+## Changelog
+
+### Version 0.85
+- Providing more options and insights for debugging and troubleshooting 
+### Version 0.84
+- Expanded debugger capabilities, providing more options and insights for debugging and troubleshooting.
