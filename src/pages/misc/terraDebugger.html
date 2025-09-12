@@ -50,8 +50,8 @@
             if (has("debug")) {
                 terraDebugger({
                 submitQA: "https://app.clickup.com/2197638/v/l/6-901701608554-1",
-                custom: async (ctx, ui) => {
-                   console.log("Custom Debugger Action", ctx, ui);
+                custom: async (window) => {
+                   console.log("Custom Debugger Action", window);
                 },
                 });
             }

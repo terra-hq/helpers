@@ -684,6 +684,8 @@ This project is licensed under the MIT License.
 
 ## Changelog
 
+### Version 0.86
+- add window to terradebug
 ### Version 0.85
 - Providing more options and insights for debugging and troubleshooting 
 ### Version 0.84
