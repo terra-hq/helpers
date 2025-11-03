@@ -31,35 +31,74 @@
                    <a href="/">Back</a>
                 </div>
             </div>
-        </div>
-        <div class="f--container">
-            <video width="320" height="240" controls class="js--video">
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-              </video>
+            <div class="f--row">
+                <div class="f--col-12 video-gallery">
+                    <video width="320" height="240" controls>
+                      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    </video>
+                  
+                    <video width="320" height="240" controls>
+                      <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+            </div>
+            <div class="f--row">
+                <div class="f--col-12">
+                    <hr/>
+                </div>
+            </div>  
+            <div class="f--row">
+                <div class="f--col-6">
+                    <h3 class="f--font-d f--sp-a f--mt-3">
+                        Video Example
+                    </h3>
+                </div>
+            </div>
+            <div class="f--row">
+                <div class="f--col-12 video-gallery">
+                    <video width="320" height="240" controls>
+                      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    </video>
+                  
+                    <video width="320" height="240" controls>
+                      <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+            </div>
 
-              <video width="320" height="240" controls class="js--video">
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-              </video>
+
+
         </div>
+       
         
   
         <script type="module">
             import "@scss/index.scss";
             import { preloadVideos } from "@js/preloadVideos/index.js";
-     
+
             (async () => {
-                try {
-                    await preloadVideos({
-                        selector: document.querySelectorAll(".js--video"),
-                        maxTime: 1300,
-                        callback:(payload) => {
-                            console.log('All videos are loaded', payload);
-                        },
-                        debug:true,
+            try {
+                const gallery = document.querySelector(".video-gallery");
+
+                await preloadVideos({
+                selector: gallery,
+                maxTime: 1000,
+                debug: true,
+                callback: (videos) => {
+                    console.log("Gallery videos loaded:", videos.length);
+                        videos.forEach((video) => {
+                        video.muted = true;      // necesario para autoplay sin interacción
+                        video.play().catch(() => {
+                            console.log("Autoplay blocked:", video);
+                        });
                     });
-                } catch (error) {
-                    console.error('Error:', error);
                 }
+                });
+
+                console.log("✅ All videos inside .video-gallery are ready to play.");
+            } catch (error) {
+                console.error("Preload error:", error);
+            }
             })();
 
         </script>

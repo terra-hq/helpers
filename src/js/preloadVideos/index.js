@@ -1,111 +1,109 @@
+// helpers/preloadVideos.js
 /**
- * Preloads video elements asynchronously and resolves the Promise when either all videos can play through, or the maximum time limit is reached.
- * Optionally, a callback function can be provided, which will be called after the videos have preloaded or the time limit is reached.
- * A debug option can be enabled to log information about the video elements that match the selector.
+ * Preloads video elements and resolves when:
+ *  - all videos can play through, or
+ *  - the maximum time limit is reached (scaled by number of videos).
  *
- * @param {Object} payload - The payload object containing the video selector, maximum time, optional callback, and debug flag.
- * @param {string | NodeList} payload.selector - The CSS selector string or NodeList representing the video elements to preload.
- * @param {number} payload.maxTime - The maximum time in milliseconds to wait for each video to be ready to play.
- * @param {Function} [payload.callback] - Optional callback function to be called when videos are preloaded or time limit is reached. Receives an array of all video elements as an argument.
- * @param {boolean} [payload.debug=false] - Optional debug flag to log information about matched video elements. Default is false.
- * @returns {Promise} - A Promise that resolves with a message indicating either the successful preloading of all videos or reaching the time limit.
+ * Acepta string (selector), HTMLElement (contenedor) o NodeList.
+ * - string: usa document.querySelector(selector) y busca <video> dentro del contenedor.
+ * - HTMLElement: busca <video> dentro del elemento.
+ * - NodeList: usa la lista directamente (de <video> o contenedores con <video>).
  *
- * @example
- * // Preload videos using a CSS selector with Promise
- * preloadVideos({ selector: '.js--video', maxTime: 300 })
- *   .then((message) => {
- *     console.log(message);
- *     // Your code to handle the resolved state
- *   })
- *   .catch((error) => {
- *     console.error('Video preload error:', error);
- *     // Your error handling code
- *   });
+ * @param {Object} payload
+ * @param {string|HTMLElement|NodeList} payload.selector
+ * @param {number} [payload.maxTime=5000] - Tiempo máximo en ms por video.
+ * @param {Function} [payload.callback] - Se ejecuta al resolver; recibe Array<HTMLElement> de videos.
+ * @param {boolean} [payload.debug=false]
+ * @returns {Promise<string>} "All videos can play through" | "Time limit reached" | mensaje sin elementos
  *
  * @example
- * // Preload videos using a NodeList with Promise
- * const videoElements = document.querySelectorAll('.js--video');
- * preloadVideos({ selector: videoElements, maxTime: 300 })
- *   .then((message) => {
- *     console.log(message);
- *     // Your code to handle the resolved state
- *   })
- *   .catch((error) => {
- *     console.error('Video preload error:', error);
- *     // Your error handling code
- *   });
- *
- * @example
- * // Preload videos with a callback
- * preloadVideos({
- *   selector: document.querySelectorAll('.js--video'),
- *   maxTime: 300,
+ * // 1️⃣ Preload videos inside a container
+ * await preloadVideos({
+ *   selector: ".js--video-block",
+ *   maxTime: 400,
  *   callback: (videos) => {
- *     console.log('Callback: All videos preloaded or time limit reached', videos);
- *     // Your code to handle when videos are preloaded
- *   }
+ *     console.log("Videos ready:", videos.length);
+ *   },
+ *   debug: true,
  * });
+ *
+ * @example
+ * // 2️⃣ Sequential preload for multiple sections
+ * const sections = document.querySelectorAll(".js--video-block");
+ * for (const section of sections) {
+ *   await preloadVideos({ selector: section, maxTime: 300 });
+ *   console.log("Loaded:", section);
+ * }
  */
-
-const preloadVideos = (payload) => {
-    // Destructure properties from payload with default values
-    const { 
-        selector, 
-        maxTime, 
-        callback = () => {}, 
-        debug = false 
+const preloadVideos = (payload = {}) => {
+    const {
+      selector,
+      maxTime = 5000,
+      callback = () => {},
+      debug = false,
     } = payload;
-
-    // If selector is not provided, log a debug message
+  
     if (!selector) {
-        if (debug) {
-            console.log("Debug: selector missing");
-        }
+      if (debug) console.warn("Debug: selector missing");
+      return Promise.resolve("No selector provided");
     }
-
-    let isResolved = false; // Flag to check if the promise has already been resolved
-
-    const elements = selector instanceof NodeList ? Array.from(selector) : document.querySelectorAll(selector);
-
-    const selectorName = selector instanceof NodeList ? 
-        (selector.length > 0 && selector[0].classList.contains('js--video') ? '.js--video' : 'NodeList') : 
-        selector;
-
+  
+    let elements;
+    let selectorName = "";
+  
+    // Normaliza el selector
+    if (typeof selector === "string") {
+      const el = document.querySelector(selector);
+      if (!el) return Promise.resolve(`No element found for selector "${selector}"`);
+      elements = el.querySelectorAll("video");
+      selectorName = selector;
+    } else if (selector instanceof HTMLElement) {
+      elements = selector.querySelectorAll("video");
+      selectorName = selector.className || selector.tagName;
+    } else if (selector instanceof NodeList) {
+      elements = selector;
+      selectorName = selector[0]?.className || "NodeList";
+    } else {
+      throw new Error("Invalid selector. Must be string, HTMLElement, or NodeList.");
+    }
+  
     if (debug) {
-        console.log(`Debug: Found ${elements.length} video element(s) matching selector "${selectorName}".`);
+      console.log(`Debug: Found ${elements.length} video(s) inside "${selectorName}".`);
     }
-
-    return Promise.race([
-        new Promise((resolve) => {
-            let loadedVideos = 0;
-
-            elements.forEach((video) => {
-                video.addEventListener(
-                    "canplaythrough",
-                    () => {
-                        if (isResolved) return; // Check if already resolved
-                        loadedVideos++;
-                        if (loadedVideos === elements.length) {
-                            isResolved = true; // Set the flag to true
-                            resolve("All videos can play through");
-                            callback(elements); // Pass all video elements to the callback
-                        }
-                    },
-                    { once: true }
-                );
-            });
-        }),
-
-        new Promise((resolve) => {
-            let videoCount = elements.length;
-            setTimeout(() => {
-                if (isResolved) return; // Check if already resolved
-                isResolved = true; // Set the flag to true
-                resolve("Time limit reached");
-                callback(elements); // Pass all video elements to the callback
-            }, maxTime * videoCount);
-        }),
-    ]);
-};
-
-export { preloadVideos };
+    if (!elements.length) {
+      return Promise.resolve(`No <video> elements found in "${selectorName}"`);
+    }
+  
+    return new Promise((resolve) => {
+      let isResolved = false;
+      let loaded = 0;
+  
+      const allVideos = Array.from(elements);
+  
+      const handleResolve = (msg) => {
+        if (isResolved) return;
+        isResolved = true;
+        try { callback(allVideos); } catch (_) {}
+        resolve(msg);
+      };
+  
+      allVideos.forEach((video) => {
+        const onReady = () => {
+          loaded++;
+          if (debug) console.log(`Debug: ready (${loaded}/${allVideos.length}) →`, video.currentSrc || video.src);
+          if (loaded === allVideos.length) handleResolve("All videos can play through");
+        };
+  
+        if (video.readyState >= 4) {
+          onReady();
+        } else {
+          video.addEventListener("canplaythrough", onReady, { once: true });
+        }
+      });
+  
+      setTimeout(() => handleResolve("Time limit reached"), maxTime * allVideos.length);
+    });
+  };
+  
+  export { preloadVideos };
+  

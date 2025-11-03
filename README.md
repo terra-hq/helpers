@@ -43,56 +43,126 @@ npm i @terrahq/helpers
 
 ### Images
 
-Preloads images asynchronously using [ImagesLoaded](https://imagesloaded.desandro.com/). This is an async/await operation that resolves when all images are loaded.
+Preloads images asynchronously using [ImagesLoaded](https://imagesloaded.desandro.com/).  
+This utility supports different selector types and resolves once all matching images have been fully loaded.
+
+**Supports:**
+- `string` — a CSS selector (uses `querySelector` to find a container and preload all images inside it).  
+- `HTMLElement` — a specific element whose images should be preloaded.  
+- `NodeList` — a list of elements or images to preload in batch.
 
 **Parameters:**
-- `selector` (string|NodeList): CSS selector or NodeList of images to preload. Default: `'img'`
-- `callback` (function, optional): Function called after images are preloaded
-- `debug` (boolean, optional): Enable debug logging. Default: `false`
+- `selector` (`string` | `HTMLElement` | `NodeList`): CSS selector, element, or NodeList of images/containers to preload. Default: `'img'`  
+- `callback` (`function`, optional): Function called after all images are preloaded.  
+- `debug` (`boolean`, optional): Enables console logging for debugging. Default: `false`.
+
+---
+
+### 🧠 Notes
+- If a string is provided, it will target that container and preload all `<img>` elements inside.  
+- You can preload multiple containers sequentially or in parallel using `for...of` or `Promise.all`.  
+- Returns a Promise that resolves when all images are loaded successfully.
+
+---
+
+### 💡 Examples
 
 ```javascript
 import { preloadImages } from "@terrahq/helpers/preloadImages";
 
-// Basic usage
+// 1️⃣ Basic usage (all images on the page, not recommended)
 await preloadImages({
-  selector: "img",
+  selector: "body",
   callback: () => {
-    console.log("All images loaded");
+    console.log("All images in <body> loaded");
   },
-  debug: false,
 });
 
-// With NodeList
+// 2️⃣ Preload images within a specific container
+const gallery = document.querySelector(".gallery");
 await preloadImages({
-  selector: document.querySelectorAll(".js--image"),
-  callback: () => {
-    console.log("All images loaded");
-  },
+  selector: gallery,
   debug: true,
+  callback: () => console.log("Gallery images loaded"),
 });
+
+// 3️⃣ Sequentially preload multiple containers (one after another)
+const sections = document.querySelectorAll(".js--lazy-image");
+for (const section of sections) {
+  await preloadImages({ selector: section });
+  console.log("Loaded section:", section);
+}
+
+// 4️⃣ Preload multiple containers in parallel
+const blocks = document.querySelectorAll(".js--lazy-image");
+await Promise.all([...blocks].map((el) => preloadImages({ selector: el })));
+console.log("All sections loaded in parallel");
 ```
+
+## Preload Utilities
 
 ### Videos
 
-Preloads video elements asynchronously using the [canplaythrough](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event) event. This is an async/await operation.
+Preloads video elements asynchronously using the [`canplaythrough`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event) event.  
+This operation resolves once all videos can play through **or** the maximum time limit is reached.
+
+**Supports:**
+- `string` — a CSS selector for a container; preloads all `<video>` elements inside.
+- `HTMLElement` — a specific element whose `<video>` elements should be preloaded.
+- `NodeList` — a list of elements or videos to preload in batch.
 
 **Parameters:**
-- `selector` (NodeList): NodeList of video elements to preload
-- `maxTime` (number): Maximum time in milliseconds to wait for videos to load
-- `callback` (function, optional): Function called after videos are preloaded or timeout
-- `debug` (boolean, optional): Enable debug logging. Default: `false`
+- `selector` (`string` | `HTMLElement` | `NodeList`): Target container, element, or NodeList containing `<video>` elements.  
+- `maxTime` (`number`, optional): Maximum time (in milliseconds) to wait for each video. Default: `5000`.  
+- `callback` (`function`, optional): Function called when all videos are preloaded or the time limit is reached. Receives an array of all video elements.  
+- `debug` (`boolean`, optional): Enable debug logging. Default: `false`.
+
+**Returns:**  
+`Promise<string>` — Resolves with `"All videos can play through"` or `"Time limit reached"`.
+
+---
+
+### 💡 Examples
 
 ```javascript
 import { preloadVideos } from "@terrahq/helpers/preloadVideos";
 
+// 1️⃣ Preload videos inside a container
 await preloadVideos({
-  selector: document.querySelectorAll(".js--video"),
-  maxTime: 1300,
-  callback: (payload) => {
-    console.log("All videos are loaded");
-  },
+  selector: ".video-gallery",
+  maxTime: 1200,
   debug: true,
+  callback: (videos) => {
+    console.log("Gallery videos loaded:", videos.length);
+    // Example: autoplay muted videos after preload
+    videos.forEach((video) => {
+      video.muted = true;
+      video.play().catch(() => console.warn("Autoplay blocked:", video));
+    });
+  },
 });
+
+// 2️⃣ Sequential preload for multiple sections
+const sections = document.querySelectorAll(".js--video-block");
+
+for (const section of sections) {
+  await preloadVideos({
+    selector: section,
+    maxTime: 1000,
+    debug: true,
+  });
+  console.log("Loaded:", section);
+}
+
+
+// 3️⃣ Parallel preload for all containers
+const blocks = document.querySelectorAll(".js--video-block");
+
+await Promise.all(
+  [...blocks].map((el) => preloadVideos({ selector: el, maxTime: 1000 }))
+);
+
+console.log("✅ All videos are ready to play");
 ```
 
 ### Lottie Animations
@@ -106,7 +176,6 @@ Preloads Lottie animations asynchronously using [lottie-web](https://www.npmjs.c
 
 ```javascript
 import { preloadLotties } from "@terrahq/helpers/preloadLotties";
-
 await preloadLotties({
   debug: true,
   selector: document.querySelectorAll(".js--lottie-element"),

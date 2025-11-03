@@ -1,102 +1,84 @@
 import imagesLoaded from "imagesloaded";
 
 /**
- * Preloads images asynchronously and resolves the Promise when all images are loaded.
- * Optionally, a callback function can be provided, which will be called after the images have preloaded.
- * A debug option can be enabled to log information about the images that match the selector.
+ * Preloads images asynchronously and resolves when all are fully loaded.
  *
- * @param {Object} payload - An object containing configuration options.
- * @param {string} [payload.selector="img"] - Optional CSS selector for the images to preload. Default is "img".
- * @param {Function} [payload.callback] - Optional callback function to be called when images are preloaded.
- * @param {boolean} [payload.debug=false] - Optional debug flag to log information about matched images. Default is false.
- * @returns {Promise} - A Promise that resolves when all images are successfully loaded.
+ * Works with a string selector, a single HTMLElement, or a NodeList.
+ * - If a string is provided, it uses `document.querySelector` and loads all <img> elements inside that container.
+ * - If an HTMLElement is provided, it loads all <img> inside that element.
+ * - If a NodeList is provided, it loads all elements in that list at once.
  *
- * @example
- * // Preload all images on the page using Promises
- * preloadImages({})
- *   .then(() => {
- *     console.log('All images preloaded successfully');
- *     // Your code to handle when images are preloaded
- *   })
- *   .catch((error) => {
- *     console.error('Image preload error:', error.message);
- *     // Your error handling code
- *   });
+ * @param {Object} payload - Configuration options.
+ * @param {string|HTMLElement|NodeList} [payload.selector="img"] - CSS selector, DOM element, or NodeList.
+ * @param {Function} [payload.callback] - Optional callback executed when all images finish loading.
+ * @param {boolean} [payload.debug=false] - Optional flag to log debug information.
+ * @returns {Promise<void>} - Resolves when all images are loaded successfully.
  *
  * @example
- * // Preload specific images using a custom selector
- * preloadImages({ selector: '.custom-images' })
- *   .then(() => {
- *     console.log('Custom images preloaded successfully');
- *     // Your code to handle when specific images are preloaded
- *   })
- *   .catch((error) => {
- *     console.error('Image preload error:', error.message);
- *     // Your error handling code
- *   });
+ * // 1️⃣ Load all images on the page
+ * await preloadImages({ selector: "body" });
+ * console.log("All images in <body> loaded");
  *
  * @example
- * // Preload images with a callback function
- * preloadImages({ selector: '.custom-images', callback: () => {
- *   console.log('Custom images preloaded successfully using callback');
- *   // Your code to handle when specific images are preloaded
- * }});
+ * // 2️⃣ Load all images inside a specific container
+ * const gallery = document.querySelector(".gallery");
+ * await preloadImages({ selector: gallery, debug: true });
+ * console.log("Gallery images loaded");
  *
  * @example
- * // Using async/await with a callback function
- * (async () => {
- *   try {
- *     await preloadImages({
- *       selector: '.custom-images', 
- *       callback: () => {
- *         console.log('Callback: Custom images preloaded successfully');
- *         // Your code to handle when specific images are preloaded
- *       },
- *       debug: true
- *     });
- *     console.log('Await: Custom images preloaded successfully');
- *     // Additional code after images are preloaded
- *   } catch (error) {
- *     console.error('Image preload error:', error.message);
- *     // Your error handling code
- *   }
- * })();
+ * // 3️⃣ Load multiple elements sequentially (one after another)
+ * const sections = document.querySelectorAll(".js--lazy-image");
+ * for (const section of sections) {
+ *   await preloadImages({ selector: section });
+ *   console.log("Loaded section:", section);
+ * }
+ *
+ * @example
+ * // 4️⃣ Load multiple elements in parallel
+ * const blocks = document.querySelectorAll(".js--lazy-image");
+ * await Promise.all([...blocks].map((el) => preloadImages({ selector: el })));
+ * console.log("All sections loaded in parallel");
  */
-
 const preloadImages = (payload = {}) => {
-    // Destructure properties from payload with default values
-    const { 
-        selector = "img", // Default to 'img' if no selector is provided
-        callback, 
-        debug = false 
-    } = payload;
+  const {
+    selector = "img",
+    callback,
+    debug = false
+  } = payload;
 
-    return new Promise((resolve) => {
-        let images;
-        let selectorName = "";
+  return new Promise((resolve, reject) => {
+    let elements;
+    let selectorName = "";
 
-        // Check if the selector is a string or a NodeList
-        if (typeof selector === 'string') {
-            images = document.querySelectorAll(selector);
-            selectorName = selector;
-        } else if (selector instanceof NodeList) {
-            images = selector;
-            selectorName = selector[0]?.className || 'NodeList'; // Get class name or fallback to 'NodeList'
-        } else {
-            throw new Error("Invalid selector provided. Must be a string or NodeList.");
-        }
+    try {
+      if (typeof selector === "string") {
+        const el = document.querySelector(selector);
+        if (!el) throw new Error(`No element found for selector "${selector}".`);
+        elements = el.querySelectorAll("img");
+        selectorName = selector;
+      } else if (selector instanceof HTMLElement) {
+        elements = selector.querySelectorAll("img");
+        selectorName = selector.className || selector.tagName;
+      } else if (selector instanceof NodeList) {
+        elements = selector;
+        selectorName = selector[0]?.className || "NodeList";
+      } else {
+        throw new Error("Invalid selector. Must be string, HTMLElement, or NodeList.");
+      }
 
-        if (debug) {
-            console.log(`Debug: Found ${images.length} image(s) matching selector "${selectorName}".`);
-        }
-        
-        imagesLoaded(images, { background: true }, () => {
-            resolve();
-            if (typeof callback === "function") {
-                callback();
-            }
-        });
-    });
+      if (debug) {
+        console.log(`Debug: Found ${elements.length} image(s) inside "${selectorName}".`);
+      }
+
+      imagesLoaded(elements, { background: true }, () => {
+        if (debug) console.log(`Debug: All images loaded for "${selectorName}".`);
+        if (typeof callback === "function") callback();
+        resolve();
+      });
+    } catch (err) {
+      reject(err);
+    }
+  });
 };
 
 export { preloadImages };
