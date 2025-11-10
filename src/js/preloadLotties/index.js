@@ -1,127 +1,86 @@
+// helpers/preloadLotties.js
 import lottie from "lottie-web";
 
 /**
- * Preloads/initializes Lottie animations and resolves when all are creadas.
+ * Initializes a single Lottie animation on the provided HTMLElement (per-element only).
  *
- * Acepta:
- * - string: selector de contenedor o del propio elemento lottie.
- * - HTMLElement: contenedor o elemento lottie individual.
- * - NodeList | Element[]: lista de elementos lottie.
+ * This utility is intentionally strict — it accepts only a single HTMLElement.
+ * If you need to initialize multiple Lotties, loop through them manually using `for...of` or `Promise.all`.
  *
- * Si recibe un contenedor, buscara dentro elementos ".js--lottie-element".
- * Si recibe un elemento que parece lottie (tiene data-path o la clase), lo inicializa directo.
+ * The initialized animation is stored globally under `window.WL[data-name]`.
+ * If a Lottie with the same name already exists, an error is thrown to prevent duplicates.
  *
- * @param {Object} payload
- * @param {string|HTMLElement|NodeList|Element[]} [payload.selector='.js--lottie-element']
- * @param {Function} [payload.callback] - Recibe Array<AnimationItem> con todas las instancias.
- * @param {Boolean} [payload.debug=false]
- * @returns {Promise<string>}
+ * @param {Object} payload - Configuration object.
+ * @param {HTMLElement} payload.selector - The Lottie container element (required).
+ * @param {Function} [payload.callback] - Optional callback called with the created AnimationItem.
+ * @param {boolean}  [payload.debug=false] - Enables console logging for debugging.
+ * @returns {Promise<import('lottie-web').AnimationItem>} The created Lottie AnimationItem.
  *
  * @example
- * // 1) Contenedor: inicializa todos los .js--lottie-element dentro
- * await preloadLotties({ selector: ".gallery", debug: true });
- *
- * @example
- * // 2) Elemento individual
+ * 1️⃣ Single element
  * const el = document.querySelector(".js--lottie-element");
- * await preloadLotties({ selector: el });
+ * await preloadLotties({
+ *   selector: el,
+ *   debug: true,
+ *   callback: (anim) => anim.play(),
+ * });
  *
  * @example
- * // 3) Secuencial por bloques
- * const blocks = document.querySelectorAll(".js--lottie-block");
- * for (const b of blocks) await preloadLotties({ selector: b });
- *
- * @example
- * // 4) Paralelo por bloques
- * const blocks = document.querySelectorAll(".js--lottie-block");
- * await Promise.all([...blocks].map(b => preloadLotties({ selector: b })));
+ * 2️⃣ Multiple (iterate manually — same pattern as preloadImages)
+ * const items = document.querySelectorAll(".js--lottie-element");
+ * for (const el of items) {
+ *   await preloadLotties({ selector: el, debug: true });
+ * }
  */
 export const preloadLotties = async (payload = {}) => {
-  const {
-    selector = ".js--lottie-element",
-    callback = () => {},
-    debug = false,
-  } = payload;
+  const { selector, callback = () => {}, debug = false } = payload;
 
-  // namespace global opcional para referenciar por nombre
+  // 🚫 Strict API: only HTMLElement is accepted
+  if (!(selector instanceof HTMLElement)) {
+    throw new Error("preloadLotties: `selector` must be an HTMLElement (use document.querySelector)");
+  }
+
+  // Define global namespace for referencing by name
   if (!window.WL) window.WL = {};
 
-  // --- Normalizacion de elementos destino
-  const looksLikeLottieEl = (el) =>
-    el &&
-    (el.classList?.contains("js--lottie-element") ||
-      el.hasAttribute?.("data-path") ||
-      el.hasAttribute?.("data-animType"));
+  const el = selector;
 
-  let elements = [];
+  // Extract attributes
+  const dataName = el.getAttribute("data-name") || "lottie";
+  const path = el.getAttribute("data-path") || "https://placeholder.terrahq.com/lotties/terraform-1.json"; // fallback path if missing
+  const renderer = el.getAttribute("data-animType") || "svg"; // 'svg' | 'canvas' | 'html'
+  const loop = el.getAttribute("data-loop") !== "false";
+  const autoplay = el.getAttribute("data-autoplay") !== "false";
 
-  if (typeof selector === "string") {
-    const root = document.querySelector(selector);
-    if (!root) {
-      if (debug) console.warn(`Debug: No element found for selector "${selector}"`);
-      return "No Lottie elements found to preload.";
-    }
-    // si el root parece ser un lottie, tomalo como unico elemento; si no, busca dentro
-    elements = looksLikeLottieEl(root)
-      ? [root]
-      : Array.from(root.querySelectorAll(".js--lottie-element"));
-  } else if (selector instanceof HTMLElement) {
-    elements = looksLikeLottieEl(selector)
-      ? [selector]
-      : Array.from(selector.querySelectorAll(".js--lottie-element"));
-  } else if (selector instanceof NodeList || Array.isArray(selector)) {
-    elements = Array.from(selector);
-  } else {
-    throw new Error("Invalid selector. Must be string, HTMLElement, NodeList, or Element[].");
+  // ❗Prevent duplicate Lottie names in global WL object
+  if (window.WL[dataName]) {
+    throw new Error(`preloadLotties: A Lottie named "${dataName}" already exists in window.WL. Use a unique data-name.`);
   }
 
-  if (debug) {
-    const where =
-      typeof selector === "string"
-        ? selector
-        : selector instanceof HTMLElement
-        ? selector.className || selector.tagName
-        : "NodeList/Array";
-    console.log(`Debug: Found ${elements.length} Lottie element(s) in "${where}".`);
-  }
-
-  if (!elements.length) return "No Lottie elements found to preload.";
-
-  // --- Crear animaciones
-  const animations = [];
-
-  elements.forEach((el, i) => {
-    const loop = el.getAttribute?.("data-loop") !== "false";
-    const animType = el.getAttribute?.("data-animType") || "svg";
-    const path =
-      el.getAttribute?.("data-path") ||
-      "https://labs.nearpod.com/bodymovin/demo/markus/isometric/markus2.json";
-    const autoplay = el.getAttribute?.("data-autoplay") !== "false";
-
-    const animItem = lottie.loadAnimation({
-      container: el,
-      renderer: animType, // 'svg' | 'canvas' | 'html'
-      loop,
-      path, // URL JSON
-      autoplay,
-    });
-
-    if (debug) {
-      console.log(
-        `Debug: Lottie created #${i} → type:${animType}, loop:${loop}, autoplay:${autoplay}, path:${path}`
-      );
-    }
-
-    // guardar referencia por data-name (o fallback)
-    const dataName = el.getAttribute?.("data-name") || `lottie-${i}`;
-    window.WL[dataName] = animItem;
-
-    animations.push(animItem);
+  // ▶️ Create animation instance
+  const animItem = lottie.loadAnimation({
+    container: el,
+    renderer,
+    loop,
+    path,
+    autoplay,
   });
 
-  try {
-    callback(animations);
-  } catch (_) {}
+  if (debug) {
+    console.log(
+      `Lottie initialized → name:${dataName}, renderer:${renderer}, loop:${loop}, autoplay:${autoplay}, path:${path}`
+    );
+  }
 
-  return "All Lottie animations are successfully loaded.";
+  // Save instance globally for external control
+  window.WL[dataName] = animItem;
+
+  // Safe callback execution
+  try {
+    callback(animItem);
+  } catch (err) {
+    if (debug) console.warn("preloadLotties callback error:", err);
+  }
+
+  return animItem;
 };

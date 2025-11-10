@@ -24,37 +24,114 @@
             <div class="f--row">
                 <div class="f--col-6">
                     <h3 class="f--font-d f--sp-a f--mt-3">
-                        Lottie Example
+                        Simple Lottie Example
                     </h3>
                 </div>
                 <div class="f--col-6" style="text-align: right;">
                    <a href="/">Back</a>
                 </div>
             </div>
+            <div class="f--row">
+                <div class="f--col-12">
+            
+                    <div class="js--lottie-element"  style="width:300px; height:300px">
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="f--row">
+                <div class="f--col-12">
+                    <hr/>
+                </div>
+            </div>  
+
+            <div class="f--row">
+                <div class="f--col-6">
+                    <h3 class="f--font-d f--sp-a f--mt-3">
+                       Multiple
+                    </h3>
+                </div>
+   
+            </div>
+            <div class="f--row">
+                <div class="f--col-3">
+                   
+                        <div
+                          data-path="https://placeholder.terrahq.com/lotties/terraform-2.json"
+                          class="js--lottie-block"
+                          data-name="lottie-block-1"
+                          data-loop="true"
+                          data-autoplay="true"
+                           style="width:300px; height:300px"
+                        ></div>
+                  
+                       
+                </div>
+                <div class="f--col-3">
+                   
+                    <div
+                      data-path="https://placeholder.terrahq.com/lotties/terraform-3.json"
+                      class="js--lottie-block"
+                      data-name="lottie-block-2"
+                      data-loop="true"
+                      data-autoplay="true"
+                       style="width:300px; height:300px"
+                    ></div>
+              
+                   
+            </div>
+            </div>
+           
         </div>
-        <div class="f--container">
-            <div class="js--lottie-element" style="width:300px; height:300px"></div>
-        </div>
+   
         
   
         <script type="module">
             import "@scss/index.scss";
             import {preloadLotties} from "@js/preloadLotties/index.js";
 
-            
             (async () => {
                 try {
-                    await preloadLotties({
-                        debug: true,
-                        selector: document.querySelectorAll('.js--lottie-element'),
-                        callback: (payload) => {
-                            console.log('All lotties loaded', payload);
-                        }
-                    });
+                const lottieNode = document.querySelector(".js--lottie-element");
+
+                await preloadLotties({
+                    selector: document.querySelector(".js--lottie-element"),
+                    debug: true,
+                    callback: (animations) => {
+                    // console.log("✅ Single Lottie loaded:", animations);
+                    //     animations[0].play(); // reproducir automáticamente
+                    },
+                });
                 } catch (error) {
-                    console.error('Error:', error);
+                console.error("Preload error:", error);
                 }
             })();
+
+
+
+            const blocks = document.querySelectorAll(".js--lottie-block");
+
+            (async () => {
+                for (const block of blocks) {
+                    await preloadLotties({
+                        selector: block,
+                        debug: true,
+                        callback: (animations) => {
+                        console.log("✅ Block loaded:", block);
+                        },
+                    });
+
+                    block.classList.add("is-loaded");
+                }
+            })()
+            .then(() => {
+                console.log("✅ All Lottie blocks loaded sequentially.");
+            })
+            .catch((error) => {
+                console.error("Preload error:", error);
+            });
+            
 
         </script>
     </body>

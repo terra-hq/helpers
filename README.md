@@ -65,41 +65,46 @@ This utility supports different selector types and resolves once all matching im
 
 ---
 
+### ⚖️ When to use each pattern
+
+
+| Pattern | Best for | When to use |
+|----------|-----------|-------------|
+| **Single call (string / element)** | Global preload | When you need all images ready before transitions, page entry animations, or a global layout render. |
+| **Sequential (`for...of`)** | Ordered preloading | When you want to trigger animations or class changes one section at a time, ensuring each block is fully loaded before continuing. |
+| **Parallel (`Promise.all`)** | Fast, independent loading | When load order doesn’t matter and you want the quickest possible load across multiple containers (e.g., image grids, cards). |
+
+---
+
 ### 💡 Examples
 
 ```javascript
 import { preloadImages } from "@terrahq/helpers/preloadImages";
 
-// 1️⃣ Basic usage (all images on the page, not recommended)
-await preloadImages({
-  selector: "body",
-  callback: () => {
-    console.log("All images in <body> loaded");
-  },
-});
-
-// 2️⃣ Preload images within a specific container
+// 1️⃣ Single call
 const gallery = document.querySelector(".gallery");
 await preloadImages({
   selector: gallery,
-  debug: true,
-  callback: () => console.log("Gallery images loaded"),
+  callback: () => console.log("Gallery ready"),
 });
 
-// 3️⃣ Sequentially preload multiple containers (one after another)
-const sections = document.querySelectorAll(".js--lazy-image");
+// 2️⃣ Sequential (for...of)
+const sections = document.querySelectorAll(".js--image-block");
 for (const section of sections) {
   await preloadImages({ selector: section });
-  console.log("Loaded section:", section);
+  section.classList.add("is-loaded");
 }
 
-// 4️⃣ Preload multiple containers in parallel
+// 3️⃣ Parallel (Promise.all)
 const blocks = document.querySelectorAll(".js--lazy-image");
 await Promise.all([...blocks].map((el) => preloadImages({ selector: el })));
 console.log("All sections loaded in parallel");
 ```
 
-## Preload Utilities
+
+---
+
+
 
 ### Videos
 
@@ -165,46 +170,105 @@ await Promise.all(
 console.log("✅ All videos are ready to play");
 ```
 
+## Preload Utilities
+
 ### Lottie Animations
 
-Preloads Lottie animations asynchronously using [lottie-web](https://www.npmjs.com/package/lottie-web). This is an async/await operation.
+Initializes Lottie animations using [lottie-web](https://www.npmjs.com/package/lottie-web).  
+**Per-element only:** the helper accepts **one `HTMLElement`**. For multiple elements, iterate yourself.
+
+**Supports:**
+- `HTMLElement` — a single `.js--lottie-element` selected via `document.querySelector`.
 
 **Parameters:**
-- `selector` (NodeList): NodeList of Lottie elements to preload
-- `callback` (function, optional): Function called after all Lottie animations are loaded
-- `debug` (boolean, optional): Enable debug logging. Default: `false`
+- `selector` (`HTMLElement`): Lottie container element (required).
+- `callback` (`function`, optional): Called with the created `AnimationItem`.
+- `debug` (`boolean`, optional): Enables console debug logs. Default: `false`.
+
+**Returns:**  
+`Promise<AnimationItem>` — The created Lottie instance. The instance is also stored at `window.WL[data-name]`.
+
+### 🧠 Notes
+- If `data-path` is missing, the helper uses the fallback:  
+  `https://placeholder.terrahq.com/lotties/terraform-1.json`.
+- The instance is saved to `window.WL[data-name]`. If the same `data-name` already exists, the helper **throws an error** (prevents duplicates).
+- Use `for...of` or `Promise.all` to handle multiple elements.
+---
+
+### ⚖️ When to use each pattern
+
+| Pattern | Best for | When to use |
+|---|---|---|
+| **Single element** | One container | Initialize a single Lottie (e.g., hero animation). |
+| **Sequential (`for...of`)** | Ordered setup | When you want to mark/animate each block after its Lottie is ready. |
+| **Parallel (`Promise.all`)** | Fast, independent setup | When order doesn’t matter and you want the quickest overall init. |
+
+
+### 💡 Examples
 
 ```javascript
 import { preloadLotties } from "@terrahq/helpers/preloadLotties";
+
+// 1️⃣ Single element
+const el = document.querySelector(".js--lottie-item");
 await preloadLotties({
+  selector: el,
   debug: true,
-  selector: document.querySelectorAll(".js--lottie-element"),
-  callback: (payload) => {
-    console.log("All lotties loaded", payload);
+  callback: (anim) => {
+    console.log("Single lottie initialized");
+    anim.play(); // optional
   },
 });
+
+// 2️⃣ Multiple — sequential (for...of)
+const nodes = document.querySelectorAll(".js--lottie-element");
+for (const el of nodes) {
+  await preloadLotties({
+    selector: el,
+    debug: true,
+    callback: (anim) => {
+      el.classList.add("is-loaded");
+    },
+  });
+}
+console.log("All lotties initialized sequentially");
+
+// 3️⃣ Multiple — parallel (Promise.all)
+const nodes = document.querySelectorAll(".js--lottie-parallel");
+await Promise.all(
+  [...nodes].map((el) =>
+    preloadLotties({
+      selector: el,
+      callback: (anim) => {
+        // optional per-element control
+        // anim.pause();
+      },
+    })
+  )
+);
+console.log("All lotties initialized in parallel");
+
+
+
+// 4️⃣ Handling duplicate names (example with try/catch)
+const elA = document.querySelector("#lottieA");
+const elB = document.querySelector("#lottieB"); // same data-name would cause an error
+try {
+  await preloadLotties({ selector: elA });
+  await preloadLotties({ selector: elB }); // throws if elB has same data-name as elA
+} catch (err) {
+  console.error("Lottie init error:", err.message);
+}
 ```
 
-**Expected HTML structure:**
-
-```html
-<div
-  class="js--lottie-element"
-  data-path="filename.json"
-  data-animType="svg"
-  data-loop="true"
-  data-autoplay="false"
-  data-name="myLottie"
-></div>
+### Controlling animations
+```js
+// From anywhere after initialization:
+window.WL["myLottie"].play();
+window.WL["myLottie"].pause();
+window.WL["myLottie"].stop();
 ```
 
-**Controlling animations:**
-
-```javascript
-window.WL["myLottie"].play();   // Play animation
-window.WL["myLottie"].pause();  // Pause animation
-window.WL["myLottie"].stop();   // Stop animation
-```
 
 ---
 
