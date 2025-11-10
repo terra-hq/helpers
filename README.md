@@ -39,9 +39,9 @@ npm i @terrahq/helpers
 
 ---
 
-## Preload Utilities
+# Preload Utilities
 
-### Images
+## Images
 
 Preloads images asynchronously using [ImagesLoaded](https://imagesloaded.desandro.com/).  
 This utility supports different selector types and resolves once all matching images have been fully loaded.
@@ -106,7 +106,7 @@ console.log("All sections loaded in parallel");
 
 
 
-### Videos
+## Videos
 
 Preloads video elements asynchronously using the [`canplaythrough`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canplaythrough_event) event.  
 This operation resolves once all videos can play through **or** the maximum time limit is reached.
@@ -170,9 +170,8 @@ await Promise.all(
 console.log("✅ All videos are ready to play");
 ```
 
-## Preload Utilities
 
-### Lottie Animations
+## Lottie Animations
 
 Initializes Lottie animations using [lottie-web](https://www.npmjs.com/package/lottie-web).  
 **Per-element only:** the helper accepts **one `HTMLElement`**. For multiple elements, iterate yourself.
@@ -272,9 +271,9 @@ window.WL["myLottie"].stop();
 
 ---
 
-## Marketing Integrations
+# Marketing Integrations
 
-### HubSpot
+#### HubSpot
 
 Submit form data directly to HubSpot using their API. Uses axios for HTTP requests.
 
@@ -320,7 +319,7 @@ try {
 }
 ```
 
-### Google reCAPTCHA
+#### Google reCAPTCHA
 
 Helper functions for implementing Google reCAPTCHA v3 in forms.
 
@@ -361,7 +360,7 @@ const response_from_server = await VALIDATE_RECAPTCHA_SERVER({
 
 **Note:** Server-side implementation examples available for [Node.js](https://gist.github.com/andresclua/02c8cc73c3a4f7ac1f78468b9e1c6b93) and [PHP](https://gist.github.com/andresclua/66b320e64857e0a3349411fbbefad4b4).
 
-### Google Scripts Detection
+#### Google Scripts Detection
 
 Asynchronously detects the presence of Google Analytics, Google Tag Manager, and Google Ads scripts.
 
@@ -389,9 +388,9 @@ await hasGoogleScripts({
 
 ---
 
-## Accessibility
+# Accessibility
 
-### Accessible Tab Navigation
+#### Accessible Tab Navigation
 
 Handles focus management for 'skip to main content' links and anchor navigation with keyboard support.
 
@@ -455,9 +454,9 @@ accessibleTabNav({
 
 ---
 
-## DOM Utilities
+# DOM Utilities
 
-### Element Viewport Detection
+#### Element Viewport Detection
 
 Checks if a DOM element is currently visible in the viewport.
 
@@ -484,7 +483,7 @@ const isInViewportDebug = isElementInViewport({
 });
 ```
 
-### Element Modification
+#### Element Modification
 
 Modifies DOM element attributes with Promise-based error handling.
 
@@ -519,7 +518,7 @@ modifyTag({
 });
 ```
 
-### Element Inspector
+#### Element Inspector
 
 Monitors DOM elements for changes in styles, classes, attributes, or children structure.
 
@@ -602,9 +601,9 @@ await digElement({
 
 ---
 
-## Scroll Utilities
+# Scroll Utilities
 
-### Scroll Manipulation
+#### Scroll Manipulation
 
 Enable or disable page scrolling.
 
@@ -621,7 +620,7 @@ manipulateScroll("block");
 manipulateScroll("scroll");
 ```
 
-### Scroll Position Detection
+#### Scroll Position Detection
 
 Checks if the current vertical scroll position meets or exceeds a specified distance.
 
@@ -640,9 +639,9 @@ if (scrollYis({ distance: 30 })) {
 
 ---
 
-## WordPress Utilities
+# WordPress Utilities
 
-### Get ID by Slug
+#### Get ID by Slug
 
 Retrieves WordPress post/page IDs by slug. Works only in WordPress environments.
 
@@ -672,7 +671,7 @@ if (postID) {
 }
 ```
 
-### Get ID by Title
+#### Get ID by Title
 
 Retrieves WordPress post/page IDs by title. Works only in WordPress environments.
 
@@ -704,9 +703,9 @@ if (postID) {
 
 ---
 
-## Development Tools
+# Development Tools
 
-### Terra Debugger
+#### Terra Debugger
 
 Development tool that displays current breakpoint information and provides quick access to QA dashboards.
 
@@ -737,7 +736,7 @@ if (terraDebug) {
 - Provides link to QA dashboard (if provided)
 - Updates automatically on window resize
 
-### Breakpoints
+#### Breakpoints
 
 Returns Terra's standard breakpoint configuration.
 
@@ -768,9 +767,9 @@ console.log(bk.desktop);  // 1700
 
 ---
 
-## General Utilities
+# General Utilities
 
-### Query Parameter Detection
+#### Query Parameter Detection
 
 Checks for the presence of URL query parameters and retrieves their values.
 
@@ -788,7 +787,7 @@ if (result) {
 }
 ```
 
-### Ordered List Start
+#### Ordered List Start
 
 Converts the `start` attribute on `<ol>` elements to inline styles to prevent WordPress WYSIWYG editor conflicts.
 
