@@ -816,6 +816,8 @@ This project is licensed under the MIT License.
 
 ## Changelog
 
+### Version 0.87
+- Updated Lottie, image, and video handling to work seamlessly with element-based structures.
 ### Version 0.86
 - add window to terradebug
 ### Version 0.85
