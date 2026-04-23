@@ -24,6 +24,7 @@ npm i @terrahq/helpers
   - [Element Viewport Detection](#element-viewport-detection)
   - [Element Modification](#element-modification)
   - [Element Inspector](#element-inspector)
+  - [Search Input](#search-input)
 - [Scroll Utilities](#scroll-utilities)
   - [Scroll Manipulation](#scroll-manipulation)
   - [Scroll Position Detection](#scroll-position-detection)
@@ -596,6 +597,66 @@ await digElement({
   timer: 5000,
   debug: true,
   callback: () => console.log("Children detected!"),
+});
+```
+
+#### Search Input
+
+Wires a custom clear button to an `<input type="search">`. The helper empties the input, dispatches an `input` event (so live filters and reactive frameworks pick up the change), returns focus to the input, and toggles a visibility class on the clear button based on whether the input has a value.
+
+Hiding the browser's default clear `X` is the consumer's responsibility. Add this CSS to your project:
+
+```css
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+}
+input[type="search"]::-ms-clear,
+input[type="search"]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+```
+
+**Parameters:**
+- `input` (`string` | `HTMLInputElement`): CSS selector or input element.
+- `clearButton` (`string` | `HTMLElement`): CSS selector or element for the custom clear button.
+- `visibleClass` (`string`, optional): Class toggled on the clear button when the input has value. Default: `'clear-btn--is-active'`.
+- `onClear` (`function`, optional): Callback called after clearing. Receives the input element.
+- `debug` (`boolean`, optional): Enable debug logging. Default: `false`.
+
+**Returns:** `{ destroy: Function }` — call `destroy()` to remove listeners.
+
+```html
+<div class="c--search-a">
+  <input type="search" class="js--search-input" />
+  <button type="button" class="js--search-clear" aria-label="Clear search">✕</button>
+</div>
+```
+
+```javascript
+import { searchInput } from "@terrahq/helpers/searchInput";
+
+// 1️⃣ Single instance
+const handler = searchInput({
+  input: ".js--search-input",
+  clearButton: ".js--search-clear",
+  visibleClass: "c--search-a__btn--is-active",
+  onClear: (el) => console.log("Cleared", el),
+});
+
+// later, if you need to tear it down:
+// handler.destroy();
+
+// 2️⃣ Multiple instances — iterate per wrapper so each pair stays scoped
+document.querySelectorAll(".c--search-a").forEach((wrapper) => {
+  searchInput({
+    input: wrapper.querySelector(".js--search-input"),
+    clearButton: wrapper.querySelector(".js--search-clear"),
+    visibleClass: "c--search-a__btn--is-active",
+  });
 });
 ```
 

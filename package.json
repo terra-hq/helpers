@@ -24,7 +24,8 @@
         "./getIDbyTitle": "./src/js/wp/getIDbyTitle/index.js",
 
         "./modifyTag": "./src/js/modifyTag/index.js",
-        "./isElementInViewport": "./src/js/isElementInViewport/index.js"
+        "./isElementInViewport": "./src/js/isElementInViewport/index.js",
+        "./searchInput": "./src/js/searchInput/index.js"
     },
     "scripts": {
         "dev": "vite",

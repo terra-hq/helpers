@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TerraHQ.com</title>
+        <style>
+            /* Hide native clear "X" — consumer-side CSS */
+            input[type="search"]::-webkit-search-cancel-button,
+            input[type="search"]::-webkit-search-decoration {
+                -webkit-appearance: none;
+                appearance: none;
+            }
+            input[type="search"]::-ms-clear,
+            input[type="search"]::-ms-reveal {
+                display: none;
+                width: 0;
+                height: 0;
+            }
+
+            .c--search-a {
+                position: relative;
+                display: inline-block;
+            }
+            .c--search-a__item {
+                padding: 8px 32px 8px 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 14px;
+                width: 260px;
+            }
+            .c--search-a__btn {
+                position: absolute;
+                top: 50%;
+                right: 6px;
+                transform: translateY(-50%);
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                padding: 4px 6px;
+                font-size: 14px;
+                line-height: 1;
+                display: none;
+            }
+            .c--search-a__btn--is-active {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="f--container">
+            <div class="f--row">
+                <div class="f--col-12">
+                    <h2 class="f--font-a f--sp-a f--mt-3">
+                        Helpers <span class="f--font-c">By Terra</span>
+                    </h2>
+                </div>
+            </div>
+            <div class="f--row">
+                <div class="f--col-12">
+                    <hr/>
+                </div>
+            </div>
+            <div class="f--row">
+                <div class="f--col-6">
+                    <h3 class="f--font-d f--sp-a f--mt-3">
+                        Search Input
+                    </h3>
+                </div>
+                <div class="f--col-6" style="text-align: right;">
+                   <a href="/">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="f--container">
+            <div class="f--row f--gap-c">
+                <div class="f--col-12">
+                    <p class="f--font-e f--sp-d">Type something and then click the custom <code>✕</code> to clear.</p>
+
+                    <div class="c--search-a">
+                        <input
+                            type="search"
+                            class="c--search-a__item js--search-input"
+                            placeholder="Search..."
+                        />
+                        <button
+                            type="button"
+                            class="c--search-a__btn js--search-clear"
+                            aria-label="Clear search"
+                        >✕</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="module">
+            import "@scss/index.scss";
+            import { searchInput } from "@js/searchInput/index.js";
+
+            document.querySelectorAll(".c--search-a").forEach((wrapper) => {
+                searchInput({
+                    input: wrapper.querySelector(".js--search-input"),
+                    clearButton: wrapper.querySelector(".js--search-clear"),
+                    visibleClass: 'c--search-a__btn--is-active',
+                    onClear: (el) => console.log("searchInput cleared:", el),
+                    debug: true,
+                });
+            });
+        </script>
+    </body>
+</html>
