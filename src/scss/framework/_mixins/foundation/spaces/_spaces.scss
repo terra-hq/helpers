@@ -1,3 +1,5 @@
+@use "../../../_vars/vars" as *;
+
 @mixin make-sp-a {
     margin-bottom: $measure*10;
     @media all and ($viewport-type: $tablets) {

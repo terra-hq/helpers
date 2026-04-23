@@ -1,48 +1,48 @@
 //Foundations
 
 // Reset
-@import './reset/reset.scss';
+// @forward './reset/reset.scss';
 
 // Grid System
 // f--container
 // f--row
 // f--col-*
 // f--offset-* 
-@import './grid/grid.scss';
+@forward './grid/grid.scss';
 
 
 // Color
 // f--color-*
-@import './color/color.scss';
+@forward './color/color.scss';
 
 // Typography
 // Hero New  & Jost 
 // f--font-*
-@import './font/font.scss';
+@forward './font/font.scss';
 
 // Aspect Ratio   
 // f--ar-*
-@import './aspect-ratio/aspect-ratio.scss';
+@forward './aspect-ratio/aspect-ratio.scss';
 
 // Spacing ( pixel based )
 // f--*-*
-@import './spacing/spacing.scss';
+@forward './spacing/spacing.scss';
 
 // b ( pixel based )
 // f--*-*
-@import './background/background.scss';
+@forward './background/background.scss';
 
 // Spaces
 // f--sp-*
-@import './spaces/spaces.scss';
+@forward './spaces/spaces.scss';
 
 // Section
 // f--section-*
-@import './section/section.scss';
+@forward './section/section.scss';
 
 // Gap
 // f--gap-*
-@import './gap/gap.scss';
+@forward './gap/gap.scss';
 
 //End
 

@@ -1,3 +1,5 @@
+@use "../../_mixins/mixins" as *;
+
 .f--row {
   @include make-row;
   &--remove-gutter{

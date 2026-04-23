@@ -1,3 +1,5 @@
+@use "../../_vars/vars" as *;
+
 /*Basic Loop Colors */
 @each $color-name, $color in $color-options {
     .f--color-#{$color-name}{

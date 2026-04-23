@@ -1,3 +1,5 @@
+@use "../../../_vars/vars" as *;
+
 //IE img with parents width and auto height, if the img is put with correct AR it will see correctly (https://imgur.com/zkNrIOt)
 @mixin make-ar($size: default) {
     display: block;

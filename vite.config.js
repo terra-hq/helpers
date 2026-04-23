@@ -30,9 +30,8 @@ export default defineConfig({
     preprocessorOptions: { 
       scss: { 
         additionalData: `
-          @import "./src/scss/framework/_vars/_vars.scss";
-          @import "./src/scss/framework/_mixins/_mixins.scss";
-          @import "./src/scss/framework/foundation/foundation.scss";
+          @use "./src/scss/framework/foundation/foundation.scss";
+          @use "./src/scss/framework/foundation/reset/reset.scss";
         ` 
       }  
     }

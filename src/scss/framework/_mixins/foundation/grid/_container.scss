@@ -1,3 +1,5 @@
+@use "../../../_vars/vars" as *;
+
 // container
 @mixin make-container () {
     margin: 0 auto;

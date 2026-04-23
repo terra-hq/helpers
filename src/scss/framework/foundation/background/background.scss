@@ -1,3 +1,5 @@
+@use "../../_vars/vars" as *;
+
 @each $color-name, $color in $colorbg-options {
     .f--background-#{$color-name}{
         background-color:$color;

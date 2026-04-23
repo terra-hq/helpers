@@ -1,3 +1,5 @@
+@use "../../_mixins/mixins" as *;
+
 .f--section-a {
     @include make-section-a();
 }

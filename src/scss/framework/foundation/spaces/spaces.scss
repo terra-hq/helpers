@@ -1,3 +1,5 @@
+@use "../../_mixins/mixins" as *;
+
 .f--sp-a {
     @include make-sp-a();
 }

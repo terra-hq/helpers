@@ -1,10 +1,10 @@
 /* foundation mixins*/
-@import './foundation/grid/grid';
-@import './foundation/aspect-ratio/ar';
-@import './foundation/font/font';
-@import './foundation/section/section';
-@import './foundation/spaces/spaces';
-@import './foundation/gap/gap';
+@forward './foundation/grid/grid';
+@forward './foundation/aspect-ratio/ar';
+@forward './foundation/font/font';
+@forward './foundation/section/section';
+@forward './foundation/spaces/spaces';
+@forward './foundation/gap/gap';
 /* foundation mixins*/
 
 /* components*/

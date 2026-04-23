@@ -1,3 +1,5 @@
+@use "../../../_vars/vars" as *;
+
 @mixin make-font-a($weight: 700) {
     font-family: $type-a;
     font-weight: $weight;

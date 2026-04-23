@@ -1,3 +1,5 @@
+@use "../../../_vars/vars" as *;
+
 /* build columns */
 @mixin make-col($i) {
     $value: calc((100% / $columns) * $i);

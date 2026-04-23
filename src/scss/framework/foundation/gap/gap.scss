@@ -1,3 +1,5 @@
+@use "../../_mixins/mixins" as *;
+
 .f--gap-a {
     @include make-gap-a();
 }

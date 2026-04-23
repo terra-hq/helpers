@@ -1,3 +1,5 @@
+@use "../../../_vars/vars" as *;
+
 @mixin make-section-a() {
     padding: $measure*15 0;
 
