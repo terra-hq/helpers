@@ -30,7 +30,7 @@ export function orderedListStart(list) {
         if (startAttr !== null) {
             const start = parseInt(startAttr, 10);
             if (!isNaN(start)) {
-                ol.style.counterReset = 'list-item ' + (start - 1);
+                ol.style.counterReset = 'item ' + (start - 1);
             }
         }
     });
