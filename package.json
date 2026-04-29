@@ -25,7 +25,8 @@
 
         "./modifyTag": "./src/js/modifyTag/index.js",
         "./isElementInViewport": "./src/js/isElementInViewport/index.js",
-        "./searchInput": "./src/js/searchInput/index.js"
+        "./searchInput": "./src/js/searchInput/index.js",
+        "./orderedListStart": "./src/js/orderedListStart/index.js"
     },
     "scripts": {
         "dev": "vite",
