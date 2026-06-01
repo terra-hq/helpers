@@ -772,6 +772,9 @@ Development tool that displays current breakpoint information and provides quick
 
 **Parameters:**
 - `submitQA` (string, optional): URL to QA dashboard (e.g., ClickUp space)
+- `custom` (function, optional): Callback invoked with the `window` object after the debugger is mounted
+- `customBreakpoints` (array, optional): Custom breakpoint set, replacing Terra's defaults. Each entry is a single-key object `{ name: maxWidth }`, ordered from smallest to largest
+- `mobileFirst` (boolean, optional): When `true`, the active breakpoint is the largest whose value is `<=` the current width (mobile-first). When `false`/omitted, it's the first whose value is `>=` the current width (desktop-first). Defaults to `false`
 
 ```javascript
 import { terraDebugger } from "@terrahq/helpers/terraDebugger";
@@ -784,8 +787,21 @@ function getQueryParam(param) {
 const terraDebug = getQueryParam("debug");
 
 if (terraDebug) {
-  terraDebugger({ 
-    submitQA: "https://app.clickup.com/your-qa-space" 
+  terraDebugger({
+    submitQA: "https://app.clickup.com/your-qa-space",
+    mobileFirst: true,
+    customBreakpoints: [
+      { 'mobile': 0 },
+      { 'tablets': 581 },
+      { 'tabletm': 811 },
+      { 'tabletl': 1025 },
+      { 'laptop': 1301 },
+      { 'desktop': 1571 },
+      { 'wide': 1701 }
+    ],
+    custom: (win) => {
+      console.log("Debugger mounted", win.innerWidth);
+    }
   });
 }
 ```
@@ -795,6 +811,8 @@ if (terraDebug) {
 - Shows current window width
 - Shows browser information
 - Provides link to QA dashboard (if provided)
+- Supports custom breakpoint sets via `customBreakpoints`
+- Supports mobile-first or desktop-first breakpoint detection via `mobileFirst`
 - Updates automatically on window resize
 
 #### Breakpoints
