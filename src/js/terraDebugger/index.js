@@ -3,7 +3,7 @@ import { u_get_browser } from '@andresclua/jsutil';
 
 export const terraDebugger = (payload) => {
   // Destructuring the payload to get submitQA and custom function
-  const { submitQA, custom, customBreakpoints, mobileFirst } = payload;
+  const { submitQA, custom, customBreakpoints, mobileFirst = false } = payload;
 
   // Create the div element for the breakpoint indicator
   const indicator = document.createElement('div');
