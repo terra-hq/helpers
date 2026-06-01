@@ -1,9 +1,9 @@
-import { breakpoints } from '../breakpoints/index.js';
+import { breakpoints as defaultBreakpoints } from '../breakpoints/index.js';
 import { u_get_browser } from '@andresclua/jsutil';
 
 export const terraDebugger = (payload) => {
   // Destructuring the payload to get submitQA and custom function
-  const { submitQA, custom } = payload;
+  const { submitQA, custom, customBreakpoints, mobileFirst } = payload;
 
   // Create the div element for the breakpoint indicator
   const indicator = document.createElement('div');
@@ -34,20 +34,24 @@ export const terraDebugger = (payload) => {
   // Function to determine the breakpoint name based on the window width
   const updateIndicatorText = () => {
     const width = window.innerWidth;
-    let breakpointName = 'desktop'; // Default value
 
-    if (width <= breakpoints[0].mobile) {
-      breakpointName = 'mobile';
-    } else if (width <= breakpoints[1].tablets) {
-      breakpointName = 'tablets';
-    } else if (width <= breakpoints[2].tabletm) {
-      breakpointName = 'tabletm';
-    } else if (width <= breakpoints[3].tabletl) {
-      breakpointName = 'tabletl';
-    } else if (width <= breakpoints[4].laptop) {
-      breakpointName = 'laptop';
-    } else {
-      breakpointName = 'desktop';
+    const breakpoints = customBreakpoints || defaultBreakpoints;
+    const lastBreakpoint = breakpoints[breakpoints.length - 1];
+    let breakpointName = Object.keys(lastBreakpoint)[0];
+
+    for (const breakpoint of breakpoints) {
+      const [key, value] = Object.entries(breakpoint)[0];
+
+      if (mobileFirst) {
+        if (width >= value) {
+          breakpointName = key;
+        }
+      } else {
+        if (width <= value) {
+          breakpointName = key;
+          break;
+        }
+      }
     }
 
     // Get the browser information
