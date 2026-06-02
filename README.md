@@ -868,13 +868,21 @@ if (result) {
 
 #### Ordered List Start
 
-Converts the `start` attribute on `<ol>` elements to inline styles to prevent WordPress WYSIWYG editor conflicts.
+Converts the `start` attribute on `<ol>` elements to inline styles (`counter-reset`) to prevent WordPress WYSIWYG editor conflicts. Exposed as a class so it can be instanced per element by Terra's handler pattern (CoreHandler / Boostify), with a `destroy()` method for cleanup on Swup page transitions.
+
+**Parameters:**
+- `element` (Element): The ordered list element with a `start` attribute
+- `debug` (boolean, optional): Enable debug mode
 
 ```javascript
-import { orderedListStart } from "@terrahq/helpers/orderedListStart";
+import OrderedListStart from "@terrahq/helpers/orderedListStart";
 
-// Automatically processes all <ol> elements with start attributes
-orderedListStart();
+const instance = new OrderedListStart({
+  element: document.querySelector("ol[start]"),
+});
+
+// Cleanup (e.g. on page transition)
+instance.destroy();
 ```
 
 ---

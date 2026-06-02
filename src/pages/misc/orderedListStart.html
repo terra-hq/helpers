@@ -43,13 +43,13 @@
     
     <script type="module">
         import "@scss/index.scss";
-        import { orderedListStart } from "@js/orderedListStart/index.js";
+        import OrderedListStart from "@js/orderedListStart/index.js";
 
         const exampleList = document.getElementById('my-list');
         const triggerButton = document.getElementById('element-to-watch');
 
         triggerButton.addEventListener('click', () => {
-            orderedListStart(exampleList);
+            new OrderedListStart({ element: exampleList });
         });
     </script>
 </body>
